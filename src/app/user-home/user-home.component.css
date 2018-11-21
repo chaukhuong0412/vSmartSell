@@ -6,17 +6,33 @@ table {
     text-align: center
   }
 
+  .right {
+    text-align: right
+  }
+
+  td {
+    height: 8px;
+  }
+
+  
+
+ 
+  
+
   button {
-    margin: 5px;
+    margin-left: 5px;
   }
 
   th {
-    font-size: 1.5vw;
+    min-width: 350px;
+    font-size: 18px;
+    font-weight: bold;
     color: black;
   }
 
   i {
-    font-size: 24px !important;
-    vertical-align:middle;
+    font-size: 20px !important;
+    vertical-align: middle;
+    text-align: center;
   }
 

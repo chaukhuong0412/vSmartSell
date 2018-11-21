@@ -1,41 +1,71 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
-  
-<button style="float: right;" type="button" class="btn btn-dark" routerLink="/Createuser"> <i class="material-icons">add</i> Tạo tài khoản</button>
+<button style="float: right;" type="button" class="btn btn-dark" routerLink="/Createuser"> <i class="material-icons">add</i>
+  Tạo tài khoản</button>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table">
+<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table">
 
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef class="centre"> Id </th>
-    <td mat-cell *matCellDef="let element" class="centre"> {{element.id}} </td>
+    <th mat-header-cell *matHeaderCellDef class="centre"> STT </th>
+    <td mat-cell *matCellDef="let element" class="centre"> {{index}} </td>
   </ng-container>
 
   <ng-container matColumnDef="userName">
-    <th mat-header-cell *matHeaderCellDef class="centre"> User Name </th>
-    <td [style.color]="element.userStatus? 'red' : 'black'" mat-cell *matCellDef="let element" class="centre"> {{element.userName}} </td>
+    <th mat-header-cell *matHeaderCellDef> Tên đăng nhập </th>
+    <td [style.color]="element.userStatus? 'red' : 'black'" mat-cell *matCellDef="let element">
+      {{element.userName}} </td>
   </ng-container>
-
+  <ng-container matColumnDef="fullName">
+    <th mat-header-cell *matHeaderCellDef> Họ tên nhân viên </th>
+    <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+  </ng-container>
   <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef class="centre"> Action </th>
-    <td mat-cell *matCellDef="let element" class="centre"> 
+    <th mat-header-cell *matHeaderCellDef class="header-right" > Thao tác </th>
+    <td mat-cell *matCellDef="let element" class="right" >
       <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/Edituser', element.id]"><i class="material-icons">build</i></button>
-      <button title="Xóa" type="button" class="btn btn-warning" (click)="openDeleteConfirmationDialog(element.id)"><i class="material-icons">delete</i></button>
-      <button title="Khôi phục mật khẩu" type="button" class="btn btn-secondary" (click)="openResetPasswordConfirmationDialog(element.id)"><i class="material-icons">restore</i></button>
-      <button title="Kích hoạt tài khoản" *ngIf="element.userStatus" type="button" class="btn btn-success" (click)="openActivateConfirmationDialog(element.id)"><i class="material-icons">done</i></button>
-      <button title="Khóa tài khoản" *ngIf="!element.userStatus" type="button" class="btn btn-danger" (click)="openDeactivateConfirmationDialog(element.id)"><i class="material-icons">clear</i></button>
+      <button title="Xóa" type="button" class="btn btn-warning" (click)="openDeleteConfirmationDialog(element.id)"><i
+          class="material-icons">delete</i></button>
+      <button title="Khôi phục mật khẩu" type="button" class="btn btn-secondary" (click)="openResetPasswordConfirmationDialog(element.id)"><i
+          class="material-icons">restore</i></button>
+      <button title="Kích hoạt tài khoản" *ngIf="element.userStatus" type="button" class="btn btn-success" (click)="openActivateConfirmationDialog(element.id)"><i
+          class="material-icons">done</i></button>
+      <button title="Khóa tài khoản" *ngIf="!element.userStatus" type="button" class="btn btn-danger" (click)="openDeactivateConfirmationDialog(element.id)"><i
+          class="material-icons">clear</i></button>
     </td>
-
-
   </ng-container>
-
-
-
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+</table> -->
 
-
+<ng-container>
+  <table class="table table-striped ">
+    <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Tên đăng nhập</th>
+        <th scope="col"> Họ tên nhân viên</th>
+        <th scope="col"> Cửa hàng</th>
+        <th scope="col" class="centre">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <th scope="row">1</th>
+        <td>{{user.userName}}</td>
+        <td>{{user.fullName}}</td>
+        <td>fake data</td>
+        <td class="centre">
+          <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/Edituser', user.id]"><i class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(user.id)"><i
+              class="fa fa-trash"></i></button>
+          <button title="Khôi phục mật khẩu" type="button" class="btn btn-secondary" (click)="openResetPasswordConfirmationDialog(user.id)"><i
+              class="fa fa-history"></i></button>
+          <button title="Kích hoạt tài khoản" *ngIf="user.userStatus" type="button" class="btn btn-success" (click)="openActivateConfirmationDialog(user.id)"><i
+              class="fa fa-check"></i></button>
+          <button title="Khóa tài khoản" *ngIf="!user.userStatus" type="button" class="btn btn-warning" (click)="openDeactivateConfirmationDialog(user.id)"><i
+              class="fa fa-times"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

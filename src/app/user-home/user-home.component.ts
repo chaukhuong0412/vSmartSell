@@ -26,11 +26,12 @@ export class UserHomeComponent implements OnInit {
     {userId: 0, userName: "", password: "", fullName:"", userStatus: "", roleIds: []}
   ]
   
-  displayedColumns: string[] = ['id', 'userName', 'action'];
+  displayedColumns: string[] = ['id', 'userName', 'fullName', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   columnsToDisplay = ['name', 'path'];
   
+  index = 1;
   users;
   searchString;
   dataFiltered: object[];
@@ -40,6 +41,7 @@ export class UserHomeComponent implements OnInit {
   ngOnInit() {
     this._userService.getListUser().subscribe( result => {
       this.dataSource = new MatTableDataSource(result);
+      this.users = result;
       ;
     });
   }
