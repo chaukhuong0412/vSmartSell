@@ -1,0 +1,29 @@
+
+
+  <button style="float: right;" mat-raised-button color="primary" routerLink="/Createrole">Create new role</button>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Role Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+           <button class='create' mat-raised-button color='primary' [routerLink]="['/Editrole', element.id]">Edit</button>
+           <button class='create' mat-raised-button color='primary' (click)="openConfirmationDialog(element.id)">Delete</button>
+        </td>
+      </ng-container>
+
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
