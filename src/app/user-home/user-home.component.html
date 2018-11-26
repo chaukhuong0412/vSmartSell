@@ -1,7 +1,13 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-<button style="float: right;" type="button" class="btn btn-dark" routerLink="/Createuser"> <i class="material-icons">add</i>
-  Tạo tài khoản</button>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+
+<button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateUserDialog()"> <i class="fa fa-plus">  Tạo tài khoản</i>
+  </button>
 
 <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table">
 
@@ -38,32 +44,35 @@
 </table> -->
 
 <ng-container>
-  <table class="table table-striped ">
+  <table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped ">
     <thead>
       <tr>
-        <th scope="col">STT</th>
-        <th scope="col">Tên đăng nhập</th>
-        <th scope="col"> Họ tên nhân viên</th>
+        <th scope="col" id="stt-column" (click)="sortById()">STT</th>
+        <th scope="col" ><a class="clickable" (click)="sortByUserName()">Tên đăng nhập</a></th>
+        <th scope="col"(click)="sortByFullName()"> Họ tên</th>
         <th scope="col"> Cửa hàng</th>
-        <th scope="col" class="centre">Thao tác</th>
+        <th scope="col"> Ngày tạo</th>
+        <th scope="col" id="right-header">Thao tác</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
-        <th scope="row">1</th>
+      <tr *ngFor="let user of users; let i = index">
+        <td scope="row" id="stt-column"> {{i + 1}}</td>
         <td>{{user.userName}}</td>
         <td>{{user.fullName}}</td>
-        <td>fake data</td>
-        <td class="centre">
+        <td>Futurify</td>
+        <td>23/11/2018</td>
+
+        <td class="right">
           <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/Edituser', user.id]"><i class="fa fa-edit"></i></button>
-          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(user.id)"><i
-              class="fa fa-trash"></i></button>
+          <button title="Khóa tài khoản" *ngIf="!user.userStatus" type="button" class="btn btn-info" (click)="openDeactivateConfirmationDialog(user.id)"><i
+              class="fa fa-lock"></i></button>
+          <button title="Mở khóa tài khoản" *ngIf="user.userStatus" type="button" class="btn btn-success" (click)="openActivateConfirmationDialog(user.id)"><i
+              class="fa fa-unlock"></i></button>
           <button title="Khôi phục mật khẩu" type="button" class="btn btn-secondary" (click)="openResetPasswordConfirmationDialog(user.id)"><i
               class="fa fa-history"></i></button>
-          <button title="Kích hoạt tài khoản" *ngIf="user.userStatus" type="button" class="btn btn-success" (click)="openActivateConfirmationDialog(user.id)"><i
-              class="fa fa-check"></i></button>
-          <button title="Khóa tài khoản" *ngIf="!user.userStatus" type="button" class="btn btn-warning" (click)="openDeactivateConfirmationDialog(user.id)"><i
-              class="fa fa-times"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(user.id)"><i
+              class="fa fa-trash"></i></button>
         </td>
       </tr>
     </tbody>

@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService, User} from '../user.service';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { UserService, User } from '../user.service';
 import { HttpClient } from '@angular/common/http';
-import {MatTableModule} from '@angular/material/table';
-import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material';
-import {MatButtonModule} from '@angular/material/button';
-import {ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
+import { UserCreateDialogComponent } from '../user-create-dialog/user-create-dialog.component';
+import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+
 
 
 
@@ -17,39 +21,66 @@ import { MatDialog, MatDialogRef } from '@angular/material';
   styleUrls: ['./user-home.component.css'],
   providers: [UserService]
 })
-export class UserHomeComponent implements OnInit {
+export class UserHomeComponent implements AfterViewInit, OnDestroy, OnInit  {
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
 
-  dialogRef: MatDialogRef<ConfirmationDialogComponent>;
+  dialogConfirmationRef: MatDialogRef<ConfirmationDialogComponent>;
+  dialogCreateRef: MatDialogRef<UserCreateDialogComponent>;
 
 
-  ELEMENT_DATA: User[] = [
-    {userId: 0, userName: "", password: "", fullName:"", userStatus: "", roleIds: []}
-  ]
-  
-  displayedColumns: string[] = ['id', 'userName', 'fullName', 'action'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
+
 
   columnsToDisplay = ['name', 'path'];
-  
+
   index = 1;
   users;
-  searchString;
   dataFiltered: object[];
+
+  sortField :string;
 
   constructor(private _userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this._userService.getListUser().subscribe( result => {
-      this.dataSource = new MatTableDataSource(result);
+    this._userService.getListUser().subscribe(result => {
       this.users = result;
-      ;
     });
+    this.dtOptions = {
+      ordering: false,
+      language: {
+        processing:     "Đang xử lý",
+        search:         "Tìm kiếm",
+        lengthMenu:    "Hiển thị _MENU_ tài khoản",
+        info:           "Hiển thị tài khoản _START_ tới _END_ trong tổng số _TOTAL_ tài khoản",
+        infoEmpty:      "Hiển thị tài khoản 0 tới 0 trong tổng số 0 tài khoản",
+        paginate: {
+            first:      "Premier",
+            previous:   "Lùi",
+            next:       "Tới",
+            last:       "Cuối"
+        }
+      }
+    };
+    this.rerender();
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  ngAfterViewInit(): void {this.dtTrigger.next();}
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+       dtInstance.destroy();
+       this.dtTrigger.next();     
+   });
+  }
+  
   delete(id) {
     this._userService.deleteUser(id).subscribe(result => {
       this.ngOnInit();
@@ -63,7 +94,7 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  
+
   activate(id) {
     this._userService.activate(id).subscribe(result => {
       this.ngOnInit();
@@ -76,57 +107,101 @@ export class UserHomeComponent implements OnInit {
     })
   }
 
+  
+  openCreateUserDialog() {
+    this.dialogCreateRef = this.dialog.open(UserCreateDialogComponent, {
+      disableClose: false,
+      width: '745px',
+    });
+    this.dialogCreateRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.ngOnInit();
+      }
+      this.dialogCreateRef = null;
+    });
+  }
+
 
   openDeleteConfirmationDialog(id) {
-    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this.dialogConfirmationRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete this user?"
-    this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+    this.dialogConfirmationRef.componentInstance.confirmMessage = "Are you sure you want to delete this user?"
+    this.dialogConfirmationRef.afterClosed().subscribe(result => {
+      if (result) {
         this.delete(id);
       }
-      this.dialogRef = null;
+      this.dialogConfirmationRef = null;
     });
   }
 
   openResetPasswordConfirmationDialog(id) {
-    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this.dialogConfirmationRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to reset password for this user?"
-    this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+    this.dialogConfirmationRef.componentInstance.confirmMessage = "Are you sure you want to reset password for this user?"
+    this.dialogConfirmationRef.afterClosed().subscribe(result => {
+      if (result) {
         this.resetPassword(id);
       }
-      this.dialogRef = null;
+      this.dialogConfirmationRef = null;
     });
   }
 
   openDeactivateConfirmationDialog(id) {
-    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this.dialogConfirmationRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to deactivate this user?"
-    this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+    this.dialogConfirmationRef.componentInstance.confirmMessage = "Are you sure you want to deactivate this user?"
+    this.dialogConfirmationRef.afterClosed().subscribe(result => {
+      if (result) {
         this.deactivate(id);
       }
-      this.dialogRef = null;
+      this.dialogConfirmationRef = null;
     });
   }
 
   openActivateConfirmationDialog(id) {
-    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this.dialogConfirmationRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to activate this user?"
-    this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+    this.dialogConfirmationRef.componentInstance.confirmMessage = "Are you sure you want to activate this user?"
+    this.dialogConfirmationRef.afterClosed().subscribe(result => {
+      if (result) {
         this.activate(id);
       }
-      this.dialogRef = null;
+      this.dialogConfirmationRef = null;
     });
+  }
+
+
+  sortByUserName() {
+    if (this.sortField == 'userName')
+      this.sortField = 'userName_desc';
+    else 
+      this.sortField = 'userName';
+    this.sort();
+  }
+
+  sortByFullName() {
+    if (this.sortField == 'fullName')
+      this.sortField = 'fullName_desc';
+    else
+      this.sortField = 'fullName';
+    this.sort();
+  }
+
+  sortById() {
+    this.sortField = 'id';
+    this.sort();
+  }
+
+  sort() {
+    this._userService.getListUserOrderBy(this.sortField).subscribe(result => {
+      this.users = result;
+    });
+    this.rerender();
   }
 
 

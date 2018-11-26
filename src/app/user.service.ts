@@ -17,6 +17,10 @@ export class UserService {
     return this._http.get<User[]>('https://localhost:44305/api/user');
   }
 
+  getListUserOrderBy(sortField): Observable<User[]> {
+    return this._http.get<User[]>('https://localhost:44305/api/user/sort=' + sortField);
+  }
+
   getUser(id): Observable<User> {
     return this._http.get<User>('https://localhost:44305/api/user/' + id)
   }
@@ -38,7 +42,7 @@ export class UserService {
   }
 
   activate(id) {
-    return this._http.get('https://localhost:44305/api/user/activate/' + id)
+    return this._http.get('https://localhost:44305/api/user/activate/' + id);
   }
 
   deactivate(id) {
@@ -64,17 +68,17 @@ export class UserService {
 }
 
 export class User {
-  userId: Number;
+  userId: number;
   userName: string;
   password: string;
   fullName: string;
   userStatus: any;
-  roleIds: Number[];
+  roleIds: number[];
 }
 
 export class UserAudit {
   type: string;
-  objectId: Number;
+  objectId: number;
   user: string;
   changeOn: Date;
   data: object;

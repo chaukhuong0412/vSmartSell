@@ -38,7 +38,7 @@ export class RoleService {
 
 
 export class Role {
-  id : Number;
+  id : number;
   name : string;
-  permissionIds: Number[];
+  permissionIds: number[];
 }

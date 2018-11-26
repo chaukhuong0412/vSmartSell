@@ -1,153 +1,149 @@
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-home"></i>
-                  <p>Trang chủ</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i class="fa fa-shopping-cart"></i>
-                  <p>Bán hàng</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-group"></i>
-                  <p>Khách hàng</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-sitemap"></i>
-                  <p>Loại sản phẩm</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-barcode"></i>
-                  <p>Sản phẩm</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-table"></i>
-                  <p>Nhập kho</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-money"></i>
-                  <p>T/toán nhập kho</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-credit-card"></i>
-                  <p>Chi tiêu</p>
-                </div>
-              </a>
-            </li>
-      
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-user"></i>
-                  <p>Tiếp thị</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div>
-                  <i aria-hidden="true" class="fa fa-truck"></i>
-                  <p>Xe hàng</p>
-                </div>
-              </a>
-            </li>
-      
-            <li class="dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <div>
-                  <i aria-hidden="true" class="fa fa-bar-chart-o"></i>
-                  Báo cáo
-                </div>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-      
-            <li class="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  <div>
-                    <i aria-hidden="true" class="fa fa-pie-chart"></i>
-                    Quản lý
-                  </div>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-      
-              <li class="dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <div>
-                        <i class="fa fa-cog"></i>
-                        Q/lý tài khoản
-                    </div>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">User</a>
-                    <a class="dropdown-item" href="/Role">Role</a>
-                    <a class="dropdown-item" href="/Permission">Permission</a>
-                  </div>
-                </li>
-      
-          </ul>
-      
-        </div>
-      </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0,0,0,0.05)">
+
+    <a style="font-size: 25px" class="navbar-brand" href="#">Demo-vSmartSell</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item" (click)="listClick($event, 1)">
+          <a class="nav-link" href="#">
+            <span aria-hidden="true" class="fa fa-home" [ngClass]="selectedItem == 1? 'blue' : 'inactive'"></span>
+            <p [ngClass]="selectedItem == 1? 'blue' : 'inactive'">Trang chủ</p>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 2)">
+          <a class="nav-link" href="#">
+            <div>
+              <i class="fa fa-shopping-cart" [ngClass]="selectedItem == 2? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 2? 'blue' : 'inactive'">Bán hàng</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 3)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-group" [ngClass]="selectedItem == 3? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 3? 'blue' : 'inactive'">Khách hàng</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 4)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-sitemap" [ngClass]="selectedItem == 4? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 4? 'blue' : 'inactive'">Loại sản phẩm</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 5)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-barcode" [ngClass]="selectedItem == 5? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 5? 'blue' : 'inactive'">Sản phẩm</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 6)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-table" [ngClass]="selectedItem == 6? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 6? 'blue' : 'inactive'">Nhập kho</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 7)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-money" [ngClass]="selectedItem == 7? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 7? 'blue' : 'inactive'">T/toán nhập kho</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 8)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-credit-card" [ngClass]="selectedItem == 8? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 8? 'blue' : 'inactive'">Chi tiêu</p>
+            </div>
+          </a>
+        </li>
+
+
+        <li class="nav-item" (click)="listClick($event, 9)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-user" [ngClass]="selectedItem == 9? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 9? 'blue' : 'inactive'">Tiếp thị</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="nav-item" (click)="listClick($event, 10)">
+          <a class="nav-link" href="#">
+            <div>
+              <i aria-hidden="true" class="fa fa-truck" [ngClass]="selectedItem == 10? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 10? 'blue' : 'inactive'">Xe hàng</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span aria-hidden="true" class="fa fa-bar-chart-o" [ngClass]="selectedItem == 11? 'blue' : 'inactive'"></span>
+            <br>
+            Báo cáo
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#" (click)="listClick($event, 11)">Action</a>
+              <a class="dropdown-item" href="#" (click)="listClick($event, 11)">Another action</a>
+              <a class="dropdown-item" href="#" (click)="listClick($event, 11)">Something else here</a>
+            </div>
+          </a>
+        </li>
+
+        <li class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span aria-hidden="true" class="fa fa-pie-chart" [ngClass]="selectedItem == 12? 'blue' : 'inactive'"></span>
+            <br>
+            Quản lý
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#"  (click)="listClick($event, 12)">Action</a>
+            <a class="dropdown-item" href="#"  (click)="listClick($event, 12)">Another action</a>
+            <a class="dropdown-item" href="#"  (click)="listClick($event, 12)">Something else here</a>
+          </div>
+        </li>
+
+        <li class="dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="fa fa-cog" [ngClass]="selectedItem == 13? 'blue' : 'inactive'"></span>
+            <br>
+            Q/lý tài khoản
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#" (click)="listClick($event, 13)">User</a>
+            <a class="dropdown-item" href="/Role" (click)="listClick($event, 13)">Role</a>
+            <a class="dropdown-item" href="/Permission">Permission</a>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
 </body>

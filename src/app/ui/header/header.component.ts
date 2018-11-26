@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  selectedItem;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  listClick(event, newValue) {
+    
+    this.selectedItem = newValue; 
+    console.log(this.selectedItem);
 }
+
+}
+ 

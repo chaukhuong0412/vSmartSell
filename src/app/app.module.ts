@@ -62,6 +62,10 @@ import { RoleCreateComponent } from './role-create/role-create.component';
 import { RoleEditComponent } from './role-edit/role-edit.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { UiModule } from './ui/ui.module';
+import { UserCreateDialogComponent } from './user-create-dialog/user-create-dialog.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
+
 
 @NgModule({
   declarations: [
@@ -75,7 +79,8 @@ import { UiModule } from './ui/ui.module';
     RoleHomeComponent,
     RoleCreateComponent,
     RoleEditComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    UserCreateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -141,12 +146,13 @@ import { UiModule } from './ui/ui.module';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
+    UiModule,
+    NgMultiSelectDropDownModule.forRoot()
     
   ],
   providers: [FlxUiDataTable],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmationDialogComponent]
+  entryComponents: [ConfirmationDialogComponent, UserCreateDialogComponent]
 
 })
 export class AppModule { }

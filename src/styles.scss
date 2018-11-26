@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+body
+{
+   
+   font-family: Tahoma, sans-serif !important;
+}
+
+.mat-pseudo-checkbox-checked::after {
+  top: 4.4px !important;
+  left: 2px !important;
+  background: #007bff !important;
+}
+
+
+.mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+  background: #007bff !important;
+
+}
+
+table.dataTable thead th {
+  border-bottom-width: 0px !important;
+}
+
+.table td {
+  border-bottom-width: 0px !important;
+}
