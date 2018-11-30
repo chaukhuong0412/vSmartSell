@@ -1,5 +1,12 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 
+
+<!-- 
   <button style="float: right;" mat-raised-button color="primary" routerLink="/Createrole">Create new role</button>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table">
@@ -26,4 +33,58 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    
+     -->
+
+
+<ng-container>
+  <label>Hiển thị <select [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange($event)">
+      <option [ngValue]=10> 10 </option>
+      <option [ngValue]=25> 25 </option>
+      <option [ngValue]=50> 50 </option>
+    </select> vai trò </label>
+
+  <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateRoleDialog()"> <i
+      class="fa fa-plus"> Tạo vai trò</i>
+  </button>
+
+  <div class="form-group row col-md-6">
+    <label id="searchLabel" for="search">Tìm kiếm:</label>
+    <div>
+        <input id="searchBox" class="form-control" name="search" [(ngModel)]="searchString" />
+    </div>
+
+    <button id="search-button"  type="button" class="btn btn-primary" (click)="search()"> <i
+      class="fa fa-search"> Tìm</i>
+  </button>
+  </div>
+
+  <table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped ">
+    <thead>
+      <tr>
+        <th scope="col" id="stt-column" (click)="sortById()">STT</th>
+        <th scope="col"><a class="clickable" (click)="sortByUserName()">Tên</a></th>
+        <th scope="col" id="right-header">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roles; let i = index">
+        <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
+        <td>{{role.name}}</td>
+
+        <td class="right">
+          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditRoleDialog(role.id)"><i class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(role.id)"><i
+              class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination [collectionSize]="totalRole*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+    (pageChange)="pageIndexChange($event)">
+
+  </ngb-pagination>
+
+  <p>Hiển thị tài khoản {{(pageIndex-1)*pageSize + 1}} tới
+    {{pageIndex*pageSize>totalRole?totalRole:pageIndex*pageSize}} trong tổng số {{totalRole}} tài khoản</p>
+</ng-container>
+

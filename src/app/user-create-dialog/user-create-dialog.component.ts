@@ -13,10 +13,7 @@ import { Router } from '@angular/router';
 })
 export class UserCreateDialogComponent implements OnInit {
 
-  dropdownList = [
-  ];
-  selectedItems = [];
-  dropdownSettings = {};
+
 
   userName;
   password;
@@ -31,23 +28,6 @@ export class UserCreateDialogComponent implements OnInit {
   ngOnInit() {
     this._roleService.getListRoles().subscribe(result => {
       this.roles = result;
-      this.dropdownList = [];
-      this.dropdownSettings = {
-        singleSelection: false,
-        idField: 'item_id',
-        textField: 'item_text',
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 3,
-        allowSearchFilter: true
-      };
-      result.forEach(o => {
-        var item = {
-          item_id: o.id,
-          item_text: o.name
-        };
-        this.dropdownList.push(item);
-      })
     })
   }
 
@@ -70,6 +50,12 @@ export class UserCreateDialogComponent implements OnInit {
       });
     }
   }
+
+  cancel() {
+    this.dialogRef.close();
+  }
+
+  
 
 
 

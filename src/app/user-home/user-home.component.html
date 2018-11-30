@@ -1,13 +1,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 
-<button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateUserDialog()"> <i class="fa fa-plus">  Tạo tài khoản</i>
-  </button>
+
 
 <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table">
 
@@ -44,12 +42,66 @@
 </table> -->
 
 <ng-container>
+
+
+      
+  <!-- <label>Hiển thị <select [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange($event)">
+      <option [ngValue]=10> 10 </option>
+      <option [ngValue]=25> 25 </option>
+      <option [ngValue]=50> 50 </option>
+    </select> tài khoản </label> -->
+
+    <div style="float:right" class="col-md-auto">
+      <div>
+          <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateUserDialog()"> <i
+            class="fa fa-plus"> Tạo tài khoản</i>
+          </button>
+      </div>
+
+    
+        <div id="searchDiv" class="row align-items-end d-flex">
+          <div  class="form-group row col-md-auto">
+            <label id="searchLabel" for="search">Tìm kiếm:</label>
+            <div>
+                <input class="form-control searchBox" name="search" [(ngModel)]="searchString" />
+            </div>
+        
+            <button id="search-button"  type="button" class="btn btn-primary" (click)="search()"> <i
+              class="fa fa-search"> Tìm</i>
+          </button>
+          </div>
+        </div>
+    </div>
+    
+
+
+<!--   
+    <div id="limitation-input" class="form-group row col-4">
+      <label id="searchLabel" for="limitedUser">Giới hạn số lượng tài khoản:</label>
+      <div>
+          <input  class="form-control searchBox" name="limitedUser" [(ngModel)]="limitedUser" />
+          {{limitedUser}}
+      </div>
+  
+      <button id="search-button"  type="button" class="btn btn-primary" (click)="setLimitation()"> <i
+        class="fa fa-check">Áp dụng</i>
+    </button>
+    </div> -->
+
+
+
   <table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped ">
     <thead>
       <tr>
         <th scope="col" id="stt-column" (click)="sortById()">STT</th>
-        <th scope="col" ><a class="clickable" (click)="sortByUserName()">Tên đăng nhập</a></th>
-        <th scope="col"(click)="sortByFullName()"> Họ tên</th>
+        <th scope="col"><a class="clickable" (click)="sortByUserName()">Tên đăng nhập</a>
+           <a *ngIf="sortField == 'UserName' && asc==true">▾</a>
+           <a *ngIf="sortField == 'UserName' && asc==false">▴</a>
+        </th>
+        <th scope="col"><a class="clickable" (click)="sortByFullName()">Họ tên</a>
+          <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
+          <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
+        </th>
         <th scope="col"> Cửa hàng</th>
         <th scope="col"> Ngày tạo</th>
         <th scope="col" id="right-header">Thao tác</th>
@@ -57,16 +109,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users; let i = index">
-        <td scope="row" id="stt-column"> {{i + 1}}</td>
+        <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
         <td>{{user.userName}}</td>
         <td>{{user.fullName}}</td>
         <td>Futurify</td>
         <td>23/11/2018</td>
 
         <td class="right">
-          <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/Edituser', user.id]"><i class="fa fa-edit"></i></button>
-          <button title="Khóa tài khoản" *ngIf="!user.userStatus" type="button" class="btn btn-info" (click)="openDeactivateConfirmationDialog(user.id)"><i
-              class="fa fa-lock"></i></button>
+          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditUserDialog(user.id)"><i class="fa fa-edit"></i></button>
+          <button title="Khóa tài khoản" *ngIf="!user.userStatus" type="button" class="btn btn-warning" (click)="openDeactivateConfirmationDialog(user.id)"><i
+               class="fa fa-lock"></i></button>
           <button title="Mở khóa tài khoản" *ngIf="user.userStatus" type="button" class="btn btn-success" (click)="openActivateConfirmationDialog(user.id)"><i
               class="fa fa-unlock"></i></button>
           <button title="Khôi phục mật khẩu" type="button" class="btn btn-secondary" (click)="openResetPasswordConfirmationDialog(user.id)"><i
@@ -77,4 +129,15 @@
       </tr>
     </tbody>
   </table>
+
+  <div style="float:right" class="col-md-auto">
+      <ngb-pagination [collectionSize]="totalUser*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+    (pageChange)="pageIndexChange($event)">
+  </ngb-pagination>
+  </div>
+
+
+  <p>Hiển thị tài khoản {{(pageIndex-1)*pageSize + 1}} tới
+    {{pageIndex*pageSize>totalUser?totalUser:pageIndex*pageSize}} trong tổng số {{totalUser}} tài khoản</p>
 </ng-container>
+

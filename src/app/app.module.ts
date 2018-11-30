@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DataTablesModule } from 'angular-datatables';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -64,6 +65,12 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { UiModule } from './ui/ui.module';
 import { UserCreateDialogComponent } from './user-create-dialog/user-create-dialog.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog.component';
+import { RoleCreateDialogComponent } from './role-create-dialog/role-create-dialog.component';
+import { RoleEditDialogComponent } from './role-edit-dialog/role-edit-dialog.component';
+import { CongtyHomeComponent } from './congty-home/congty-home.component';
+import { CongtyCreateDialogComponent } from './congty-create-dialog/congty-create-dialog.component';
+import { CongtyEditDialogComponent } from './congty-edit-dialog/congty-edit-dialog.component';
 
 
 
@@ -80,7 +87,13 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     RoleCreateComponent,
     RoleEditComponent,
     ConfirmationDialogComponent,
-    UserCreateDialogComponent
+    UserCreateDialogComponent,
+    UserEditDialogComponent,
+    RoleCreateDialogComponent,
+    RoleEditDialogComponent,
+    CongtyHomeComponent,
+    CongtyCreateDialogComponent,
+    CongtyEditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +134,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
       {
         path: 'Editrole/:id',
         component: RoleEditComponent
-      }
+      },
+      {
+        path: 'CongTy',
+        component: CongtyHomeComponent
+      },
       
     ]),
     BrowserAnimationsModule,
@@ -147,12 +164,14 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     ReactiveFormsModule,
     UiModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgbModule
     
   ],
   providers: [FlxUiDataTable],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmationDialogComponent, UserCreateDialogComponent]
+  entryComponents: [ConfirmationDialogComponent, UserCreateDialogComponent, UserEditDialogComponent, RoleCreateDialogComponent,
+      RoleEditDialogComponent,CongtyCreateDialogComponent, CongtyEditDialogComponent]
 
 })
 export class AppModule { }
