@@ -10,62 +10,62 @@ export class CongtyService {
   constructor(private _http: HttpClient) {
   }
 
-  getListCongTys(): Observable<CongTy[]> {
-    return this._http.get<CongTy[]>('https://localhost:44305/api/CongTy');
+  getListCongTys(): Observable<Company[]> {
+    return this._http.get<Company[]>('https://localhost:44305/api/Company');
   }
 
-  getListCongTysExcept(id): Observable<CongTy[]> {
-    return this._http.get<CongTy[]>('https://localhost:44305/api/CongTy/all/' + id);
+  getListCongTysExcept(id): Observable<Company[]> {
+    return this._http.get<Company[]>('https://localhost:44305/api/Company/all/' + id);
   }
 
-  getListCongTyOrderBy(reqModelGetListCongTy): Observable<CongTyViewModel[]> {
+  getListCongTyOrderBy(reqModelGetListCongTy): Observable<CompanyViewModel[]> {
     if (reqModelGetListCongTy.searchString == "")
-      return this._http.get<CongTyViewModel[]>('https://localhost:44305/api/congty/sort?IsAscending=' 
+      return this._http.get<CompanyViewModel[]>('https://localhost:44305/api/Company/sort?IsAscending=' 
       + reqModelGetListCongTy.isAscending + '&SortField=' + reqModelGetListCongTy.sortField
       + '&PageIndex=' + reqModelGetListCongTy.pageIndex + '&PageSize=' + reqModelGetListCongTy.pageSize);
     else 
-      return this._http.get<CongTyViewModel[]>('https://localhost:44305/api/congty/sort?IsAscending=' 
+      return this._http.get<CompanyViewModel[]>('https://localhost:44305/api/Company/sort?IsAscending=' 
         + reqModelGetListCongTy.isAscending + '&SortField=' + reqModelGetListCongTy.sortField
         + '&PageIndex=' + reqModelGetListCongTy.pageIndex + '&PageSize=' + reqModelGetListCongTy.pageSize + '&SearchString=' + reqModelGetListCongTy.searchString);
   }
 
   getNumberOfCongTysWithSearchString(searchString): Observable<number> {
-    return this._http.get<number>('https://localhost:44305/api/congty/number', {params: {searchString: searchString}});
+    return this._http.get<number>('https://localhost:44305/api/Company/number', {params: {searchString: searchString}});
   }
 
-  createCongTy(congty): Observable<CongTy> {
-    return this._http.post<CongTy>('https://localhost:44305/api/congty/create', congty);
+  createCongTy(congty): Observable<Company> {
+    return this._http.post<Company>('https://localhost:44305/api/Company/create', congty);
   }
 
-  getCongTy(id): Observable<CongTy> {
-    return this._http.get<CongTy>('https://localhost:44305/api/congty/' + id)
+  getCongTy(id): Observable<Company> {
+    return this._http.get<Company>('https://localhost:44305/api/Company/' + id)
   }
 
-  editCongTy(congty) : Observable<CongTy> {
-    return this._http.post<CongTy>('https://localhost:44305/api/congty/edit', congty);
+  editCongTy(congty) : Observable<Company> {
+    return this._http.post<Company>('https://localhost:44305/api/Company/edit', congty);
   }
 
   deleteCongTy(id) {
-    return this._http.delete('https://localhost:44305/api/congty/' + id);
+    return this._http.delete('https://localhost:44305/api/Company/' + id);
   }
 }
 
-export class CongTy {
+export class Company {
   id : number;
-  tenCongTy : string;
-  congTyChaId : number;
-  congTyConIds: number[];
-  cuaHangIds: number[];
+  name : string;
+  parentCompanyId : number;
+  daughterCompanyIds: number[];
+  // regionIds: number[];
 }
 
-export class CongTyViewModel {
+export class CompanyViewModel {
   id : number;
-  tenCongTy : string;
-  tenCongTyCha : string;
+  name : string;
+  parentCompanyName : string;
 }
 
 
-export class ReqModelGetListCongTy {
+export class ReqModelGetListCompany {
   sortField: ESortField;
   isAscending: boolean;
   pageSize: number;

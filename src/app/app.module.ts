@@ -7,9 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
-
-
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 
 
 import { MatAutocompleteModule,
@@ -51,26 +49,31 @@ import { MatAutocompleteModule,
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserHomeComponent } from './user-home/user-home.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
 import { FlxUiDatatableModule, FlxUiDataTable } from 'flx-ui-datatable';
-import { UserCreateComponent } from './user-create/user-create.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
 import { PermissionHomeComponent } from './permission-home/permission-home.component';
 import { PermissionCreateComponent } from './permission-create/permission-create.component';
 import { PermissionEditComponent } from './permission-edit/permission-edit.component';
-import { RoleHomeComponent } from './role-home/role-home.component';
-import { RoleCreateComponent } from './role-create/role-create.component';
-import { RoleEditComponent } from './role-edit/role-edit.component';
+import { RoleHomeComponent } from './role/role-home/role-home.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { UiModule } from './ui/ui.module';
-import { UserCreateDialogComponent } from './user-create-dialog/user-create-dialog.component';
+import { UserCreateDialogComponent } from './user/user-create-dialog/user-create-dialog.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog.component';
-import { RoleCreateDialogComponent } from './role-create-dialog/role-create-dialog.component';
-import { RoleEditDialogComponent } from './role-edit-dialog/role-edit-dialog.component';
-import { CongtyHomeComponent } from './congty-home/congty-home.component';
-import { CongtyCreateDialogComponent } from './congty-create-dialog/congty-create-dialog.component';
-import { CongtyEditDialogComponent } from './congty-edit-dialog/congty-edit-dialog.component';
+import { UserEditDialogComponent } from './user/user-edit-dialog/user-edit-dialog.component';
+import { RoleCreateDialogComponent } from './role/role-create-dialog/role-create-dialog.component';
+import { RoleEditDialogComponent } from './role/role-edit-dialog/role-edit-dialog.component';
+import { CongtyHomeComponent } from './congty/congty-home/congty-home.component';
+import { CongtyCreateDialogComponent } from './congty/congty-create-dialog/congty-create-dialog.component';
+import { CongtyEditDialogComponent } from './congty/congty-edit-dialog/congty-edit-dialog.component';
+import { CuahangHomeComponent } from './cuahang/cuahang-home/cuahang-home.component';
+import { CuahangCreateDialogComponent } from './cuahang/cuahang-create-dialog/cuahang-create-dialog.component';
+import { CuahangEditDialogComponent } from './cuahang/cuahang-edit-dialog/cuahang-edit-dialog.component';
+import { LoginComponent } from './login/login.component';
+import { JwtInterceptor } from './helper/jwt.interceptor';
+import { AuthGuard } from './guard/auth.guard';
+import { RegionHomeComponent } from './region/region-home/region-home.component';
+import { RegionCreateDialogComponent } from './region/region-create-dialog/region-create-dialog.component';
+import { RegionEditDialogComponent } from './region/region-edit-dialog/region-edit-dialog.component';
 
 
 
@@ -78,14 +81,10 @@ import { CongtyEditDialogComponent } from './congty-edit-dialog/congty-edit-dial
   declarations: [
     AppComponent,
     UserHomeComponent,
-    UserCreateComponent,
-    UserEditComponent,
     PermissionHomeComponent,
     PermissionCreateComponent,
     PermissionEditComponent,
     RoleHomeComponent,
-    RoleCreateComponent,
-    RoleEditComponent,
     ConfirmationDialogComponent,
     UserCreateDialogComponent,
     UserEditDialogComponent,
@@ -93,23 +92,27 @@ import { CongtyEditDialogComponent } from './congty-edit-dialog/congty-edit-dial
     RoleEditDialogComponent,
     CongtyHomeComponent,
     CongtyCreateDialogComponent,
-    CongtyEditDialogComponent
+    CongtyEditDialogComponent,
+    CuahangHomeComponent,
+    CuahangCreateDialogComponent,
+    CuahangEditDialogComponent,
+    LoginComponent,
+    RegionHomeComponent,
+    RegionCreateDialogComponent,
+    RegionEditDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
       {
+        path: 'Login',
+        component: LoginComponent
+      },
+      {
         path: '',
-        component: UserHomeComponent
-      },
-      {
-        path: 'Createuser',
-        component: UserCreateComponent
-      },
-      {
-        path: 'Edituser/:id',
-        component: UserEditComponent
+        component: UserHomeComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'Permission',
@@ -128,16 +131,16 @@ import { CongtyEditDialogComponent } from './congty-edit-dialog/congty-edit-dial
         component: RoleHomeComponent
       },
       {
-        path: 'Createrole',
-        component: RoleCreateComponent
-      },
-      {
-        path: 'Editrole/:id',
-        component: RoleEditComponent
-      },
-      {
         path: 'CongTy',
         component: CongtyHomeComponent
+      },
+      {
+        path: 'KhuVuc',
+        component: RegionHomeComponent
+      },
+      {
+        path: 'CuaHang',
+        component: CuahangHomeComponent
       },
       
     ]),
@@ -168,10 +171,15 @@ import { CongtyEditDialogComponent } from './congty-edit-dialog/congty-edit-dial
     NgbModule
     
   ],
-  providers: [FlxUiDataTable],
+  providers: [
+    AuthGuard,
+    FlxUiDataTable,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent, UserCreateDialogComponent, UserEditDialogComponent, RoleCreateDialogComponent,
-      RoleEditDialogComponent,CongtyCreateDialogComponent, CongtyEditDialogComponent]
+      RoleEditDialogComponent,CongtyCreateDialogComponent, CongtyEditDialogComponent, CuahangCreateDialogComponent, CuahangEditDialogComponent,
+      RegionCreateDialogComponent, RegionEditDialogComponent]
 
 })
 export class AppModule { }

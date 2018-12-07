@@ -136,7 +136,7 @@
             Q/lý tài khoản
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" (click)="listClick($event, 13)">User</a>
+            <a class="dropdown-item" href="/" (click)="listClick($event, 13)">User</a>
             <a class="dropdown-item" href="/Role" (click)="listClick($event, 13)">Role</a>
             <a class="dropdown-item" href="/Permission">Permission</a>
           </div>
@@ -151,10 +151,21 @@
           </a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="/CongTy" (click)="listClick($event, 14)">Công Ty</a>
-            <a class="dropdown-item" href="#" (click)="listClick($event, 14)">Cửa Hàng</a>
+            <a class="dropdown-item" href="/KhuVuc" (click)="listClick($event, 14)">Khu Vực</a>
+            <a class="dropdown-item" href="/CuaHang" (click)="listClick($event, 14)">Cửa Hàng</a>
           </div>
         </li>
-
+      </ul>
+      <ul class="navbar-nav ml-auto">
+          <li class="dropdown" >
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{userName}}
+              </a>
+              <div id="logout" class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item"  (click)="logOut()">Đăng xuất</a>
+              </div>
+            </li>
       </ul>
 
     </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth.service';
+import { Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  isAuthenticated = false;
+
+  constructor(private authService:AuthService, private router: Router) {
+    router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        if (event['url'] == '/Login') {
+          this.isAuthenticated = false;
+        } else {
+          this.isAuthenticated = true;
+        }
+      }
+    })
+
+  }
 
   ngOnInit() {
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
 }

@@ -1,0 +1,19 @@
+<div class="row justify-content-md-center">
+  <div class="col-xs-8 col-sm-6 col-md-4 col-sm-offset-4 col-md-offset-6">
+      <form (ngSubmit)="onLogin(f)" #f="ngForm">
+          <div class="form-group">
+            <label for="userName">Tên đăng nhập</label>
+            <input class="form-control" type="text" id="userName" name="userName" [(ngModel)]="userName">
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password">
+          </div>
+          <div *ngIf="error" class="alert alert-danger">
+              Sai tên đăng nhập hoặc mật khẩu!
+            </div>
+          <button class="btn btn-primary" type="submit">Đăng nhập</button>
+        </form>
+  </div>
+</div>
+
