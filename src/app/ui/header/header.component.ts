@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClientComponent } from 'src/app/client/client/client.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { ClientService } from 'src/app/client.service';
 
 
 @Component({
@@ -9,10 +12,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  //dialogRef: MatDialogRef<ClientComponent>;
+
   selectedItem;
   userName;
 
-  constructor(private router: Router ) { }
+  constructor(private router: Router, public dialog: MatDialog ) { }
 
   ngOnInit() {
     var obj = JSON.parse(localStorage.getItem('currentUser'));
@@ -21,15 +26,25 @@ export class HeaderComponent implements OnInit {
 
   listClick(event, newValue) {
     this.selectedItem = newValue; 
-    console.log(this.selectedItem);
+    console.log(this.selectedItem);    
   }
+
+  openClientInformationDialog(event) {
+    this.listClick(event, 14)
+    const dialogRef = this.dialog.open(ClientComponent, {
+      disableClose: false,
+      width: '745px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+  }
+
   
   logOut() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/Login']);
   }  
 
-
-
 }
- 
+

@@ -20,7 +20,7 @@
   <div class="form-group scrollbar">
     <mat-selection-list class="border" [(ngModel)]="selectedPermissions">
       <mat-list-option *ngFor="let permission of permissions" [value]="permission.id">
-        {{permission.name}}
+        {{permission.display}}
       </mat-list-option>
     </mat-selection-list>
   </div>

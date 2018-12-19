@@ -83,6 +83,13 @@ export class UserHomeComponent implements AfterViewInit, OnDestroy, OnInit {
     this.update();
   }
 
+  // getCompanyOrStoreName(user: User) {
+  //   this._userService.getUser(user.userId).subscribe(result => {
+  //     console.log(result);
+  //   })
+  //   return user;
+  // } 
+
   update() {
     this._userService.getNumberOfUsersWithSearchString(this.searchString).subscribe(result => {
       this.totalUser = result;
@@ -137,7 +144,7 @@ export class UserHomeComponent implements AfterViewInit, OnDestroy, OnInit {
   openCreateUserDialog() {
     this.dialogCreateRef = this.dialog.open(UserCreateDialogComponent, {
       disableClose: false,
-      width: '745px',
+      width: '880px',
     });
     this.dialogCreateRef.afterClosed().subscribe(result => {
       console.log(result);

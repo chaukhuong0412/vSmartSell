@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> -->
 
 
 
@@ -59,7 +59,7 @@
       </div>
 
     
-        <div id="searchDiv" class="row align-items-end d-flex">
+        <div class="row align-items-end d-flex searchDiv">
           <div  class="form-group row col-md-auto">
             <label id="searchLabel" for="search">Tìm kiếm:</label>
             <div>
@@ -102,7 +102,8 @@
           <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
           <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
         </th>
-        <th scope="col"> Cửa hàng</th>
+        <th scope="col">Công ty</th>
+        <th scope="col">Cửa hàng</th>
         <th scope="col"> Ngày tạo</th>
         <th scope="col" id="right-header">Thao tác</th>
       </tr>
@@ -112,7 +113,8 @@
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
         <td>{{user.userName}}</td>
         <td>{{user.fullName}}</td>
-        <td>Futurify</td>
+        <td>{{user}}</td>
+        <td>{{user}}</td>
         <td>23/11/2018</td>
 
         <td class="right">

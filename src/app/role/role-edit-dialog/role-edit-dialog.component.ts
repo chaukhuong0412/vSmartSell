@@ -16,7 +16,7 @@ export class RoleEditDialogComponent implements OnInit {
   private id : number;
   private sub: any;
   name;
-  permissionIds: Number[];
+  permissionIds: string[];
   permissions: Permission[];
   selectedPermissions;
 

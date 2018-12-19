@@ -1,0 +1,60 @@
+<ng-container>
+
+  <div style="float:right" class="col-md-auto">
+    <div>
+      <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateCuaHangDialog()">
+        <i class="fa fa-plus"> Tạo cửa hàng</i>
+      </button>
+    </div>
+
+    <div class="row align-items-end d-flex searchDiv">
+
+      <div class="form-group row col-md-auto">
+        <label id="searchLabel" for="search">Tìm kiếm:</label>
+        <div>
+          <input id="searchBox" class="form-control" name="search" [(ngModel)]="searchString" />
+        </div>
+
+        <button id="search-button" type="button" class="btn btn-primary" (click)="search()"> <i class="fa fa-search">
+            Tìm</i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" id="stt-column" (click)="sortById()">STT</th>
+        <th scope="col"><a class="clickable" (click)="sortByTenCuaHang()">Tên cửa hàng</a></th>
+        <th scope="col"><a>Tên công ty</a></th>
+        <th scope="col" id="right-header">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cuaHang of cuaHangs; let i = index">
+        <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
+        <td>{{cuaHang.name}}</td>
+        <td>{{cuaHang.companyName}}</td>
+
+
+        <td class="right">
+          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditCuaHangDialog(cuaHang.id)"><i
+              class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(cuaHang.id)"><i
+              class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination [collectionSize]="totalCuaHang*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+    (pageChange)="pageIndexChange($event)">
+
+  </ngb-pagination>
+
+  <p>Hiển thị cửa hàng {{(pageIndex-1)*pageSize + 1}} tới
+    {{pageIndex*pageSize>totalCuaHang?totalCuaHang:pageIndex*pageSize}} trong tổng số {{totalCuaHang}} cửa hàng</p>
+</ng-container>

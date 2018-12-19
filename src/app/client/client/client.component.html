@@ -1,0 +1,53 @@
+<h1 class="text-center">Quản lý tài khoản</h1>
+<hr />
+
+<div class="container create-dialog">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="Name">Tên</label>
+        <input required class="form-control" [(ngModel)]="name" #uName="ngModel">
+      </div>
+
+      <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
+        <div *ngIf="uName.errors.required">
+          Không được để trống tên công ty!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="Name">Địa chỉ</label>
+          <input required class="form-control" [(ngModel)]="address" #uName="ngModel">
+        </div>
+  
+
+      </div>
+    </div>
+  
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="Name">Số điện thoại</label>
+            <input required class="form-control" [(ngModel)]="phoneNumber" #uName="ngModel">
+          </div>
+        </div>
+      </div>
+
+
+
+  <hr />
+
+
+  <div>
+    <button id="create-button" class="btn btn-primary" (click)="save();">Lưu</button>
+  </div>
+
+  <div>
+    <button id="cancel-button" class="btn btn-secondary" (click)="cancel();">Hủy</button>
+  </div>
+</div>

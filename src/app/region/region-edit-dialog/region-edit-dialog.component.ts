@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Company, CongtyService } from 'src/app/congty.service';
+import { Company, CompanyService } from 'src/app/company.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CuahangService } from 'src/app/cuahang.service';
+import { StoreService } from 'src/app/store.service';
 import { RegionService } from 'src/app/region.service';
 
 @Component({
@@ -19,8 +19,8 @@ export class RegionEditDialogComponent implements OnInit {
   loopError;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<RegionEditDialogComponent>,
-    private _congTyService: CongtyService,
-    private _cuaHangService: CuahangService,
+    private _congTyService: CompanyService,
+    private _cuaHangService: StoreService,
     private _regionService: RegionService) { }
 
   ngOnInit() {

@@ -17,29 +17,27 @@ export class PermissionService {
     return this._http.get<Permission[]>('https://localhost:44305/api/permission');
   }
 
-  createPermission(permission): Observable<Permission> {
-    return this._http.post<Permission>('https://localhost:44305/api/permission/create', permission);
-  }
+  // createPermission(permission): Observable<Permission> {
+  //   return this._http.post<Permission>('https://localhost:44305/api/permission/create', permission);
+  // }
 
-  getPermission(id): Observable<Permission> {
-    return this._http.get<Permission>('https://localhost:44305/api/Permission/' + id)
-  }
+  // getPermission(id): Observable<Permission> {
+  //   return this._http.get<Permission>('https://localhost:44305/api/Permission/' + id)
+  // }
 
-  editPermission(permission) : Observable<Permission> {
-    return this._http.post<Permission>('https://localhost:44305/api/permission/edit', permission);
-  }
+  // editPermission(permission) : Observable<Permission> {
+  //   return this._http.post<Permission>('https://localhost:44305/api/permission/edit', permission);
+  // }
 
-  deletePermission(id) {
-    return this._http.delete('https://localhost:44305/api/permission/' + id);
-  }
+  // deletePermission(id) {
+  //   return this._http.delete('https://localhost:44305/api/permission/' + id);
+  // }
 
 
 
 }
 
 export class Permission {
-  id : Number;
-  name : string;
-  featureName : string;
-  description: string;
+  id : string;
+  display: string;
 }

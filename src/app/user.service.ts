@@ -101,6 +101,10 @@ export class User {
   fullName: string;
   userStatus: any;
   roleIds: number[];
+  companyId: number;
+  storeId: number;
+  storeIds: number[];
+  companyIds: number[];
 }
 
 export class UserAudit {

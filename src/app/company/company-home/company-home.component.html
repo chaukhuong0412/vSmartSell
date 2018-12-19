@@ -1,0 +1,57 @@
+<ng-container>
+
+    <div style="float:right" class="col-md-auto">
+      <div>
+          <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateCongTyDialog()"> <i
+            class="fa fa-plus"> Tạo công ty</i>
+        </button>
+      </div>
+
+    <div class="row align-items-end d-flex searchDiv">
+        <div class="form-group row col-md-auto">
+            <label id="searchLabel" for="search">Tìm kiếm:</label>
+            <div>
+                <input id="searchBox" class="form-control" name="search" [(ngModel)]="searchString" />
+            </div>
+        
+            <button id="search-button"  type="button" class="btn btn-primary" (click)="search()"> <i
+              class="fa fa-search"> Tìm</i>
+          </button>
+          </div>
+    </div>
+  </div>
+
+
+  <table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped ">
+    <thead>
+      <tr>
+        <th scope="col" id="stt-column" (click)="sortById()">STT</th>
+        <th scope="col"><a class="clickable" (click)="sortByTenCongTy()">Tên</a></th>
+        <th scope="col"><a >Tên công ty cha</a></th>
+        <th scope="col" id="right-header">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let congTy of congTys; let i = index">
+        <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
+        <td>{{congTy.name}}</td>
+        <td>{{congTy.parentCompanyName}}</td>
+
+
+        <td class="right">
+          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditCongTyDialog(congTy.id)"><i class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(congTy.id)"><i
+              class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination [collectionSize]="totalCongTy*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+    (pageChange)="pageIndexChange($event)">
+
+  </ngb-pagination>
+
+  <p>Hiển thị công ty {{(pageIndex-1)*pageSize + 1}} tới
+    {{pageIndex*pageSize>totalCongTy?totalCongTy:pageIndex*pageSize}} trong tổng số {{totalCongTy}} công ty</p>
+</ng-container>
+

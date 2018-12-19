@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Company, CongtyService } from 'src/app/congty.service';
-import { Store, CuahangService } from 'src/app/cuahang.service';
+import { Company, CompanyService } from 'src/app/company.service';
+import { Store, StoreService } from 'src/app/store.service';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { RegionService } from 'src/app/region.service';
@@ -20,8 +20,8 @@ export class RegionCreateDialogComponent implements OnInit {
   loopError = false;
 
   constructor(public dialogRef: MatDialogRef<RegionCreateDialogComponent>,
-    private _congTyService: CongtyService,
-    private _cuaHangService: CuahangService, 
+    private _congTyService: CompanyService,
+    private _cuaHangService: StoreService, 
     private _regionService: RegionService,
     private router: Router) { }
 

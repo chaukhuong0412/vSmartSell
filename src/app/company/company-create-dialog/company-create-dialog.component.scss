@@ -1,0 +1,23 @@
+#create-button {
+    text-align: center;
+    float: right;
+}
+
+#cancel-button {
+    text-align: center;
+    float: left;
+}
+
+.create-dialog {
+    max-height: 700px;
+}
+
+// input {
+//     width: 310px;
+// }
+
+
+ .scrollbar {
+    max-height: 300px;
+     overflow-y: scroll;
+ }
