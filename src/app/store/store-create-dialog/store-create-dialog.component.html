@@ -4,7 +4,7 @@
 <div class="container create-dialog">
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="form-group">
         <label for="Name">Tên cửa hàng</label>
         <input required class="form-control" [(ngModel)]="name" #uName="ngModel">
@@ -17,27 +17,72 @@
       </div>
     </div>
 
+    
+    <div class="col-md-4">
+        <div class="form-group">
+          <label for="Name">Mã cửa hàng</label>
+          <input required class="form-control" [(ngModel)]="storeCode" #uName="ngModel">
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="CongTyCha">Công ty</label>
+        <select class="form-control" [(ngModel)]="companyId">
+          <option class="form-control" *ngFor="let company of companies" [value]="company.id"> {{company.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+
     <div class="col-md-6">
         <div class="form-group">
-            <label for="CongTyCha">Công ty</label> 
-            <select class="form-control" [(ngModel)]="companyId">
-                <option class="form-control" *ngFor="let company of companies" [value]="company.id"> {{company.name}} </option>
-              </select>
-          </div>
+          <label for="Name">Số điện thoại</label>
+          <input required class="form-control" [(ngModel)]="phoneNumber" #uName="ngModel">
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+
+
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="Name">Địa chỉ</label>
+        <input required class="form-control" [(ngModel)]="address" #uName="ngModel">
+      </div>
     </div>
 
   </div>
 
+  <div class="row">
 
-    <!-- <div class="form-group">
-      <p>Kho hàng</p>
+    <div class="col-md-12">
+      <label for="">Kho hàng</label>
       <div class="form-group scrollbar">
-        <mat-selection-list class="border" [(ngModel)]="selectedCongTyCons">
-          <mat-list-option>
+        <mat-selection-list class="border" [(ngModel)]="selectedWarehouses">
+          <mat-list-option>All</mat-list-option>
+          <mat-list-option>All</mat-list-option>
+          <mat-list-option>All</mat-list-option>
+          <mat-list-option>All</mat-list-option>
+          <mat-list-option>All</mat-list-option>
+          <mat-list-option>All</mat-list-option>
+          <mat-list-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+            {{warehouse.name}}
           </mat-list-option>
         </mat-selection-list>
       </div>
-    </div> -->
+    </div>
+
+
+
+  </div>
+
+
 
 
   <hr />

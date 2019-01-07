@@ -17,6 +17,10 @@ export class PermissionService {
     return this._http.get<Permission[]>('https://localhost:44305/api/permission');
   }
 
+  getPermissionGroups() {
+    return this._http.get('https://localhost:44305/api/permission/group');
+  }
+
   // createPermission(permission): Observable<Permission> {
   //   return this._http.post<Permission>('https://localhost:44305/api/permission/create', permission);
   // }

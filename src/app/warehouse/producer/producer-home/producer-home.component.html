@@ -1,0 +1,119 @@
+<ng-container>
+
+  <div class="container form-group">
+
+      <!-- <button style="float:left;" type="button" class="btn btn-dark" [routerLink]="'/Supplier'">
+        <i class="fa fa-edit"> Quản lý nhà sản xuất</i>
+      </button> -->
+
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <label for="Name">Nhà sản xuất</label>
+        <ng-multiselect-dropdown class="multiselect" [placeholder]="'Nhà sản xuất'" [data]="supplierList" [(ngModel)]="selectedSuppliers"
+        
+          [settings]="dropdownSettings" (onSelect)="onSupplierIdsChange($event)" (onDeSelect)="onSupplierIdsChange($event)">
+        </ng-multiselect-dropdown>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Name">Ngày giao dịch</label>
+          <div class="input-group">
+            <input id="toDatePicker" class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fromDate"
+              ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" (dateSelect)="onFromDateSelected(d2);">
+
+            <input class="form-control" [minDate]="minToDate" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="toDate"
+              ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" (dateSelect)="onToDateSelected($event)">
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div style="float:right" class="container">
+
+    <div class="col-md-6 filter align-self-end">
+      <!-- <div class="row">
+        <button style="float:right;" id="add-button" type="button" class="btn btn-dark" [routerLink]="'/Producer/Create'">
+          <i class="fa fa-plus"> Tạo nhà cung cấp</i>
+        </button>
+      </div> -->
+
+
+      <div class="row">
+        <label id="searchLabel" for="search">Tìm kiếm:</label>
+        <div>
+          <input class="form-control searchBox" name="search" [(ngModel)]="searchString" />
+        </div>
+
+        <button id="search-button" type="button" class="btn btn-primary" (click)="search()"> <i class="fa fa-search">
+            Tìm</i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped ">
+    <thead>
+      <tr>
+        <th scope="col" id="stt-column" (click)="sortById()">STT</th>
+        <th scope="col"><a class="clickable" (click)="sortByUserName()">Ngày giao dịch</a>
+          <a *ngIf="sortField == 'UserName' && asc==true">▾</a>
+          <a *ngIf="sortField == 'UserName' && asc==false">▴</a>
+        </th>
+        <th scope="col"><a class="clickable" (click)="sortByFullName()">Tên nhà cung cấp</a>
+          <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
+          <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
+        </th>
+        <th scope="col">Số điện thoại</th>
+        <th scope="col">Địa chỉ</th>
+        <th scope="col"> Nhà sản xuất</th>
+        <th scope="col"> Nợ hiện tại</th>
+        <th scope="col" id="right-header">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producer of producers; let i = index">
+        <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
+        <td>{{producer.createdAt | date:"dd/MM/yyyy"}}</td>
+        <td>{{producer.name}}</td>
+        <td>{{producer.name}}</td>
+        <td>{{producer.name}}</td>
+        <td>{{producer.suppliers | getObjectName }}</td>
+        <td>{{ 0 | date:"dd/MM/yyyy" }}</td>
+
+        <td class="right">
+          <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/Producer/Edit', producer.id]"><i
+              class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(producer.id)"><i
+              class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="float:right" class="col-md-auto">
+    <ngb-pagination [collectionSize]="totalUser*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+      (pageChange)="pageIndexChange($event)">
+    </ngb-pagination>
+  </div>
+
+
+  <p>Hiển thị tài khoản {{(pageIndex-1)*pageSize + 1}} tới
+    {{pageIndex*pageSize>totalUser?totalUser:pageIndex*pageSize}} trong tổng số {{totalUser}} tài khoản</p>
+</ng-container>

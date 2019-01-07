@@ -1,0 +1,54 @@
+<h1 class="text-center">Tạo config mới</h1>
+<hr />
+
+<div class="container create-dialog">
+
+  <div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="Name">Key</label>
+            <input required class="form-control" [(ngModel)]="key" #uName="ngModel">
+          </div>
+    
+          <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">
+            <div *ngIf="uName.errors.required">
+              Không được để trống key!
+            </div>
+          </div>
+    </div>
+      
+    </div>
+
+
+  <div class="row">
+      <div class="col-md-12">
+
+      <div class="form-group">
+          <label for="Name">Value</label>
+          <input required class="form-control" [(ngModel)]="value" #uName="ngModel">
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+
+      <div class="form-group">
+          <label for="Name">Description</label>
+          <input required class="form-control" [(ngModel)]="description" #uName="ngModel">
+        </div>
+        </div>
+  </div>
+
+
+  <hr />
+
+
+  <div>
+    <button id="create-button" class="btn btn-primary" (click)="createConfig();">Lưu</button>
+  </div>
+
+  <div>
+    <button id="cancel-button" class="btn btn-secondary" (click)="cancel();">Hủy</button>
+  </div>
+</div>

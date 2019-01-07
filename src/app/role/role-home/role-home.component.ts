@@ -69,10 +69,11 @@ export class RoleHomeComponent implements  OnInit {
   }
 
   update() {
-    this._roleService.getNumberOfRolesWithSearchString(this.searchString).subscribe(result => {
-      this.totalRole = result;
-    })
+    // this._roleService.getNumberOfRolesWithSearchString(this.searchString).subscribe(result => {
+    //   this.totalRole = result;
+    // })
     this._roleService.getListRoleOrderBy(this.reqModelGetListRole).subscribe(result => {
+      this.totalRole = result.length;
       this.roles = result;
       console.log(result.length);
       this.rerender();

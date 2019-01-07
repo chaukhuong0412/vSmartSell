@@ -1,0 +1,49 @@
+<h1 class="text-center">Edit config</h1>
+<hr />
+
+<div class="container create-dialog">
+
+  <div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="Name">Key</label>
+            <input class="form-control" [(ngModel)]="key" #uName="ngModel" readonly="readonly"/>
+          </div>
+    
+    </div>
+      
+    </div>
+
+
+  <div class="row">
+      <div class="col-md-12">
+
+      <div class="form-group">
+          <label for="Name">Value</label>
+          <textarea required class="form-control" [(ngModel)]="value" #uName="ngModel"> </textarea>
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+
+      <div class="form-group">
+          <label for="Name">Description</label>
+          <input required class="form-control" [(ngModel)]="description" #uName="ngModel">
+        </div>
+        </div>
+  </div>
+
+
+  <hr />
+
+
+  <div>
+    <button id="create-button" class="btn btn-primary" (click)="save();">Lưu</button>
+  </div>
+
+  <div>
+    <button id="cancel-button" class="btn btn-secondary" (click)="cancel();">Hủy</button>
+  </div>
+</div>

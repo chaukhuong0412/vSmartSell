@@ -1,0 +1,52 @@
+<ng-container>
+
+
+    <div style="float:right" class="col-md-auto">
+      <div>
+        <button style="float:right;" id="add-button" type="button" class="btn btn-dark" (click)="openCreateSupplierDialog()">
+          <i class="fa fa-plus"> Tạo nhà sản xuất</i>
+        </button>
+      </div>
+    </div>
+
+
+
+  <table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped ">
+    <thead>
+      <tr>
+        <th scope="col" id="stt-column" (click)="sortById()">STT</th>
+        <th scope="col"><a class="clickable" (click)="sortByFullName()">Tên nhà sản xuất</a>
+          <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
+          <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
+        </th>
+
+        <th scope="col">Nhà cung cấp</th>
+
+        <th scope="col" id="right-header">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of supplierList; let i = index">
+        <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
+        <td>{{supplier.name}}</td>
+        <td>{{supplier.producers | getObjectName}}</td>
+
+        <td class="right">
+          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditSupplierDialog(supplier.id)"><i class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(supplier.id)"><i
+              class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="float:right" class="col-md-auto">
+    <ngb-pagination [collectionSize]="totalUser*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+      (pageChange)="pageIndexChange($event)">
+    </ngb-pagination>
+  </div>
+
+
+  <p>Hiển thị tài khoản {{(pageIndex-1)*pageSize + 1}} tới
+    {{pageIndex*pageSize>totalUser?totalUser:pageIndex*pageSize}} trong tổng số {{totalUser}} tài khoản</p>
+</ng-container>

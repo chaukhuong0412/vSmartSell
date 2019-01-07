@@ -34,9 +34,6 @@ export class UserHomeComponent implements AfterViewInit, OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
 
 
-
-
-
   index = 1;
   pageIndex = 1;
   pageSize = 10;
@@ -96,7 +93,7 @@ export class UserHomeComponent implements AfterViewInit, OnDestroy, OnInit {
     })
     this._userService.getListUserOrderBy(this.reqModelGetListUser).subscribe(result => {
       this.users = result;
-      console.log(result.length);
+      console.log(this.users);
       this.rerender();
     });
   }

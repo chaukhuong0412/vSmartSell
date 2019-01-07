@@ -16,13 +16,24 @@
         </div>
       </div>
     </div>
-  
+    <hr />
+
   <div class="form-group scrollbar">
-    <mat-selection-list class="border" [(ngModel)]="selectedPermissions">
+    <!-- <mat-selection-list class="border" [(ngModel)]="selectedPermissions">
+      <mat-list-option>All</mat-list-option>
       <mat-list-option *ngFor="let permission of permissions" [value]="permission.id">
         {{permission.display}}
       </mat-list-option>
-    </mat-selection-list>
+    </mat-selection-list> -->
+
+    <div *ngFor="let permissionGroup of permissionGroups; let i = index" >
+        <mat-checkbox (click)="selectGroup(i)"> {{permissionGroup.name}}<br></mat-checkbox>
+        <div  *ngFor="let permission of permissionGroup.permissions">
+            <mat-checkbox class="childCheckbox" [checked]="permissionChecked[i]" [value]="permission.id"> {{permission.display}} </mat-checkbox><br>
+        </div>
+    </div>
+    
+
   </div>
 
   <hr />

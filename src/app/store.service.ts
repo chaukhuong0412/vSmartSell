@@ -14,6 +14,10 @@ export class StoreService {
     return this._http.get<Store[]>('https://localhost:44305/api/store');
   }
 
+  getListCuaHangManagedBy(user) : Observable<Store[]> {
+    return this._http.get<Store[]>('https://localhost:44305/api/store/managedby/' + user);
+  }
+
   getListCuaHangsExcept(id): Observable<Store[]> {
     return this._http.get<Store[]>('https://localhost:44305/api/store/all/' + id);
   }
@@ -48,11 +52,34 @@ export class StoreService {
   deleteCuaHang(id) {
     return this._http.delete('https://localhost:44305/api/store/' + id);
   }
+
+  getStoreConfigOfStore(id) : Observable<StoreConfig[]> {
+    return this._http.get<StoreConfig[]>('https://localhost:44305/api/config/store/' + id);
+  }
+
+  getStoreConfig(id) : Observable<StoreConfig> {
+    return this._http.get<StoreConfig>('https://localhost:44305/api/config/' + id);
+  }
+
+  deleteStoreConfig(id) {
+    return this._http.delete('https://localhost:44305/api/config/' + id);
+  }
+
+  editStoreConfig(config) {
+    return this._http.post('https://localhost:44305/api/config/edit', config)
+  }
+
+  createStoreConfig(config) {
+    return this._http.post('https://localhost:44305/api/config/create', config);
+  }
 }
 
 export class Store {
   id : number;
   name : string;
+  storeCode: string;
+  phoneNumber: string;
+  address: string;
   companyId : number;
 }
 
@@ -60,6 +87,14 @@ export class StoreViewModel {
   id : number;
   name : string;
   companyName : string;
+}
+
+export class StoreConfig {
+  id: number;
+  key: string;
+  value: string;
+  description: string;
+  storeId: number;
 }
 
 

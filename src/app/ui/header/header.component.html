@@ -1,5 +1,4 @@
 <body>
-
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0,0,0,0.05)">
 
     <a style="font-size: 25px" class="navbar-brand" href="#">Demo-vSmartSell</a>
@@ -13,7 +12,7 @@
       <ul class="navbar-nav mx-auto">
         <li class="nav-item" (click)="listClick($event, 1)">
           <a class="nav-link" href="#">
-            <span aria-hidden="true" class="fa fa-home" [ngClass]="selectedItem == 1? 'blue' : 'inactive'"></span>
+            <i  [ngClass]="selectedItem == 1? 'blue' : 'inactive'"  class="fa fa-home"></i>
             <p [ngClass]="selectedItem == 1? 'blue' : 'inactive'">Trang chủ</p>
           </a>
         </li>
@@ -136,9 +135,9 @@
             Q/lý tài khoản
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="/" (click)="listClick($event, 13)">User</a>
-            <a class="dropdown-item" href="/Role" (click)="listClick($event, 13)">Role</a>
-            <a class="dropdown-item" href="/Permission">Permission</a>
+            <a class="dropdown-item" [routerLink]="['']" (click)="listClick($event, 13)">User</a>
+            <a class="dropdown-item" [routerLink]="['/Role']" (click)="listClick($event, 13)">Role</a>
+            <a class="dropdown-item" [routerLink]="['/Permission']">Permission</a>
           </div>
         </li>
 
@@ -151,11 +150,26 @@
           </a>
           <div class="dropdown-menu">
               <a class="dropdown-item" style="cursor: pointer;" (click)="openClientInformationDialog($event)">Tài khoản</a>
-            <a class="dropdown-item" href="/CongTy" (click)="listClick($event, 14)">Công Ty</a>
-            <a class="dropdown-item" href="/CuaHang" (click)="listClick($event, 14)">Cửa Hàng</a>
+            <a class="dropdown-item" [routerLink]="['/CongTy']" (click)="listClick($event, 14)">Công Ty</a>
+            <a class="dropdown-item" [routerLink]="['/CuaHang']" (click)="listClick($event, 14)">Cửa Hàng</a>
           </div>
         </li>
+
+
+
+        <li class="nav-item"  (click)="listClick($event, 15)">
+          <a class="nav-link" [routerLink]="['/Producer']">
+            <div>
+              <i aria-hidden="true" class="fa fa-amazon" [ngClass]="selectedItem == 15? 'blue' : 'inactive'"></i>
+              <p [ngClass]="selectedItem == 15? 'blue' : 'inactive'">Nhà cung cấp</p>
+            </div>
+          </a>
+        </li>
+        
+
+
       </ul>
+
       <ul class="navbar-nav ml-auto">
         <li class="dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -170,4 +184,6 @@
 
     </div>
   </nav>
+
+  <div id="headerDiv" style="width: 100%; height: 43.5px; background-color: rgb(206, 206, 206)"></div>
 </body>

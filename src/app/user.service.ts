@@ -105,6 +105,9 @@ export class User {
   storeId: number;
   storeIds: number[];
   companyIds: number[];
+  companyName: string;
+  storeName: string;
+  createdAt: any;
 }
 
 export class UserAudit {

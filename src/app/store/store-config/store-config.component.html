@@ -1,0 +1,40 @@
+
+  <h1 style="text-align:center">Config</h1>
+
+  <div style="float:right" class="col-md-auto">
+      <div>
+        <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateConfigDialog()">
+          <i class="fa fa-plus"> Tạo config</i>
+        </button>
+      </div>
+  
+  
+    </div>
+
+<table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 20%"><a class="clickable" (click)="sortByTenCuaHang()">Key</a></th>
+        <th scope="col" style="width: 20%"><a>Value</a></th>
+        <th scope="col" style="width: 50%"><a>Description</a></th>
+        <th scope="col" id="right-header">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let config of storeConfigs; let i = index">
+        <td>{{config.key}}</td>
+        <td>
+            {{config.value}}
+        </td>
+        <td>{{config.description}}</td>
+
+        <td class="right">
+            <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditConfigDialog(config.id)"><i
+              class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(config.id)"><i
+              class="fa fa-trash"></i></button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>

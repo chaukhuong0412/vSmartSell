@@ -70,7 +70,17 @@ import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './helper/jwt.interceptor';
 import { AuthGuard } from './guard/auth.guard';
 import { ClientComponent } from './client/client/client.component';
-
+import { StoreConfigComponent } from './store/store-config/store-config.component';
+import { StoreConfigEditDialogComponent } from './store/store-config-edit-dialog/store-config-edit-dialog.component';
+import { StoreConfigCreateDialogComponent } from './store/store-config-create-dialog/store-config-create-dialog.component';
+import { ProducerHomeComponent } from './warehouse/producer/producer-home/producer-home.component';
+import { ProducerEditComponent } from './warehouse/producer/producer-edit/producer-edit.component';
+import { Select2Module } from 'ng2-select2';
+import { SupplierHomeComponent } from './warehouse/supplier/supplier-home/supplier-home.component';
+import { ProducerCreateComponent } from './warehouse/producer/producer-create/producer-create.component';
+import { SupplierCreateDialogComponent } from './warehouse/supplier/supplier-create-dialog/supplier-create-dialog.component';
+import { SupplierEditDialogComponent } from './warehouse/supplier/supplier-edit-dialog/supplier-edit-dialog.component';
+import { PipesCommonModule } from './pipes/pipes-common/pipes-common.module';
 
 
 @NgModule({
@@ -90,7 +100,18 @@ import { ClientComponent } from './client/client/client.component';
     StoreCreateDialogComponent,
     StoreEditDialogComponent,
     LoginComponent,
-    ClientComponent
+    ClientComponent,
+    StoreConfigComponent,
+    StoreConfigEditDialogComponent,
+    StoreConfigCreateDialogComponent,
+    ProducerHomeComponent,
+    ProducerEditComponent,
+    SupplierHomeComponent,
+    ProducerCreateComponent,
+    SupplierCreateDialogComponent,
+    SupplierEditDialogComponent,
+    
+    
     
   ],
   imports: [
@@ -122,6 +143,28 @@ import { ClientComponent } from './client/client/client.component';
         path: 'TaiKhoan',
         component: ClientComponent
       },
+      {
+        path: 'Config/:id',
+        component: StoreConfigComponent
+      },
+      {
+        path: 'Producer',
+        component: ProducerHomeComponent
+      },
+      {
+        path: 'Producer/Edit/:id',
+        component: ProducerEditComponent
+      },
+      {
+        path: 'Producer/Create',
+        component: ProducerCreateComponent
+      },
+      
+      {
+        path: 'Supplier',
+        component: SupplierHomeComponent
+      },
+      
       
     ]),
     BrowserAnimationsModule,
@@ -148,8 +191,10 @@ import { ClientComponent } from './client/client/client.component';
     ReactiveFormsModule,
     UiModule,
     NgMultiSelectDropDownModule.forRoot(),
-    NgbModule
-    
+    NgbModule,
+    MatTabsModule,
+    Select2Module,
+    PipesCommonModule
   ],
   providers: [
     AuthGuard,
@@ -159,7 +204,7 @@ import { ClientComponent } from './client/client/client.component';
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent, UserCreateDialogComponent, UserEditDialogComponent, RoleCreateDialogComponent,
       RoleEditDialogComponent,CompanyCreateDialogComponent, CompanyEditDialogComponent, StoreCreateDialogComponent, StoreEditDialogComponent,ClientComponent,
-      ]
+      StoreConfigCreateDialogComponent, StoreConfigEditDialogComponent, SupplierCreateDialogComponent,SupplierEditDialogComponent]
 
 })
 export class AppModule { }

@@ -31,10 +31,11 @@ export class CompanyCreateDialogComponent implements OnInit {
   }
 
   createCongTy() {
-    
+
     var congTy = {
       name: this.tenCongTy,
-
+      address: this.address,
+      phoneNumber: this.phoneNumber,
       numberOfAccountAllowed: this.numberOfAccountAllowed
     }
 

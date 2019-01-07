@@ -5,7 +5,6 @@
 
 body
 {
-   
    font-family: Tahoma, sans-serif !important;
 }
 
@@ -20,6 +19,21 @@ body
   background: #007bff !important;
 }
 
+.multiselect-item-checkbox input[type=checkbox]:checked + div:before {
+  background: #007bff !important;
+  border: 2px solid #007bff !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox] + div:before {
+  border: 2px solid #007bff !important;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item {
+  background: #007bff !important;
+}
+
+
+
 table.dataTable thead th {
   border-bottom-width: 0px !important;
 }
@@ -30,5 +44,26 @@ table.dataTable thead th {
 
 .searchDiv {
   float:right;
+}
+
+.mat-tab-label {
+  font-size: 18px !important;
+}
+
+.rightFloatButton {
+  float: right;
+  margin: 5px;
+}
+
+.leftFloatButton {
+  float: left;
+  margin: 5px;
+
+}
+
+
+
+* {
+  font-size: 14px;
 }
 

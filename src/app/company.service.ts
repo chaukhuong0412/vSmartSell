@@ -14,6 +14,10 @@ export class CompanyService {
     return this._http.get<Company[]>('https://localhost:44305/api/Company');
   }
 
+  getListCongTyManagedBy(user) : Observable<Company[]> {
+    return this._http.get<Company[]>('https://localhost:44305/api/Company/managedby/' + user);
+  }
+
   getListCongTysExcept(id): Observable<Company[]> {
     return this._http.get<Company[]>('https://localhost:44305/api/Company/all/' + id);
   }

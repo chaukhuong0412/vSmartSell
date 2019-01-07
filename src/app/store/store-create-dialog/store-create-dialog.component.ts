@@ -13,6 +13,9 @@ import { Region, RegionService } from 'src/app/region.service';
 export class StoreCreateDialogComponent implements OnInit {
 
   name;
+  storeCode;
+  phoneNumber;
+  address;
   companyId;
   companies: Company[];
 
@@ -28,6 +31,9 @@ export class StoreCreateDialogComponent implements OnInit {
   createCuaHang() {
     var cuaHang = {
       name:this.name,
+      storeCode: this.storeCode,
+      phoneNumber: this.phoneNumber,
+      address: this.address,
       companyId: this.companyId,
     }
     this._cuaHangService.createCuaHang(cuaHang).subscribe((result) => {

@@ -12,6 +12,9 @@ import { Region, RegionService } from 'src/app/region.service';
 export class StoreEditDialogComponent implements OnInit {
 
   name;
+  storeCode;
+  phoneNumber;
+  address;
   companyId;
   companies: Company[];
 
@@ -20,11 +23,15 @@ export class StoreEditDialogComponent implements OnInit {
     private _cuaHangService: StoreService) { }
 
   ngOnInit() {
+
     this._congTyService.getListCongTys().subscribe(result => {
       this.companies = result;
 
       this._cuaHangService.getCuaHang(this.data.id).subscribe(result => {
         this.name = result.name;
+        this.storeCode = result.storeCode;
+        this.phoneNumber = result.phoneNumber;
+        this.address = result.address;
         this.companyId = result.companyId;
       });
     });
@@ -34,6 +41,9 @@ export class StoreEditDialogComponent implements OnInit {
     var cuaHang = {
       id: this.data.id,
       name:this.name,
+      storeCode: this.storeCode,
+      phoneNumber: this.phoneNumber,
+      address: this.address,
       companyId: this.companyId
     }
     this._cuaHangService.editCuaHang(cuaHang).subscribe((result) => {

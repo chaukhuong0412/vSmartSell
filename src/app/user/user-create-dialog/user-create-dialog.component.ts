@@ -15,8 +15,6 @@ import { CompanyService, Company } from 'src/app/company.service';
 })
 export class UserCreateDialogComponent implements OnInit {
 
-
-
   userName: string;
   password;
   confirmPassword;
@@ -40,13 +38,16 @@ export class UserCreateDialogComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
     this._roleService.getListRoles().subscribe(result => {
       this.roles = result;
     })
-    this._companyService.getListCongTys().subscribe(result => {
+
+    this._companyService.getListCongTyManagedBy(currentUser.userName).subscribe(result => {
       this.companies = result;
     })
-    this._storeService.getListCuaHangs().subscribe(result => {
+    this._storeService.getListCuaHangManagedBy(currentUser.userName).subscribe(result => {
       this.stores = result;
     })
   }
@@ -81,10 +82,10 @@ export class UserCreateDialogComponent implements OnInit {
       }
       this._userService.createUser(user).subscribe(s => {
         this.dialogRef.close("Create");
-      },
-      error => {
-        alert(error.error.Code);
-      } );
+      })
+      // error => {
+      //   alert(error.error.Code);
+      // } );
     }
   }
 

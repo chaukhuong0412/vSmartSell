@@ -113,9 +113,9 @@
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
         <td>{{user.userName}}</td>
         <td>{{user.fullName}}</td>
-        <td>{{user}}</td>
-        <td>{{user}}</td>
-        <td>23/11/2018</td>
+        <td>{{user.companyName}}</td>
+        <td>{{user.storeName}}</td>
+        <td>{{user.createdAt | date:"dd/MM/yyyy" }}</td>
 
         <td class="right">
           <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditUserDialog(user.id)"><i class="fa fa-edit"></i></button>
