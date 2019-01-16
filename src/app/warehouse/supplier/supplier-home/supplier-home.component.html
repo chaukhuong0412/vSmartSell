@@ -1,13 +1,75 @@
 <ng-container>
 
+  <div class="filter">
 
-    <div style="float:right" class="col-md-auto">
-      <div>
-        <button style="float:right;" id="add-button" type="button" class="btn btn-dark" (click)="openCreateSupplierDialog()">
-          <i class="fa fa-plus"> Tạo nhà sản xuất</i>
-        </button>
+
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <form>
+          <div class="form-row">
+            <div class="col-3">
+              <label class="control-label">Nhà sản xuất:</label>
+            </div>
+            <div class="col-7">
+              <ng-multiselect-dropdown class="multiselect" [placeholder]="'Nhà sản xuất'" [data]="producerList" 
+                [(ngModel)]="selectedProducers" [settings]="dropdownSettings" (onSelect)="onProducerIdsChange($event)"
+                (onDeSelect)="onProducerIdsChange($event)" [ngModelOptions]="{standalone:true}">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <form>
+          <div class="form-row">
+            <div class="col-3">
+              <label class="control-label">Ngày giao dịch:</label>
+            </div>
+            <div class="col-7">
+              <div class="input-group">
+                <input id="toDatePicker" class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fromDate"
+                  ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" (dateSelect)="onFromDateSelected(d2);">
+
+                <input class="form-control" [minDate]="minToDate" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="toDate"
+                  ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" (dateSelect)="onToDateSelected($event)">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <form>
+          <div class="form-row">
+            <div class="col-3">
+              <label class="control-label">Tìm kiếm:</label>
+            </div>
+            <div class="col-7">
+              <input id="search-field" class="form-control" name="search" [(ngModel)]="searchString" />
+
+            </div>
+            <div class="col-2">
+              <button class="btn btn-primary" (click)="search()"> <i class="fa fa-search">
+                  Tìm</i>
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -15,24 +77,38 @@
     <thead>
       <tr>
         <th scope="col" id="stt-column" (click)="sortById()">STT</th>
-        <th scope="col"><a class="clickable" (click)="sortByFullName()">Tên nhà sản xuất</a>
+        <th scope="col"><a class="clickable" (click)="sortByUserName()">Ngày giao dịch</a>
+          <a *ngIf="sortField == 'UserName' && asc==true">▾</a>
+          <a *ngIf="sortField == 'UserName' && asc==false">▴</a>
+        </th>
+        <th scope="col"><a class="clickable" (click)="sortByFullName()">Tên nhà cung cấp</a>
           <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
           <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
         </th>
-
-        <th scope="col">Nhà cung cấp</th>
-
+        <th scope="col">Số điện thoại</th>
+        <th scope="col">Địa chỉ</th>
+        <th scope="col"> Nhà sản xuất</th>
+        <th scope="col"> Nợ hiện tại</th>
         <th scope="col" id="right-header">Thao tác</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let supplier of supplierList; let i = index">
+      <tr *ngFor="let supplier of suppliers; let i = index">
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
+        <td>{{supplier.createdAt | date:"dd/MM/yyyy"}}</td>
+        <td>
+          {{supplier.name}}
+          <ng-template #popContent>{{supplier.note}}</ng-template>
+          <i *ngIf="supplier.note" class="fa fa-question-circle" [ngbPopover]="popContent" placement="left"></i>
+        </td>
         <td>{{supplier.name}}</td>
-        <td>{{supplier.producers | getObjectName}}</td>
+        <td>{{supplier.name}}</td>
+        <td>{{supplier.producers | getObjectName }}</td>
+        <td>{{ 0 | date:"dd/MM/yyyy" }}</td>
 
         <td class="right">
-          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditSupplierDialog(supplier.id)"><i class="fa fa-edit"></i></button>
+          <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/Supplier/Edit', supplier.id]"><i
+              class="fa fa-edit"></i></button>
           <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(supplier.id)"><i
               class="fa fa-trash"></i></button>
         </td>

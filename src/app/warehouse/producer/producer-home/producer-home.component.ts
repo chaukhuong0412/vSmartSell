@@ -1,33 +1,31 @@
-import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, PipeTransform, Pipe } from '@angular/core';
-import { DataTableDirective } from 'angular-datatables';
-import { Subject } from 'rxjs';
-import { ProducerService, ReqModelGetListProducer, ESortField } from 'src/app/producer.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Select2OptionData } from 'ng2-select2';
 import { Router } from '@angular/router';
-import { NgbDate, NgbCalendar, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { DataTableDirective } from 'angular-datatables';
+import { SupplierService, ReqModelGetListSupplier, ESortField } from 'src/app/supplier.service';
+import { ProducerService, ReqModelGetListProducer } from 'src/app/producer.service';
+import { Subject } from 'rxjs';
+import { ProducerCreateDialogComponent } from '../producer-create-dialog/producer-create-dialog.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-import { SupplierService } from 'src/app/supplier.service';
+import { ProducerEditDialogComponent } from '../producer-edit-dialog/producer-edit-dialog.component';
 
 @Component({
   selector: 'app-producer-home',
   templateUrl: './producer-home.component.html',
   styleUrls: ['./producer-home.component.scss']
 })
-
-
-export class ProducerHomeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProducerHomeComponent implements OnInit {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
 
-
-
+  dialogCreateRef: MatDialogRef<ProducerCreateDialogComponent>;
   dialogConfirmationRef: MatDialogRef<ConfirmationDialogComponent>;
-
+  dialogEditRef: MatDialogRef<ProducerEditDialogComponent>;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  // Sorting, Paging, Filtering
   index = 1;
   pageIndex = 1;
   pageSize = 10;
@@ -36,36 +34,15 @@ export class ProducerHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   dataFiltered: object[];
   sortField: string;
   asc: boolean;
-  reqModelGetListProducer: ReqModelGetListProducer;
+  ReqModelGetListProducer: ReqModelGetListProducer;
 
-  // Dropdown menu
-  supplierNames: string[];
-  supplierList;
-  selectedSuppliers;
-  dropdownSettings;
+  producerList;
 
-  // Datepicker
-  fromDate: NgbDate;
-  toDate: NgbDate;
-  minToDate: NgbDate;
-  toDatepicker: NgbInputDatepicker;
-
-  constructor(calendar: NgbCalendar, private _producerService: ProducerService, 
-              private router: Router, public dialog: MatDialog, private _supplierService: SupplierService) {
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-  }
-
-  
+  constructor(public dialog: MatDialog, private router: Router, private _supplierService: SupplierService, private _producerService: ProducerService) { }
 
   ngOnInit() {
 
-    var createProducer = {
-      router: this.router,
-      handleEvent: function( event ) {
-        this.router.navigate(['/Producer/Create']);
-      },
-    };
+    var createProducerHandler = this.openCreateProducerDialog.bind( this );
 
     var manageSupplier = {
       router: this.router,
@@ -81,28 +58,24 @@ export class ProducerHomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     var createProducerButton = document.createElement("button");
     createProducerButton.className = "btn btn-primary rightFloatButton";
-    createProducerButton.innerHTML = '<i class="fa fa-plus"> Tạo nhà cung cấp</i>';
+    createProducerButton.innerHTML = '<i class="fa fa-plus"> Tạo nhà sản xuất</i>';
 
     var manageSupplierButton = document.createElement("button");
     manageSupplierButton.className = "btn btn-secondary leftFloatButton";
-    manageSupplierButton.innerHTML = ' <i class="fa fa-plus"> Danh sách nhà sản xuất</i>';
+    manageSupplierButton.innerHTML = ' <i class="fa fa-plus"> Danh sách nhà cung cấp</i>';
 
     headerDiv.append(manageSupplierButton);
     headerDiv.append(createProducerButton);
 
-    createProducerButton.addEventListener("click", createProducer);
+    createProducerButton.addEventListener("click", createProducerHandler);
     manageSupplierButton.addEventListener("click", manageSupplier);
 
-
-    this.reqModelGetListProducer = {
+    this.ReqModelGetListProducer = {
       sortField: ESortField.Name,
       isAscending: true,
       pageIndex: 0,
       pageSize: 10,
       searchString: "",
-      fromDate: null,
-      toDate: null,
-      supplierIds: []
     }
 
     this.dtOptions = {
@@ -124,34 +97,14 @@ export class ProducerHomeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     };
-
-    this._supplierService.getListSupplier().subscribe(res => {
-      this.supplierList = res;
-    });
-
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'id',
-      textField: 'name',
-      itemsShowLimit: 3,
-      allowSearchFilter: true,
-      enableCheckAll: false
-    };
     this.update();
   }
 
-  // getCompanyOrStoreName(user: User) {
-  //   this._userService.getUser(user.userId).subscribe(result => {
-  //     console.log(result);
-  //   })
-  //   return user;
-  // } 
-
   update() {
-    this._producerService.getListProducerOrderBy(this.reqModelGetListProducer).subscribe(result => {
-      this.producers = result;
+    this._producerService.getListProducer().subscribe(res => {
+      this.producerList = res;
       this.rerender();
-    })
+    });
   }
 
   ngAfterViewInit(): void { this.dtTrigger.next(); }
@@ -168,36 +121,47 @@ export class ProducerHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  toggle(): void {
-    console.log('click');
-  }
-
-  onToDateSelect(): void {
-  }
-
-  onToDateSelected(): void {
-    console.log(this.toDate, this.fromDate);
-  }
-
-  onFromDateSelected(d2) {
-    this.minToDate = this.fromDate;
-    this.toDatepicker = d2;
-    setTimeout(function () {
-      d2.toggle();
-    }, 200);
-  }
-
-  delete(id) {
-    this._producerService.deleteProducer(id).subscribe(result => {
+  delete(id): void {
+    this._producerService.delete(id).subscribe(res => {
       this.update();
     })
+  }
+
+  openCreateProducerDialog() {
+    this.dialogCreateRef = this.dialog.open(ProducerCreateDialogComponent, {
+      disableClose: false,
+      width: '500px',
+    });
+    this.dialogCreateRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.update();
+      }
+      this.dialogCreateRef = null;
+    });
+  }
+
+  openEditProducerDialog(id) {
+    this.dialogEditRef = this.dialog.open(ProducerEditDialogComponent, {
+      disableClose: false,
+      width: '745px',
+      data: {
+        id: id
+      }
+    });
+    this.dialogEditRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.update();
+      }
+      this.dialogEditRef = null;
+    });
   }
 
   openDeleteConfirmationDialog(id) {
     this.dialogConfirmationRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    this.dialogConfirmationRef.componentInstance.confirmMessage = "Bạn có muốn xóa nhà cung cấp này không?"
+    this.dialogConfirmationRef.componentInstance.confirmMessage = "Bạn có muốn xóa nhà sản xuất này không?"
     this.dialogConfirmationRef.afterClosed().subscribe(result => {
       if (result) {
         this.delete(id);
@@ -205,19 +169,5 @@ export class ProducerHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dialogConfirmationRef = null;
     });
   }
-
-  onSupplierIdsChange() {
-    var supplierIds: Array<number> = new Array();
-    this.selectedSuppliers.forEach(element => {
-      supplierIds.push(element.id);
-    });
-    this.reqModelGetListProducer.supplierIds = supplierIds;
-    console.log(this.selectedSuppliers);
-    this.update();
-  }
-
-
-
-
 
 }

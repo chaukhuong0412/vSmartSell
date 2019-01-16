@@ -8,5 +8,12 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title = 'vSmartSellFrontEnd';
+  routerOutletComponent: object;
+  routerOutletComponentClass: string;
 
+  onActivate(event: any): void {
+    this.routerOutletComponent = event;
+    this.routerOutletComponentClass = event.constructor.name;
+    console.log("Activated: ", this.routerOutletComponentClass);
+  }
 }

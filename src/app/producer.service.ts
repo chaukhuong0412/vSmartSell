@@ -1,60 +1,42 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Supplier } from './supplier.service';
+import { SupplierViewModel } from './supplier.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProducerService {
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient) { }
+
+  getListProducer(): Observable<Producer[]> {
+    return this._http.get<Producer[]>('https://localhost:44392/api/Producer');
   }
 
-  getProducer(id): Observable<ProducerViewModel> {
-    return this._http.get<ProducerViewModel>('https://localhost:44392/api/producer/' + id);
+  createProducer(producer): Observable<Producer> {
+    return this._http.post<Producer>('https://localhost:44392/api/Producer/create', producer);
   }
 
-  getListProducerOrderBy(reqModelGetListProducer): Observable<ProducerViewModel[]> {
-    return this._http.post<ProducerViewModel[]>('https://localhost:44392/api/producer/sort', reqModelGetListProducer);
+  delete(id) {
+    return this._http.delete('https://localhost:44392/api/Producer/' + id);
   }
 
-  createProducer(producer): Observable<ProducerBindingModel> {
-    return this._http.post<ProducerBindingModel>('https://localhost:44392/api/producer/create', producer);
-  }
-
-  deleteProducer(id) {
-    return this._http.delete('https://localhost:44392/api/producer/' + id);
+  getProducer(id): Observable<Producer> {
+    return this._http.get<Producer>('https://localhost:44392/api/Producer/' + id);
   }
 
   editProducer(producer) {
-    return this._http.post('https://localhost:44392/api/producer/edit', producer);
+    return this._http.post('https://localhost:44392/api/Producer/edit', producer);
   }
-
 }
 
-export class ProducerBindingModel {
-  id: number;
-  name: string;
-  code: string;
-  phoneNumber: string;
-  address: string;
-  beginningPeriodDebt: number;
-  currentDebt: number;
-  supplierIds: number[];
-  createAt: Date;
-}
 
-export class ProducerViewModel {
+export class Producer {
   id: number;
   name: string;
-  code: string;
-  phoneNumber: string;
-  address: string;
-  beginningPeriodDebt: number;
-  currentDebt: number;
-  suppliers: Supplier[];
-  createAt: Date;
+  suppliers: SupplierViewModel[];
 }
 
 export class ReqModelGetListProducer {
@@ -63,9 +45,6 @@ export class ReqModelGetListProducer {
   pageSize: number;
   pageIndex: number;
   searchString: string;
-  fromDate: Date;
-  toDate: Date;
-  supplierIds: number[];
 }
 
 export enum ESortField {

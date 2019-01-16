@@ -1,0 +1,53 @@
+<button id="create-payment" class="btn btn-primary create-button" (click)="openCreatePaymentDialog()">Thanh toán</button>
+
+
+<div id="information-header">
+  <div class="col">
+      <span>Nợ hiện tại: </span>
+      <span>{{currentDebt}}</span>
+  </div>
+
+  <div class="col">
+      <span>Định mức công nợ: </span>
+      <span>{{currentDebt}}</span>
+  </div>
+
+</div>
+
+<table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col" id="stt-column" (click)="sortById()">STT</th>
+        <th scope="col"><a class="clickable" (click)="sortByUserName()">Ngày tạo</a>
+        </th>
+        <th scope="col"><a class="clickable" (click)="sortByFullName()">Loại sản phẩm</a>
+        </th>
+        <th scope="col">Mã hàng</th>
+        <th scope="col">ĐV</th>
+        <th scope="col">SL</th>
+        <th scope="col">Đơn giá</th>
+        <th scope="col">Tiền giảm</th>
+        <th scope="col">Thành tiền</th>
+        <th scope="col">Thanh toán</th>
+        <th scope="col">Công nợ</th>
+        <th scope="col">Ghi chú</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of payments; let i = index">
+        <td scope="row" id="stt-column"> {{i + 1}}</td>
+        <td>{{payment.date | date:"dd/MM/yyyy HH:mm"}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{payment.amount}}</td>
+        <td>{{payment.rest}}</td>
+        <td></td>
+
+      </tr>
+    </tbody>
+  </table>

@@ -1,71 +1,69 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Select2OptionData } from 'ng2-select2';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, PipeTransform, Pipe } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import { SupplierService, ReqModelGetListSupplier, ESortField } from 'src/app/supplier.service';
-import { ProducerService } from 'src/app/producer.service';
 import { Subject } from 'rxjs';
-import { SupplierCreateDialogComponent } from '../supplier-create-dialog/supplier-create-dialog.component';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { ProducerService, ReqModelGetListProducer, ESortField } from 'src/app/producer.service';
+import { Router } from '@angular/router';
+import { NgbDate, NgbCalendar, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-import { SupplierEditDialogComponent } from '../supplier-edit-dialog/supplier-edit-dialog.component';
+import { SupplierService, ReqModelGetListSupplier } from 'src/app/supplier.service';
 
 @Component({
   selector: 'app-supplier-home',
   templateUrl: './supplier-home.component.html',
   styleUrls: ['./supplier-home.component.scss']
 })
-export class SupplierHomeComponent implements OnInit {
+
+
+export class SupplierHomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
 
-  dialogCreateRef: MatDialogRef<SupplierCreateDialogComponent>;
+
+
   dialogConfirmationRef: MatDialogRef<ConfirmationDialogComponent>;
-  dialogEditRef: MatDialogRef<SupplierEditDialogComponent>;
+
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
+  // Sorting, Paging, Filtering
   index = 1;
   pageIndex = 1;
   pageSize = 10;
   searchString = "";
-  producers;
+  suppliers;
   dataFiltered: object[];
   sortField: string;
   asc: boolean;
   reqModelGetListSupplier: ReqModelGetListSupplier;
 
-  supplierList;
+  // Dropdown menu
+  producerNames: string[];
+  producerList;
+  selectedProducers;
+  dropdownSettings;
 
-  constructor(public dialog: MatDialog, private router: Router, private _supplierService: SupplierService, private _producerService: ProducerService) { }
+  // Datepicker
+  fromDate: NgbDate;
+  toDate: NgbDate;
+  minToDate: NgbDate;
+  toDatepicker: NgbInputDatepicker;
+
+  constructor(calendar: NgbCalendar, private _producerService: ProducerService, 
+              private router: Router, public dialog: MatDialog, private _supplierService: SupplierService) {
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  }
+
+  
 
   ngOnInit() {
 
     var createSupplier = {
       router: this.router,
-      dialogCreateRef: this.dialogCreateRef,
-      dialog: this.dialog,
-      update: this.update,
-      supplierList: this.supplierList,
-      _supplierService: this._supplierService,
-      rerender: this.rerender,
-      dtElement: this.dtElement,
-      dtTrigger: this.dtTrigger,
-
-
       handleEvent: function( event ) {
-        this.dialogCreateRef = this.dialog.open(SupplierCreateDialogComponent, {
-          disableClose: false,
-          width: '500px',
-        });
-        this.dialogCreateRef.afterClosed().subscribe(result => {
-          console.log(result);
-          if (result) {
-            this.update();
-          }
-          this.dialogCreateRef = null;
-        });
+        this.router.navigate(['/Supplier/Create']);
       },
     };
 
@@ -83,11 +81,11 @@ export class SupplierHomeComponent implements OnInit {
 
     var createSupplierButton = document.createElement("button");
     createSupplierButton.className = "btn btn-primary rightFloatButton";
-    createSupplierButton.innerHTML = '<i class="fa fa-plus"> Tạo nhà sản xuất</i>';
+    createSupplierButton.innerHTML = '<i class="fa fa-plus"> Tạo nhà cung cấp</i>';
 
     var manageProducerButton = document.createElement("button");
     manageProducerButton.className = "btn btn-secondary leftFloatButton";
-    manageProducerButton.innerHTML = ' <i class="fa fa-plus"> Danh sách nhà cung cấp</i>';
+    manageProducerButton.innerHTML = ' <i class="fa fa-plus"> Danh sách nhà sản xuất</i>';
 
     headerDiv.append(manageProducerButton);
     headerDiv.append(createSupplierButton);
@@ -95,12 +93,16 @@ export class SupplierHomeComponent implements OnInit {
     createSupplierButton.addEventListener("click", createSupplier);
     manageProducerButton.addEventListener("click", manageProducer);
 
+
     this.reqModelGetListSupplier = {
       sortField: ESortField.Name,
       isAscending: true,
       pageIndex: 0,
       pageSize: 10,
       searchString: "",
+      fromDate: null,
+      toDate: null,
+      producerIds: []
     }
 
     this.dtOptions = {
@@ -122,15 +124,34 @@ export class SupplierHomeComponent implements OnInit {
         }
       }
     };
+
+    this._producerService.getListProducer().subscribe(res => {
+      this.producerList = res;
+    });
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      enableCheckAll: false
+    };
     this.update();
   }
 
+  // getCompanyOrStoreName(user: User) {
+  //   this._userService.getUser(user.userId).subscribe(result => {
+  //     console.log(result);
+  //   })
+  //   return user;
+  // } 
+
   update() {
-    this._supplierService.getListSupplier().subscribe(res => {
-      this.supplierList = res;
-      console.log(this.supplierList);
+    this._supplierService.getListSupplierOrderBy(this.reqModelGetListSupplier).subscribe(result => {
+      this.suppliers = result;
       this.rerender();
-    });
+    })
   }
 
   ngAfterViewInit(): void { this.dtTrigger.next(); }
@@ -144,51 +165,39 @@ export class SupplierHomeComponent implements OnInit {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();
       this.dtTrigger.next();
-      console.log('x');
     });
   }
 
-  delete(id): void {
-    this._supplierService.delete(id).subscribe(res => {
+  toggle(): void {
+    console.log('click');
+  }
+
+  onToDateSelect(): void {
+  }
+
+  onToDateSelected(): void {
+    console.log(this.toDate, this.fromDate);
+  }
+
+  onFromDateSelected(d2) {
+    this.minToDate = this.fromDate;
+    this.toDatepicker = d2;
+    setTimeout(function () {
+      d2.toggle();
+    }, 200);
+  }
+
+  delete(id) {
+    this._supplierService.deleteSupplier(id).subscribe(result => {
       this.update();
     })
-  }
-
-  openCreateSupplierDialog() {
-    this.dialogCreateRef = this.dialog.open(SupplierCreateDialogComponent, {
-      disableClose: false,
-      width: '500px',
-    });
-    this.dialogCreateRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result) {
-        this.update();
-      }
-      this.dialogCreateRef = null;
-    });
-  }
-
-  openEditSupplierDialog(id) {
-    this.dialogEditRef = this.dialog.open(SupplierEditDialogComponent, {
-      disableClose: false,
-      width: '745px',
-      data: {
-        id: id
-      }
-    });
-    this.dialogEditRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.update();
-      }
-      this.dialogEditRef = null;
-    });
   }
 
   openDeleteConfirmationDialog(id) {
     this.dialogConfirmationRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    this.dialogConfirmationRef.componentInstance.confirmMessage = "Bạn có muốn xóa nhà sản xuất này không?"
+    this.dialogConfirmationRef.componentInstance.confirmMessage = "Bạn có muốn xóa nhà cung cấp này không?"
     this.dialogConfirmationRef.afterClosed().subscribe(result => {
       if (result) {
         this.delete(id);
@@ -197,7 +206,24 @@ export class SupplierHomeComponent implements OnInit {
     });
   }
 
+  onProducerIdsChange() {
+    var producerIds: Array<number> = new Array();
+    this.selectedProducers.forEach(element => {
+      producerIds.push(element.id);
+    });
+    this.reqModelGetListSupplier.producerIds = producerIds;
+    this.update();
+  }
+
+  search() {
+    this.reqModelGetListSupplier.searchString = this.searchString;
+    this.reqModelGetListSupplier.pageIndex = 0;
+    this.pageIndex = 1;
+    this.update()
+  }
 
 
-  
+
+
+
 }

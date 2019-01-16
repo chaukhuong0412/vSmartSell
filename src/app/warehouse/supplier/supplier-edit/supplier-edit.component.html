@@ -1,0 +1,86 @@
+<mat-tab-group>
+  <mat-tab label="Thông tin">
+
+    <div class="container">
+      <h1 class="text-center">Thông tin</h1>
+      <div *ngIf="success" class="alert alert-success">Lưu thành công!</div>
+      <hr />
+
+      <div class="row">
+
+        <div class="col-md-9">
+          <div class="form-group">
+            <label for="Name">Tên nhà cung cấp</label>
+            <input required class="form-control" [(ngModel)]="supplierName" #uName="ngModel">
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="Name">Mã nhà cung cấp</label>
+            <input required class="form-control" [(ngModel)]="supplierCode" #uName="ngModel">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+          <div class="form-group">
+            <label for="Name">Địa chỉ</label>
+            <input required class="form-control" [(ngModel)]="address">
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="Name">Số điện thoại</label>
+            <input required class="form-control" [(ngModel)]="phoneNumber">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="form-group">
+            <label for="Name">Nhà sản xuất</label>
+            <ng-multiselect-dropdown class="multiselect" [placeholder]="'Nhà sản xuất'" [data]="producerList"
+              [(ngModel)]="selectedProducers" [settings]="dropdownSettings">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="Name">Ghi chú</label>
+            <textarea required class="form-control" [(ngModel)]="note"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+      <hr />
+
+
+    </div>
+
+  </mat-tab>
+
+  <mat-tab label="Công nợ nhập kho">
+
+    <app-payment-home></app-payment-home>
+
+
+  </mat-tab>
+
+
+
+
+
+  <mat-tab label="Lịch sử"> Content 3 </mat-tab>
+
+  
+</mat-tab-group>

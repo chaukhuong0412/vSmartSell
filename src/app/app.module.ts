@@ -74,13 +74,15 @@ import { StoreConfigComponent } from './store/store-config/store-config.componen
 import { StoreConfigEditDialogComponent } from './store/store-config-edit-dialog/store-config-edit-dialog.component';
 import { StoreConfigCreateDialogComponent } from './store/store-config-create-dialog/store-config-create-dialog.component';
 import { ProducerHomeComponent } from './warehouse/producer/producer-home/producer-home.component';
-import { ProducerEditComponent } from './warehouse/producer/producer-edit/producer-edit.component';
+import { ProducerEditDialogComponent } from './warehouse/producer/producer-edit-dialog/producer-edit-dialog.component';
 import { Select2Module } from 'ng2-select2';
 import { SupplierHomeComponent } from './warehouse/supplier/supplier-home/supplier-home.component';
-import { ProducerCreateComponent } from './warehouse/producer/producer-create/producer-create.component';
-import { SupplierCreateDialogComponent } from './warehouse/supplier/supplier-create-dialog/supplier-create-dialog.component';
-import { SupplierEditDialogComponent } from './warehouse/supplier/supplier-edit-dialog/supplier-edit-dialog.component';
+import { ProducerCreateDialogComponent } from './warehouse/producer/producer-create-dialog/producer-create-dialog.component';
+import { SupplierCreateComponent } from './warehouse/supplier/supplier-create/supplier-create.component';
+import { SupplierEditComponent } from './warehouse/supplier/supplier-edit/supplier-edit.component';
 import { PipesCommonModule } from './pipes/pipes-common/pipes-common.module';
+import { PaymentCreateDialogComponent } from './warehouse/payment/payment-create-dialog/payment-create-dialog.component';
+import { PaymentHomeComponent } from './warehouse/payment/payment-home/payment-home.component';
 
 
 @NgModule({
@@ -105,11 +107,13 @@ import { PipesCommonModule } from './pipes/pipes-common/pipes-common.module';
     StoreConfigEditDialogComponent,
     StoreConfigCreateDialogComponent,
     ProducerHomeComponent,
-    ProducerEditComponent,
+    ProducerEditDialogComponent,
     SupplierHomeComponent,
-    ProducerCreateComponent,
-    SupplierCreateDialogComponent,
-    SupplierEditDialogComponent,
+    ProducerCreateDialogComponent,
+    SupplierCreateComponent,
+    SupplierEditComponent,
+    PaymentCreateDialogComponent,
+    PaymentHomeComponent,
     
     
     
@@ -148,22 +152,26 @@ import { PipesCommonModule } from './pipes/pipes-common/pipes-common.module';
         component: StoreConfigComponent
       },
       {
+        path: 'Supplier',
+        component: SupplierHomeComponent
+      },
+      {
+        path: 'Supplier/Edit/:id',
+        component: SupplierEditComponent
+      },
+      {
+        path: 'Supplier/Create',
+        component: SupplierCreateComponent
+      },
+      
+      {
         path: 'Producer',
         component: ProducerHomeComponent
       },
       {
-        path: 'Producer/Edit/:id',
-        component: ProducerEditComponent
-      },
-      {
-        path: 'Producer/Create',
-        component: ProducerCreateComponent
-      },
-      
-      {
-        path: 'Supplier',
-        component: SupplierHomeComponent
-      },
+        path: 'Payment',
+        component: PaymentCreateDialogComponent
+      }
       
       
     ]),
@@ -204,7 +212,7 @@ import { PipesCommonModule } from './pipes/pipes-common/pipes-common.module';
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent, UserCreateDialogComponent, UserEditDialogComponent, RoleCreateDialogComponent,
       RoleEditDialogComponent,CompanyCreateDialogComponent, CompanyEditDialogComponent, StoreCreateDialogComponent, StoreEditDialogComponent,ClientComponent,
-      StoreConfigCreateDialogComponent, StoreConfigEditDialogComponent, SupplierCreateDialogComponent,SupplierEditDialogComponent]
+      StoreConfigCreateDialogComponent, StoreConfigEditDialogComponent, ProducerCreateDialogComponent, ProducerEditDialogComponent]
 
 })
 export class AppModule { }

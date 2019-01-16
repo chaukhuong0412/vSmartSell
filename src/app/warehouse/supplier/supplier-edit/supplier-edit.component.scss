@@ -1,0 +1,28 @@
+.create-button {
+    text-align: center;
+    float: right;
+}
+
+#cancel-button {
+    text-align: center;
+    float: left;
+}
+
+.container {
+    padding-top: 15px;
+    min-height: 700px;
+}
+
+.multiselect {
+    min-width: 500px;
+}
+
+.success-information {
+    background: #e6f1c9;
+    border: 1px solid #cfe493;
+    color: #062232;
+}
+
+#create-payment {
+    margin: 6px;
+}
