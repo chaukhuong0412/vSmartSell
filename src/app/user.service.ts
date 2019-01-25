@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { debug } from 'util';
 import { Observable } from 'rxjs';
 
@@ -8,72 +8,64 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
+  apiURL: string = 'https://localhost:44305/api/user';
+
   constructor(private _http: HttpClient) {
-
-
-   }
+  }
 
   getListUser(): Observable<User[]> {
-    return this._http.get<User[]>('https://localhost:44305/api/user');
+    return this._http.get<User[]>(this.apiURL);
   }
 
   getListUserOrderBy(reqModelGetListUser): Observable<User[]> {
-    if (reqModelGetListUser.searchString == "")
-      console.log('https://localhost:44305/api/user/sort?IsAscending=' 
-      + reqModelGetListUser.isAscending + '&SortField=' + reqModelGetListUser.sortField
-      + '&PageIndex=' + reqModelGetListUser.pageIndex + '&PageSize=' + reqModelGetListUser.pageSize);
-    else 
-      console.log('https://localhost:44305/api/user/sort?IsAscending=' 
-        + reqModelGetListUser.isAscending + '&SortField=' + reqModelGetListUser.sortField
-        + '&PageIndex=' + reqModelGetListUser.pageIndex + '&PageSize=' + reqModelGetListUser.pageSize + '&SearchString=' + reqModelGetListUser.searchString);
-    if (reqModelGetListUser.searchString == "")
-      return this._http.get<User[]>('https://localhost:44305/api/user/sort?IsAscending=' 
-      + reqModelGetListUser.isAscending + '&SortField=' + reqModelGetListUser.sortField
-      + '&PageIndex=' + reqModelGetListUser.pageIndex + '&PageSize=' + reqModelGetListUser.pageSize);
-    else 
-      return this._http.get<User[]>('https://localhost:44305/api/user/sort?IsAscending=' 
-        + reqModelGetListUser.isAscending + '&SortField=' + reqModelGetListUser.sortField
-        + '&PageIndex=' + reqModelGetListUser.pageIndex + '&PageSize=' + reqModelGetListUser.pageSize + '&SearchString=' + reqModelGetListUser.searchString);
+    let params = new HttpParams();
+    params = params.append('IsAscending',reqModelGetListUser.isAscending);
+    params = params.append('SortField',reqModelGetListUser.sortField);
+    params = params.append('PageIndex',reqModelGetListUser.pageIndex);
+    params = params.append('PageSize',reqModelGetListUser.pageSize);
+    params = params.append('SearchString',reqModelGetListUser.searchString);
+    return this._http.get<User[]>(this.apiURL, { params: params });
   }
 
   getUser(id): Observable<User> {
-    return this._http.get<User>('https://localhost:44305/api/user/' + id)
+    return this._http.get<User>(`${this.apiURL}/${id}`)
   }
 
   getNumberOfUsers(): Observable<number> {
-    return this._http.get<number>('https://localhost:44305/api/user/number')
+    return this._http.get<number>(`${this.apiURL}/number`)
   }
 
   getNumberOfUsersWithSearchString(searchString): Observable<number> {
-    return this._http.get<number>('https://localhost:44305/api/user/number', {params: {searchString: searchString}});
+    return this._http.get<number>(`${this.apiURL}/number`, {params: {searchString: searchString}});
   }
 
   createUser(user) : Observable<User> {
-    return this._http.post<User>('https://localhost:44305/api/user/create', user);
+    return this._http.post<User>(`${this.apiURL}/create`, user);
   }
 
   editUser(user) : Observable<User> {
-    return this._http.post<User>('https://localhost:44305/api/user/edit', user);
+    return this._http.post<User>(`${this.apiURL}/edit`, user);
   }
 
   resetPassword(id) {
-    return this._http.get('https://localhost:44305/api/user/resetpassword/' + id);
+    
+    return this._http.get(`${this.apiURL}/resetpassword/${id}`);
   }
 
   deleteUser(id) {
-    return this._http.delete('https://localhost:44305/api/user/' + id);
+    return this._http.delete(`${this.apiURL}/${id}`);
   }
 
   activate(id) {
-    return this._http.get('https://localhost:44305/api/user/activate/' + id);
+    return this._http.get(`${this.apiURL}/activate/${id}`);
   }
 
   deactivate(id) {
-    return this._http.get('https://localhost:44305/api/user/deactivate/' + id)
+    return this._http.get(`${this.apiURL}/deactivate/${id}`)
   }
 
   setLimitation(number) {
-    return this._http.post('https://localhost:44305/api/user/setlimitation', {params: {number: number}});
+    return this._http.post(`${this.apiURL}/setlimitation`, {params: {number: number}});
   }
 
 
@@ -108,6 +100,8 @@ export class User {
   companyName: string;
   storeName: string;
   createdAt: any;
+  importWarehouseIds: number[];
+  sellWarehouseIds: number[];
 }
 
 export class UserAudit {

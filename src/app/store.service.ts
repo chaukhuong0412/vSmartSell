@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,50 +7,51 @@ import { Observable } from 'rxjs';
 })
 export class StoreService {
 
+  apiURL: string = 'https://localhost:44305/api/store';
+
   constructor(private _http: HttpClient) {
   }
 
-  getListCuaHangs(): Observable<Store[]> {
-    return this._http.get<Store[]>('https://localhost:44305/api/store');
+  getListStores(): Observable<Store[]> {
+    return this._http.get<Store[]>(this.apiURL);
   }
 
-  getListCuaHangManagedBy(user) : Observable<Store[]> {
-    return this._http.get<Store[]>('https://localhost:44305/api/store/managedby/' + user);
+  getListStoreManagedBy(userName) : Observable<Store[]> {
+    return this._http.get<Store[]>(`${this.apiURL}/managedby/${userName}`);
   }
 
-  getListCuaHangsExcept(id): Observable<Store[]> {
-    return this._http.get<Store[]>('https://localhost:44305/api/store/all/' + id);
+  getListStoresExcept(id): Observable<Store[]> {
+    return this._http.get<Store[]>(`${this.apiURL}/all/${id}`);
   }
 
-  getListCuaHangOrderBy(reqModelGetListCuaHang): Observable<StoreViewModel[]> {
-    if (reqModelGetListCuaHang.searchString == "")
-      return this._http.get<StoreViewModel[]>('https://localhost:44305/api/store/sort?IsAscending=' 
-      + reqModelGetListCuaHang.isAscending + '&SortField=' + reqModelGetListCuaHang.sortField
-      + '&PageIndex=' + reqModelGetListCuaHang.pageIndex + '&PageSize=' + reqModelGetListCuaHang.pageSize);
-    else 
-      return this._http.get<StoreViewModel[]>('https://localhost:44305/api/store/sort?IsAscending=' 
-        + reqModelGetListCuaHang.isAscending + '&SortField=' + reqModelGetListCuaHang.sortField
-        + '&PageIndex=' + reqModelGetListCuaHang.pageIndex + '&PageSize=' + reqModelGetListCuaHang.pageSize + '&SearchString=' + reqModelGetListCuaHang.searchString);
+  getListStoreOrderBy(reqModelGetListStore): Observable<StoreViewModel[]> {
+    let params = new HttpParams();
+    params = params.append('IsAscending',reqModelGetListStore.isAscending);
+    params = params.append('SortField',reqModelGetListStore.sortField);
+    params = params.append('PageIndex',reqModelGetListStore.pageIndex);
+    params = params.append('PageSize',reqModelGetListStore.pageSize);
+    params = params.append('SearchString',reqModelGetListStore.searchString);
+    return this._http.get<StoreViewModel[]>(this.apiURL, { params: params });
   }
 
-  getNumberOfCuaHangsWithSearchString(searchString): Observable<number> {
-    return this._http.get<number>('https://localhost:44305/api/store/number', {params: {searchString: searchString}});
+  getNumberOfStoresWithSearchString(searchString): Observable<number> {
+    return this._http.get<number>(`${this.apiURL}/number`, {params: {searchString: searchString}});
   }
 
-  createCuaHang(cuaHang): Observable<Store> {
-    return this._http.post<Store>('https://localhost:44305/api/store/create', cuaHang);
+  createStore(store): Observable<Store> {
+    return this._http.post<Store>(`${this.apiURL}/create`, store);
   }
 
-  getCuaHang(id): Observable<Store> {
-    return this._http.get<Store>('https://localhost:44305/api/store/' + id)
+  getStore(id): Observable<Store> {
+    return this._http.get<Store>(`${this.apiURL}/${id}`)
   }
 
-  editCuaHang(cuaHang) : Observable<Store> {
-    return this._http.post<Store>('https://localhost:44305/api/store/edit', cuaHang);
+  editStore(store) : Observable<Store> {
+    return this._http.post<Store>(`${this.apiURL}/edit`, store);
   }
 
-  deleteCuaHang(id) {
-    return this._http.delete('https://localhost:44305/api/store/' + id);
+  deleteStore(id) {
+    return this._http.delete(`${this.apiURL}/${id}`);
   }
 
   getStoreConfigOfStore(id) : Observable<StoreConfig[]> {

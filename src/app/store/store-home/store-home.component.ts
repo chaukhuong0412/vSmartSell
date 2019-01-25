@@ -27,14 +27,14 @@ export class StoreHomeComponent implements OnInit {
   index = 1;
   pageIndex = 1;
   pageSize = 10;
-  totalCuaHang;
+  totalStore;
   searchString = "";
-  cuaHangs;
+  stores;
   dataFiltered: object[];
   sortField: string;
   reqModelGetListStore: ReqModelGetListStore;
 
-  constructor(private _cuaHangService: StoreService, public dialog: MatDialog) { }
+  constructor(private _storeService: StoreService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.reqModelGetListStore = {
@@ -68,11 +68,11 @@ export class StoreHomeComponent implements OnInit {
   }
 
   update() {
-    this._cuaHangService.getNumberOfCuaHangsWithSearchString(this.searchString).subscribe(result => {
-      this.totalCuaHang = result;
+    this._storeService.getNumberOfStoresWithSearchString(this.searchString).subscribe(result => {
+      this.totalStore = result;
     })
-    this._cuaHangService.getListCuaHangOrderBy(this.reqModelGetListStore).subscribe(result => {
-      this.cuaHangs = result;
+    this._storeService.getListStoreOrderBy(this.reqModelGetListStore).subscribe(result => {
+      this.stores = result;
       this.rerender();
     });
   }
@@ -93,12 +93,12 @@ export class StoreHomeComponent implements OnInit {
   }
 
   delete(id) {
-    this._cuaHangService.deleteCuaHang(id).subscribe(result => {
+    this._storeService.deleteStore(id).subscribe(result => {
       this.ngOnInit();
     });
   }
 
-  sortByTenCongTy() {
+  sortByStoreName() {
     if (this.reqModelGetListStore.sortField == ESortField.Name)
       this.reqModelGetListStore.isAscending = !this.reqModelGetListStore.isAscending;
     else {
@@ -125,7 +125,7 @@ export class StoreHomeComponent implements OnInit {
       this.update();
   }
 
-  openCreateCuaHangDialog() {
+  openCreateStoreDialog() {
     this.dialogCreateRef = this.dialog.open(StoreCreateDialogComponent, {
       disableClose: false,
       width: '745px',
@@ -153,7 +153,7 @@ export class StoreHomeComponent implements OnInit {
     });
   }
 
-  openEditCuaHangDialog(id) {
+  openEditStoreDialog(id) {
     this.dialogEditRef = this.dialog.open(StoreEditDialogComponent, {
       disableClose: false,
       width: '745px',

@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Company, CompanyService } from 'src/app/company.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StoreService } from 'src/app/store.service';
-import { Region, RegionService } from 'src/app/region.service';
 
 @Component({
   selector: 'app-store-edit-dialog',
@@ -20,14 +19,14 @@ export class StoreEditDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<StoreEditDialogComponent>,
     private _congTyService: CompanyService, 
-    private _cuaHangService: StoreService) { }
+    private _storeService: StoreService) { }
 
   ngOnInit() {
 
-    this._congTyService.getListCongTys().subscribe(result => {
+    this._congTyService.getListCompanys().subscribe(result => {
       this.companies = result;
 
-      this._cuaHangService.getCuaHang(this.data.id).subscribe(result => {
+      this._storeService.getStore(this.data.id).subscribe(result => {
         this.name = result.name;
         this.storeCode = result.storeCode;
         this.phoneNumber = result.phoneNumber;
@@ -38,7 +37,7 @@ export class StoreEditDialogComponent implements OnInit {
   }
 
   save() {
-    var cuaHang = {
+    var store = {
       id: this.data.id,
       name:this.name,
       storeCode: this.storeCode,
@@ -46,7 +45,7 @@ export class StoreEditDialogComponent implements OnInit {
       address: this.address,
       companyId: this.companyId
     }
-    this._cuaHangService.editCuaHang(cuaHang).subscribe((result) => {
+    this._storeService.editStore(store).subscribe((result) => {
       this.dialogRef.close("Edit");
     });
   }

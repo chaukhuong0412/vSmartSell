@@ -3,7 +3,7 @@
 
   <div style="float:right" class="col-md-auto">
     <div>
-      <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateCuaHangDialog()">
+      <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateStoreDialog()">
         <i class="fa fa-plus"> Tạo cửa hàng</i>
       </button>
     </div>
@@ -30,34 +30,34 @@
     <thead>
       <tr>
         <th scope="col" id="stt-column" (click)="sortById()">STT</th>
-        <th scope="col"><a class="clickable" (click)="sortByTenCuaHang()">Tên cửa hàng</a></th>
+        <th scope="col"><a class="clickable" (click)="sortByStoreName()">Tên cửa hàng</a></th>
         <th scope="col"><a>Tên công ty</a></th>
         <th scope="col" id="right-header">Thao tác</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cuaHang of cuaHangs; let i = index">
+      <tr *ngFor="let store of stores; let i = index">
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
-        <td>{{cuaHang.name}}</td>
-        <td>{{cuaHang.companyName}}</td>
+        <td>{{store.name}}</td>
+        <td>{{store.companyName}}</td>
 
 
         <td class="right">
-            <button title="Chỉnh sửa config" type="button" class="btn btn-warning" [routerLink]="['/Config', cuaHang.id]"><i
+            <button title="Chỉnh sửa config" type="button" class="btn btn-warning" [routerLink]="['/Config', store.id]"><i
               class="fa fa-cog"></i></button>
-          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditCuaHangDialog(cuaHang.id)"><i
+          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditStoreDialog(store.id)"><i
               class="fa fa-edit"></i></button>
-          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(cuaHang.id)"><i
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(store.id)"><i
               class="fa fa-trash"></i></button>
         </td>
       </tr>
     </tbody>
   </table>
-  <ngb-pagination [collectionSize]="totalCuaHang*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+  <ngb-pagination [collectionSize]="totalStore*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
     (pageChange)="pageIndexChange($event)">
 
   </ngb-pagination>
 
   <p>Hiển thị cửa hàng {{(pageIndex-1)*pageSize + 1}} tới
-    {{pageIndex*pageSize>totalCuaHang?totalCuaHang:pageIndex*pageSize}} trong tổng số {{totalCuaHang}} cửa hàng</p>
+    {{pageIndex*pageSize>totalStore?totalStore:pageIndex*pageSize}} trong tổng số {{totalStore}} cửa hàng</p>
 </ng-container>

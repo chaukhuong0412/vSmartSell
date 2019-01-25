@@ -83,6 +83,27 @@ import { SupplierEditComponent } from './warehouse/supplier/supplier-edit/suppli
 import { PipesCommonModule } from './pipes/pipes-common/pipes-common.module';
 import { PaymentCreateDialogComponent } from './warehouse/payment/payment-create-dialog/payment-create-dialog.component';
 import { PaymentHomeComponent } from './warehouse/payment/payment-home/payment-home.component';
+import { PaymentsTableComponent } from './warehouse/payment/payments-table/payments-table.component';
+import { PaymentsFilterComponent } from './warehouse/payment/payments-filter/payments-filter.component';
+import { TaxonomyHomeComponent } from './warehouse/taxonomy/taxonomy-home/taxonomy-home.component';
+import { UnitHomeComponent } from './warehouse/taxonomy/unit/unit-home/unit-home.component';
+import { UnitCreateComponent } from './warehouse/taxonomy/unit/unit-create/unit-create.component';
+import { UnitEditComponent } from './warehouse/taxonomy/unit/unit-edit/unit-edit.component';
+import { WaveTypeHomeComponent } from './warehouse/taxonomy/wave-type/wave-type-home/wave-type-home.component';
+import { WaveTypeEditComponent } from './warehouse/taxonomy/wave-type/wave-type-edit/wave-type-edit.component';
+import { WaveTypeCreateComponent } from './warehouse/taxonomy/wave-type/wave-type-create/wave-type-create.component';
+import { GroupProductTypeHomeComponent } from './warehouse/taxonomy/group-product-type/group-product-type-home/group-product-type-home.component';
+import { GroupProductTypeCreateComponent } from './warehouse/taxonomy/group-product-type/group-product-type-create/group-product-type-create.component';
+import { GroupProductTypeEditComponent } from './warehouse/taxonomy/group-product-type/group-product-type-edit/group-product-type-edit.component';
+import { WarehouseHomeComponent } from './warehouse/warehouse/warehouse-home/warehouse-home.component';
+import { WarehouseCreateDialogComponent } from './warehouse/warehouse/warehouse-create-dialog/warehouse-create-dialog.component';
+import { WarehouseEditDialogComponent } from './warehouse/warehouse/warehouse-edit-dialog/warehouse-edit-dialog.component';
+import { ProductNameHomeComponent } from './warehouse/product-name/product-name-home/product-name-home.component';
+import { ProductNameCreateComponent } from './warehouse/product-name/product-name-create/product-name-create.component';
+import { ProductNameEditComponent } from './warehouse/product-name/product-name-edit/product-name-edit.component';
+import { HttpErrorInterceptor } from './helper/http-error.interceptor';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -114,6 +135,25 @@ import { PaymentHomeComponent } from './warehouse/payment/payment-home/payment-h
     SupplierEditComponent,
     PaymentCreateDialogComponent,
     PaymentHomeComponent,
+    PaymentsTableComponent,
+    PaymentsFilterComponent,
+    TaxonomyHomeComponent,
+    UnitHomeComponent,
+    UnitCreateComponent,
+    UnitEditComponent,
+    WaveTypeHomeComponent,
+    WaveTypeEditComponent,
+    WaveTypeCreateComponent,
+    GroupProductTypeHomeComponent,
+    GroupProductTypeCreateComponent,
+    GroupProductTypeEditComponent,
+    WarehouseHomeComponent,
+    WarehouseCreateDialogComponent,
+    WarehouseEditDialogComponent,
+    ProductNameHomeComponent,
+    ProductNameCreateComponent,
+    ProductNameEditComponent,
+    ErrorDialogComponent,
     
     
     
@@ -136,15 +176,15 @@ import { PaymentHomeComponent } from './warehouse/payment/payment-home/payment-h
         component: RoleHomeComponent
       },
       {
-        path: 'CongTy',
+        path: 'Company',
         component: CompanyHomeComponent
       },
       {
-        path: 'CuaHang',
+        path: 'Store',
         component: StoreHomeComponent
       },
       {
-        path: 'TaiKhoan',
+        path: 'Client',
         component: ClientComponent
       },
       {
@@ -170,8 +210,65 @@ import { PaymentHomeComponent } from './warehouse/payment/payment-home/payment-h
       },
       {
         path: 'Payment',
-        component: PaymentCreateDialogComponent
-      }
+        component: PaymentHomeComponent
+      },
+      {
+        path: 'Taxonomy',
+        component: TaxonomyHomeComponent
+      },
+      {
+        path: 'Unit',
+        component: UnitHomeComponent
+      },
+      {
+        path: 'Unit/Create',
+        component: UnitCreateComponent
+      },
+      {
+        path: 'Unit/Edit/:id',
+        component: UnitEditComponent
+      },
+      {
+        path: 'WaveType',
+        component: WaveTypeHomeComponent
+      },
+      {
+        path: 'WaveType/Create',
+        component: WaveTypeCreateComponent
+      },
+      {
+        path: 'WaveType/Edit/:id',
+        component: WaveTypeEditComponent
+      },
+      {
+        path: 'GroupProductType',
+        component: GroupProductTypeHomeComponent
+      },
+      {
+        path: 'GroupProductType/Create',
+        component: GroupProductTypeCreateComponent
+      },
+      {
+        path: 'GroupProductType/Edit/:id',
+        component: GroupProductTypeEditComponent
+      },
+      {
+        path: 'Warehouse',
+        component: WarehouseHomeComponent
+      },
+      {
+        path: 'ProductName',
+        component: ProductNameHomeComponent
+      },
+      {
+        path: 'ProductName/Create',
+        component: ProductNameCreateComponent
+      },
+      {
+        path: 'ProductName/Edit/:id',
+        component: ProductNameEditComponent
+      },
+      
       
       
     ]),
@@ -202,17 +299,20 @@ import { PaymentHomeComponent } from './warehouse/payment/payment-home/payment-h
     NgbModule,
     MatTabsModule,
     Select2Module,
-    PipesCommonModule
+    PipesCommonModule,
+    NgxMatSelectSearchModule
   ],
   providers: [
     AuthGuard,
     FlxUiDataTable,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent, UserCreateDialogComponent, UserEditDialogComponent, RoleCreateDialogComponent,
       RoleEditDialogComponent,CompanyCreateDialogComponent, CompanyEditDialogComponent, StoreCreateDialogComponent, StoreEditDialogComponent,ClientComponent,
-      StoreConfigCreateDialogComponent, StoreConfigEditDialogComponent, ProducerCreateDialogComponent, ProducerEditDialogComponent]
+      StoreConfigCreateDialogComponent, StoreConfigEditDialogComponent, ProducerCreateDialogComponent, ProducerEditDialogComponent,PaymentCreateDialogComponent,
+      WarehouseCreateDialogComponent, WarehouseEditDialogComponent,ErrorDialogComponent]
 
 })
 export class AppModule { }

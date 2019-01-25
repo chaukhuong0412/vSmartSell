@@ -67,3 +67,38 @@ table.dataTable thead th {
   font-size: 14px;
 }
 
+.btn-warning {
+  color:white;
+  background-color: #f0ad4e;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+  color: #007bff !important;
+  background-color: #ffffff !important;
+}
+
+.btn-warning:hover,.btn-warning:active, .btn-warning.active, .open>.dropdown-toggle.btn-warning {
+  color: #f0ad4e !important;
+  background-color: #ffffff !important;
+}
+
+.btn-success:hover,  .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success {
+  color: #28a745 !important;
+  background-color: #ffffff !important;
+}
+
+.btn-secondary:hover, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+  color: #6c757d !important;
+  background-color: #ffffff !important;
+}
+
+.btn-danger:hover, .btn-danger:active, .btn-danger.active, .open>.dropdown-toggle.btn-danger {
+  color: #dc3545 !important;
+  background-color: #ffffff !important;
+}
+
+.btn-dark:hover, .btn-dark:active, .btn-dark.active, .open>.dropdown-toggle.btn-dark {
+  color: #343a40 !important;
+  background-color: #ffffff !important;
+}
+

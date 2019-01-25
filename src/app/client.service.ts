@@ -7,15 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class ClientService {
 
+  apiURL: string = 'https://localhost:44305/api/client/';
+
+
   constructor(private _http: HttpClient) {
   }
 
   getClient(): Observable<Client> {
-    return this._http.get<Client>('https://localhost:44305/api/client/');
+    return this._http.get<Client>(this.apiURL);
   }
 
   editClient(client) {
-    return this._http.post('https://localhost:44305/api/client/', client);
+    return this._http.post(this.apiURL, client);
   }
 
 

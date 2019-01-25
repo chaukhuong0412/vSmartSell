@@ -50,6 +50,21 @@ export class UserHomeComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngOnInit() {
 
+    var createHandler = this.openCreateUserDialog.bind( this );
+
+
+    var headerDiv = document.getElementById('headerDiv');
+    while (headerDiv.firstChild) {
+      headerDiv.removeChild(headerDiv.firstChild);
+    }
+
+    var createUserButton = document.createElement("button");
+    createUserButton.className = "btn btn-primary rightFloatButton";
+    createUserButton.innerHTML = '<i class="fa fa-plus"> Tạo tài khoản</i>';
+    headerDiv.append(createUserButton);
+
+    createUserButton.addEventListener("click", createHandler);
+
     this.reqModelGetListUser = {
       sortField: ESortField.UserName,
       isAscending: true,

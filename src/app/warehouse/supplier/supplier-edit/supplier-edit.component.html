@@ -71,8 +71,22 @@
 
   <mat-tab label="Công nợ nhập kho">
 
-    <app-payment-home></app-payment-home>
+      <button id="create-payment" class="btn btn-primary create-button" (click)="openCreatePaymentDialog()">Thanh toán</button>
 
+
+    <div id="information-header">
+      <div class="col">
+          <span>Nợ hiện tại: </span>
+          <span>{{currentDebt}}</span>
+      </div>
+    
+      <div class="col">
+          <span>Định mức công nợ: </span>
+          <span>{{currentDebt}}</span>
+      </div>
+    </div>
+    
+    <app-payments-table [supplierId]="supplierId"></app-payments-table>
 
   </mat-tab>
 

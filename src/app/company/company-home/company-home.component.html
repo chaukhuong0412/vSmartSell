@@ -2,7 +2,7 @@
 
     <div style="float:right" class="col-md-auto">
       <div>
-          <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateCongTyDialog()"> <i
+          <button id="add-button" style="float: right;" type="button" class="btn btn-dark" (click)="openCreateCompanyDialog()"> <i
             class="fa fa-plus"> Tạo công ty</i>
         </button>
       </div>
@@ -26,32 +26,32 @@
     <thead>
       <tr>
         <th scope="col" id="stt-column" (click)="sortById()">STT</th>
-        <th scope="col"><a class="clickable" (click)="sortByTenCongTy()">Tên</a></th>
+        <th scope="col"><a class="clickable" (click)="sortByTenCompany()">Tên</a></th>
         <th scope="col"><a >Tên công ty cha</a></th>
         <th scope="col" id="right-header">Thao tác</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let congTy of congTys; let i = index">
+      <tr *ngFor="let company of companys; let i = index">
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
-        <td>{{congTy.name}}</td>
-        <td>{{congTy.parentCompanyName}}</td>
+        <td>{{company.name}}</td>
+        <td>{{company.parentCompanyName}}</td>
 
 
         <td class="right">
-          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditCongTyDialog(congTy.id)"><i class="fa fa-edit"></i></button>
-          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(congTy.id)"><i
+          <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditCompanyDialog(company.id)"><i class="fa fa-edit"></i></button>
+          <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(company.id)"><i
               class="fa fa-trash"></i></button>
         </td>
       </tr>
     </tbody>
   </table>
-  <ngb-pagination [collectionSize]="totalCongTy*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
+  <ngb-pagination [collectionSize]="totalCompany*10/pageSize" [(page)]="pageIndex" aria-label="Default pagination"
     (pageChange)="pageIndexChange($event)">
 
   </ngb-pagination>
 
   <p>Hiển thị công ty {{(pageIndex-1)*pageSize + 1}} tới
-    {{pageIndex*pageSize>totalCongTy?totalCongTy:pageIndex*pageSize}} trong tổng số {{totalCongTy}} công ty</p>
+    {{pageIndex*pageSize>totalCompany?totalCompany:pageIndex*pageSize}} trong tổng số {{totalCompany}} công ty</p>
 </ng-container>
 

@@ -1,0 +1,33 @@
+import { Component, OnInit } from '@angular/core';
+import { SupplierService } from 'src/app/supplier.service';
+import { MatDialogRef } from '@angular/material';
+import { WarehouseService } from 'src/app/warehouse.service';
+
+@Component({
+  selector: 'app-warehouse-create-dialog',
+  templateUrl: './warehouse-create-dialog.component.html',
+  styleUrls: ['./warehouse-create-dialog.component.scss']
+})
+export class WarehouseCreateDialogComponent implements OnInit {
+
+  name: string;
+
+  constructor(public dialogRef: MatDialogRef<WarehouseCreateDialogComponent>, private _warehouseService: WarehouseService) { }
+
+  ngOnInit() {
+  }
+
+  cancel() {
+    this.dialogRef.close();
+  }
+
+  createWarehouse() {
+    var warehouse = {
+      name: this.name
+    };
+    this._warehouseService.createWarehouse(warehouse).subscribe(res => {
+      this.dialogRef.close("Create");
+    })
+  }
+
+}

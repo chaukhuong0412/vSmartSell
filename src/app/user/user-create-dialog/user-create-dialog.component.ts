@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/user.service';
 import { StoreService, Store } from 'src/app/store.service';
 import { CompanyService, Company } from 'src/app/company.service';
+import { Warehouse, WarehouseService } from 'src/app/warehouse.service';
 
 
 @Component({
@@ -23,10 +24,13 @@ export class UserCreateDialogComponent implements OnInit {
   stores: Store[];
   storeId;
   companies: Company[];
+  warehouses: Warehouse[];
   companyId;
   selectedRoles = [];
   selectedStores = [];
   selectedCompanies = [];
+  selectedImportWarehouses;
+  selectedSellWarehouses;
   notMatched = false;
   hasWhiteSpace = false;
 
@@ -35,6 +39,7 @@ export class UserCreateDialogComponent implements OnInit {
     private _roleService: RoleService,
     private _storeService: StoreService,
     private _companyService: CompanyService, 
+    private _warehouseService: WarehouseService,
     private router: Router) { }
 
   ngOnInit() {
@@ -44,11 +49,15 @@ export class UserCreateDialogComponent implements OnInit {
       this.roles = result;
     })
 
-    this._companyService.getListCongTyManagedBy(currentUser.userName).subscribe(result => {
+    this._companyService.getListCompanyManagedBy(currentUser.userName).subscribe(result => {
       this.companies = result;
     })
-    this._storeService.getListCuaHangManagedBy(currentUser.userName).subscribe(result => {
+    this._storeService.getListStoreManagedBy(currentUser.userName).subscribe(result => {
       this.stores = result;
+    })
+
+    this._warehouseService.getListWarehouse().subscribe(result => {
+      this.warehouses = result;
     })
   }
 
@@ -78,7 +87,10 @@ export class UserCreateDialogComponent implements OnInit {
         companyId: this.companyId,
         storeId: this.storeId,
         storeIds: this.selectedStores,
-        companyIds: this.selectedCompanies
+        companyIds: this.selectedCompanies,
+        importWarehouseIds: this.selectedImportWarehouses,
+        sellWarehouseIds: this.selectedSellWarehouses
+
       }
       this._userService.createUser(user).subscribe(s => {
         this.dialogRef.close("Create");

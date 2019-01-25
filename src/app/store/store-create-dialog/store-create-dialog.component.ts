@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/store.service';
 import { CompanyService, Company } from 'src/app/company.service';
 import { MatDialogRef } from '@angular/material';
-import { Region, RegionService } from 'src/app/region.service';
 
 @Component({
   selector: 'app-store-create-dialog',
@@ -20,23 +19,23 @@ export class StoreCreateDialogComponent implements OnInit {
   companies: Company[];
 
   constructor(public dialogRef: MatDialogRef<StoreCreateDialogComponent>,
-    private _congTyService: CompanyService, private _cuaHangService: StoreService) { }
+    private _congTyService: CompanyService, private _storeService: StoreService) { }
 
   ngOnInit() {
-    this._congTyService.getListCongTys().subscribe(result => {
+    this._congTyService.getListCompanys().subscribe(result => {
       this.companies = result;
     });
   }
 
-  createCuaHang() {
-    var cuaHang = {
+  createStore() {
+    var store = {
       name:this.name,
       storeCode: this.storeCode,
       phoneNumber: this.phoneNumber,
       address: this.address,
       companyId: this.companyId,
     }
-    this._cuaHangService.createCuaHang(cuaHang).subscribe((result) => {
+    this._storeService.createStore(store).subscribe((result) => {
       this.dialogRef.close("Create");
     });
   }

@@ -1,0 +1,23 @@
+
+
+<table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Tên</th>
+        <th scope="col" id="right-header">Thao tác</th>
+  
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let waveType of waveTypes; let i = index">
+        <td>{{waveType.waveTypeName}}</td>
+        <td id="right-col">
+          <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/WaveType/Edit/', waveType.id ]"><i
+            class="fa fa-edit"></i></button>
+        <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(waveType.id)"><i
+            class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

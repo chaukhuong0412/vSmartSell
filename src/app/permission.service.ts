@@ -8,17 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class PermissionService {
 
+  apiURL: string = 'https://localhost:44305/api/permission';
+
+
   constructor(private _http: HttpClient) {
 
   }
 
 
   getListPermissions(): Observable<Permission[]> {
-    return this._http.get<Permission[]>('https://localhost:44305/api/permission');
+    return this._http.get<Permission[]>(this.apiURL);
   }
 
   getPermissionGroups() {
-    return this._http.get('https://localhost:44305/api/permission/group');
+    return this._http.get(`${this.apiURL}/group`);
   }
 
   // createPermission(permission): Observable<Permission> {

@@ -23,21 +23,20 @@ export class CompanyHomeComponent implements OnInit {
   dialogEditRef:  MatDialogRef<CompanyEditDialogComponent>;
   dialogCreateRef: MatDialogRef<CompanyCreateDialogComponent>;
 
-
   index = 1;
   pageIndex = 1;
   pageSize = 10;
-  totalCongTy;
+  totalCompany;
   searchString = "";
-  congTys;
+  companys;
   dataFiltered: object[];
   sortField: string;
-  reqModelGetListCongTy: ReqModelGetListCompany;
+  reqModelGetListCompany: ReqModelGetListCompany;
 
-  constructor(private _congTyService: CompanyService, public dialog: MatDialog) { }
+  constructor(private _companyService: CompanyService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.reqModelGetListCongTy = {
+    this.reqModelGetListCompany = {
       sortField: ESortField.Name,
       isAscending: true,
       pageIndex: 0,
@@ -68,11 +67,11 @@ export class CompanyHomeComponent implements OnInit {
   }
 
   update() {
-    this._congTyService.getNumberOfCongTysWithSearchString(this.searchString).subscribe(result => {
-      this.totalCongTy = result;
+    this._companyService.getNumberOfCompanysWithSearchString(this.searchString).subscribe(result => {
+      this.totalCompany = result;
     })
-    this._congTyService.getListCongTyOrderBy(this.reqModelGetListCongTy).subscribe(result => {
-      this.congTys = result;
+    this._companyService.getListCompanyOrderBy(this.reqModelGetListCompany).subscribe(result => {
+      this.companys = result;
       console.log(result.length);
       this.rerender();
     });
@@ -94,40 +93,40 @@ export class CompanyHomeComponent implements OnInit {
   }
 
   delete(id) {
-    this._congTyService.deleteCongTy(id).subscribe(result => {
+    this._companyService.deleteCompany(id).subscribe(result => {
       this.ngOnInit();
     });
   }
 
-  sortByTenCongTy() {
-    if (this.reqModelGetListCongTy.sortField == ESortField.Name)
-      this.reqModelGetListCongTy.isAscending = !this.reqModelGetListCongTy.isAscending;
+  sortByTenCompany() {
+    if (this.reqModelGetListCompany.sortField == ESortField.Name)
+      this.reqModelGetListCompany.isAscending = !this.reqModelGetListCompany.isAscending;
     else {
-      this.reqModelGetListCongTy.sortField = ESortField.Name;
-      this.reqModelGetListCongTy.isAscending = true;
+      this.reqModelGetListCompany.sortField = ESortField.Name;
+      this.reqModelGetListCompany.isAscending = true;
     }
     this.update();
   }
 
   pageIndexChange() {
-    this.reqModelGetListCongTy.pageIndex = this.pageIndex - 1;
+    this.reqModelGetListCompany.pageIndex = this.pageIndex - 1;
     this.update();
   }
 
   pageSizeChange() {
-    this.reqModelGetListCongTy.pageSize = this.pageSize;
+    this.reqModelGetListCompany.pageSize = this.pageSize;
     this.update();
   }
 
   search() {
-      this.reqModelGetListCongTy.searchString = this.searchString;
-      this.reqModelGetListCongTy.pageIndex = 0;
+      this.reqModelGetListCompany.searchString = this.searchString;
+      this.reqModelGetListCompany.pageIndex = 0;
       this.pageIndex = 0;
       this.update();
 
   }
 
-  openCreateCongTyDialog() {
+  openCreateCompanyDialog() {
     this.dialogCreateRef = this.dialog.open(CompanyCreateDialogComponent, {
       disableClose: false,
       width: '745px',
@@ -155,7 +154,7 @@ export class CompanyHomeComponent implements OnInit {
     });
   }
 
-  openEditCongTyDialog(id) {
+  openEditCompanyDialog(id) {
     this.dialogEditRef = this.dialog.open(CompanyEditDialogComponent, {
       disableClose: false,
       width: '745px',

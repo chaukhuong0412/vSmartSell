@@ -8,6 +8,7 @@ import { PaymentCreateDialogComponent } from '../../payment/payment-create-dialo
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { PaymentHomeComponent } from '../../payment/payment-home/payment-home.component';
+import { PaymentsTableComponent } from '../../payment/payments-table/payments-table.component';
 
 
 
@@ -17,12 +18,13 @@ import { PaymentHomeComponent } from '../../payment/payment-home/payment-home.co
   styleUrls: ['./supplier-edit.component.scss']
 })
 export class SupplierEditComponent implements OnInit {
-
-  @ViewChild(PaymentHomeComponent) private paymentHomeComponent: PaymentHomeComponent;
+  @ViewChild(PaymentsTableComponent) private paymentsTableComponent: PaymentsTableComponent;
 
 
   public options: Select2Options;
 
+
+  dialogCreateRef: MatDialogRef<PaymentCreateDialogComponent>;
 
 
   sub: any;
@@ -95,7 +97,7 @@ export class SupplierEditComponent implements OnInit {
       this.phoneNumber = res.phoneNumber;
       this.note = res.note;
       this.selectedProducers = res.producers;
-      //this.note = res.note;
+      // this.note = res.note;
     })
 
     this.dropdownSettings = {
@@ -111,7 +113,24 @@ export class SupplierEditComponent implements OnInit {
     this.producerService.getListProducer().subscribe(result => {
       this.producerList = result;
     })
+  }
 
+  openCreatePaymentDialog() {
+    this.dialogCreateRef = this.dialog.open(PaymentCreateDialogComponent, {
+      disableClose: false,
+      width: '880px',
+      height: '800px',
+      data: {
+        id: this.supplierId
+      }
+    });
+    this.dialogCreateRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.paymentsTableComponent.update();
+      }
+      this.dialogCreateRef = null;
+    });
   }
 
 

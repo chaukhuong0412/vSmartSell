@@ -1,0 +1,23 @@
+
+
+<table id="user-table" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Tên</th>
+        <th scope="col" id="right-header">Thao tác</th>
+  
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let groupProductType of groupProductTypes; let i = index">
+        <td>{{groupProductType.groupProductTypeName}}</td>
+        <td id="right-col">
+          <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/GroupProductType/Edit/', groupProductType.id ]"><i
+            class="fa fa-edit"></i></button>
+        <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(groupProductType.id)"><i
+            class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

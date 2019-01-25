@@ -4,6 +4,7 @@ import { SupplierService } from 'src/app/supplier.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { PaymentService } from 'src/app/payment.service';
 
 @Component({
   selector: 'app-payment-create-dialog',
@@ -33,7 +34,7 @@ export class PaymentCreateDialogComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA)
-  public data: any, private _supplierService: SupplierService, public dialogRef: MatDialogRef<PaymentCreateDialogComponent>) { }
+  public data: any, private _supplierService: SupplierService, private paymentService: PaymentService, public dialogRef: MatDialogRef<PaymentCreateDialogComponent>) { }
 
   ngOnInit() {
     this._supplierService.getSupplier(this.data.id).subscribe(res => {
@@ -103,7 +104,7 @@ export class PaymentCreateDialogComponent implements OnInit {
         amount: this.removeCommas(this.amount)
       }
       console.log(payment);
-      this._supplierService.createPayment(payment).subscribe(s => {
+      this.paymentService.createPayment(payment).subscribe(s => {
         this.dialogRef.close("Create");
       })
     }

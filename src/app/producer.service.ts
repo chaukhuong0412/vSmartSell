@@ -8,27 +8,28 @@ import { SupplierViewModel } from './supplier.service';
   providedIn: 'root'
 })
 export class ProducerService {
+  apiURL: string = 'https://localhost:44392/api/producer';
 
   constructor(private _http: HttpClient) { }
 
   getListProducer(): Observable<Producer[]> {
-    return this._http.get<Producer[]>('https://localhost:44392/api/Producer');
+    return this._http.get<Producer[]>(this.apiURL);
   }
 
   createProducer(producer): Observable<Producer> {
-    return this._http.post<Producer>('https://localhost:44392/api/Producer/create', producer);
+    return this._http.post<Producer>(`${this.apiURL}/create`, producer);
   }
 
   delete(id) {
-    return this._http.delete('https://localhost:44392/api/Producer/' + id);
+    return this._http.delete(`${this.apiURL}/${id}`);
   }
 
   getProducer(id): Observable<Producer> {
-    return this._http.get<Producer>('https://localhost:44392/api/Producer/' + id);
+    return this._http.get<Producer>(`${this.apiURL}/${id}`);
   }
 
   editProducer(producer) {
-    return this._http.post('https://localhost:44392/api/Producer/edit', producer);
+    return this._http.post(`${this.apiURL}/edit`, producer);
   }
 }
 

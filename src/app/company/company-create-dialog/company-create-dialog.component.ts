@@ -3,7 +3,6 @@ import { CompanyService, Company } from 'src/app/company.service';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material';
 import { Store, StoreService } from 'src/app/store.service';
-import { Region, RegionService } from 'src/app/region.service';
 
 @Component({
   selector: 'app-company-create-dialog',
@@ -13,7 +12,7 @@ import { Region, RegionService } from 'src/app/region.service';
 })
 export class CompanyCreateDialogComponent implements OnInit {
 
-  tenCongTy;
+  companyName;
   address;
   phoneNumber;
   numberOfAccountAllowed: number;
@@ -22,24 +21,23 @@ export class CompanyCreateDialogComponent implements OnInit {
   loopError = false;
 
   constructor(public dialogRef: MatDialogRef<CompanyCreateDialogComponent>,
-    private _congTyService: CompanyService,
-    private _cuaHangService: StoreService,
-    private _regionService: RegionService,
+    private _companyService: CompanyService,
+    private _storeService: StoreService,
     private router: Router) { }
 
   ngOnInit() {
   }
 
-  createCongTy() {
+  createCompany() {
 
-    var congTy = {
-      name: this.tenCongTy,
+    var company = {
+      name: this.companyName,
       address: this.address,
       phoneNumber: this.phoneNumber,
       numberOfAccountAllowed: this.numberOfAccountAllowed
     }
 
-    this._congTyService.createCongTy(congTy).subscribe((result) => {
+    this._companyService.createCompany(company).subscribe((result) => {
       this.dialogRef.close("Create");
     },
       error => {

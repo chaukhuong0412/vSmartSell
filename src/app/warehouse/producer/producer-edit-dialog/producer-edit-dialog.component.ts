@@ -30,7 +30,7 @@ export class ProducerEditDialogComponent implements OnInit {
       id: this.data.id,
       name: this.name
     }
-    this._producerService.editProducer([producer]).subscribe((result) => {
+    this._producerService.editProducer(producer).subscribe((result) => {
       this.dialogRef.close("Edit");
     });
   }

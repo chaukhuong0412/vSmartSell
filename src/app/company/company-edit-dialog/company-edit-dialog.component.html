@@ -7,7 +7,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label for="Name">Tên công ty</label>
-        <input required class="form-control" [(ngModel)]="tenCongTy" #uName="ngModel">
+        <input required class="form-control" [(ngModel)]="companyName" #uName="ngModel">
       </div>
 
       <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">

@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CompanyService, Company } from 'src/app/company.service';
 import { Store, StoreService } from 'src/app/store.service';
-import { Region, RegionService } from 'src/app/region.service';
 
 @Component({
   selector: 'app-company-edit-dialog',
@@ -12,21 +11,20 @@ import { Region, RegionService } from 'src/app/region.service';
 })
 export class CompanyEditDialogComponent implements OnInit {
 
-  congTy: Company;
-  tenCongTy;
+  company: Company;
+  companyName;
   address;
   phoneNumber;
   numberOfAccountAllowed;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<CompanyEditDialogComponent>,
-    private _congTyService: CompanyService,
-    private _cuaHangService: StoreService,
-    private _regionService: RegionService) { }
+    private _companyService: CompanyService,
+    private _cuaHangService: StoreService) { }
 
   ngOnInit() {
-      this._congTyService.getCongTy(this.data.id).subscribe(result => {
-        this.tenCongTy = result.name;
+      this._companyService.getCompany(this.data.id).subscribe(result => {
+        this.companyName = result.name;
         this.address = result.address;
         this.phoneNumber = result.phoneNumber;
         this.numberOfAccountAllowed = result.numberOfAccountAllowed;
@@ -38,13 +36,13 @@ export class CompanyEditDialogComponent implements OnInit {
 
   save() {
 
-      var congTy = {
-        name: this.tenCongTy,
+      var company = {
+        name: this.companyName,
         address: this.address,
         phoneNumber: this.phoneNumber,
         numberOfAccountAllowed: this.numberOfAccountAllowed
       }
-      this._congTyService.editCongTy(congTy).subscribe((result) => {
+      this._companyService.editCompany(company).subscribe((result) => {
         this.dialogRef.close("Edit");
       });
     

@@ -36,10 +36,10 @@
         </li>
 
         <li class="nav-item" (click)="listClick($event, 4)">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/ProductName']">
             <div>
               <i aria-hidden="true" class="fa fa-sitemap" [ngClass]="selectedItem == 4? 'blue' : 'inactive'"></i>
-              <p [ngClass]="selectedItem == 4? 'blue' : 'inactive'">Loại sản phẩm</p>
+              <p [ngClass]="selectedItem == 4? 'blue' : 'inactive'">Tên sản phẩm</p>
             </div>
           </a>
         </li>
@@ -63,7 +63,7 @@
         </li>
 
         <li class="nav-item" (click)="listClick($event, 7)">
-          <a class="nav-link" href="#">
+          <a class="nav-link" [routerLink]="['/Payment']">
             <div>
               <i aria-hidden="true" class="fa fa-money" [ngClass]="selectedItem == 7? 'blue' : 'inactive'"></i>
               <p [ngClass]="selectedItem == 7? 'blue' : 'inactive'">T/toán nhập kho</p>
@@ -150,8 +150,10 @@
           </a>
           <div class="dropdown-menu">
               <a class="dropdown-item" style="cursor: pointer;" (click)="openClientInformationDialog($event)">Tài khoản</a>
-            <a class="dropdown-item" [routerLink]="['/CongTy']" (click)="listClick($event, 14)">Công Ty</a>
-            <a class="dropdown-item" [routerLink]="['/CuaHang']" (click)="listClick($event, 14)">Cửa Hàng</a>
+            <a class="dropdown-item" [routerLink]="['/Company']" (click)="listClick($event, 14)">Công Ty</a>
+            <a class="dropdown-item" [routerLink]="['/Store']" (click)="listClick($event, 14)">Cửa Hàng</a>
+            <a class="dropdown-item" [routerLink]="['/Warehouse']" (click)="listClick($event, 14)">Kho hàng</a>
+
           </div>
         </li>
 
@@ -178,6 +180,7 @@
           </a>
           <div id="logout" class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" style="cursor: pointer;" (click)="logOut()">Đăng xuất</a>
+            <a class="dropdown-item" style="cursor: pointer;" [routerLink]="['/Taxonomy']">Taxonomy</a>
           </div>
         </li>
       </ul>

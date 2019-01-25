@@ -91,7 +91,7 @@
     <div class="form-group col-md-4">
         <label for="CongTyCha">Quản lý cửa hàng </label>
       <div class="form-group scrollbar">
-        <mat-selection-list class="border" [(ngModel)]="selectedStores" #listroles>
+        <mat-selection-list class="border" [(ngModel)]="selectedStores">
           <mat-list-option *ngFor="let store of stores" [value]="store.id">
             {{store.name}}
           </mat-list-option>
@@ -111,6 +111,29 @@
       </div>
 
   </div>
+
+  <div class="row">
+      <div class="form-group col-6">
+          <label for="CongTyCha">Quản lý kho nhập </label>
+        <div class="form-group scrollbar" id="style-1">
+          <mat-selection-list class="border" [(ngModel)]="selectedImportWarehouses" >
+            <mat-list-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+              {{warehouse.name}}
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+      </div>
+      <div class="form-group col-6">
+          <label for="CongTyCha">Quản lý kho bán </label>
+        <div class="form-group scrollbar" id="style-1">
+          <mat-selection-list class="border" [(ngModel)]="selectedSellWarehouses" >
+            <mat-list-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+              {{warehouse.name}}
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+      </div>
+</div>
 
 </div>
 

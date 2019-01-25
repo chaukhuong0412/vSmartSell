@@ -1,56 +1,57 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
+  apiURL: string = 'https://localhost:44305/api/company';
+
 
   constructor(private _http: HttpClient) {
   }
 
-  getListCongTys(): Observable<Company[]> {
-    return this._http.get<Company[]>('https://localhost:44305/api/Company');
+  getListCompanys(): Observable<Company[]> {
+    return this._http.get<Company[]>(this.apiURL);
   }
 
-  getListCongTyManagedBy(user) : Observable<Company[]> {
-    return this._http.get<Company[]>('https://localhost:44305/api/Company/managedby/' + user);
+  getListCompanyManagedBy(userName) : Observable<Company[]> {
+    return this._http.get<Company[]>(`${this.apiURL}/managedby/${userName}`);
   }
 
-  getListCongTysExcept(id): Observable<Company[]> {
-    return this._http.get<Company[]>('https://localhost:44305/api/Company/all/' + id);
+  getListCompanysExcept(id): Observable<Company[]> {
+    return this._http.get<Company[]>(`${this.apiURL}/all/${id}`);
   }
 
-  getListCongTyOrderBy(reqModelGetListCongTy): Observable<CompanyViewModel[]> {
-    if (reqModelGetListCongTy.searchString == "")
-      return this._http.get<CompanyViewModel[]>('https://localhost:44305/api/Company/sort?IsAscending=' 
-      + reqModelGetListCongTy.isAscending + '&SortField=' + reqModelGetListCongTy.sortField
-      + '&PageIndex=' + reqModelGetListCongTy.pageIndex + '&PageSize=' + reqModelGetListCongTy.pageSize);
-    else 
-      return this._http.get<CompanyViewModel[]>('https://localhost:44305/api/Company/sort?IsAscending=' 
-        + reqModelGetListCongTy.isAscending + '&SortField=' + reqModelGetListCongTy.sortField
-        + '&PageIndex=' + reqModelGetListCongTy.pageIndex + '&PageSize=' + reqModelGetListCongTy.pageSize + '&SearchString=' + reqModelGetListCongTy.searchString);
+  getListCompanyOrderBy(reqModelGetListCompany): Observable<CompanyViewModel[]> {
+    let params = new HttpParams();
+    params = params.append('IsAscending',reqModelGetListCompany.isAscending);
+    params = params.append('SortField',reqModelGetListCompany.sortField);
+    params = params.append('PageIndex',reqModelGetListCompany.pageIndex);
+    params = params.append('PageSize',reqModelGetListCompany.pageSize);
+    params = params.append('SearchString',reqModelGetListCompany.searchString);
+    return this._http.get<Company[]>(this.apiURL, { params: params });
   }
 
-  getNumberOfCongTysWithSearchString(searchString): Observable<number> {
-    return this._http.get<number>('https://localhost:44305/api/Company/number', {params: {searchString: searchString}});
+  getNumberOfCompanysWithSearchString(searchString): Observable<number> {
+    return this._http.get<number>(`${this.apiURL}/number`, {params: {searchString: searchString}});
   }
 
-  createCongTy(congty): Observable<Company> {
-    return this._http.post<Company>('https://localhost:44305/api/Company/create', congty);
+  createCompany(company): Observable<Company> {
+    return this._http.post<Company>(`${this.apiURL}/create`, company);
   }
 
-  getCongTy(id): Observable<Company> {
-    return this._http.get<Company>('https://localhost:44305/api/Company/' + id)
+  getCompany(id): Observable<Company> {
+    return this._http.get<Company>(`${this.apiURL}/${id}`)
   }
 
-  editCongTy(congty) : Observable<Company> {
-    return this._http.post<Company>('https://localhost:44305/api/Company/edit', congty);
+  editCompany(company) : Observable<Company> {
+    return this._http.post<Company>(`${this.apiURL}/edit`, company);
   }
 
-  deleteCongTy(id) {
-    return this._http.delete('https://localhost:44305/api/Company/' + id);
+  deleteCompany(id) {
+    return this._http.delete(`${this.apiURL}/${id}`);
   }
 }
 

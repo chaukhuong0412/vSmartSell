@@ -57,40 +57,6 @@ table {
     text-align: center;
   }
 
-  .btn-warning {
-    color:white;
-    background-color: #f0ad4e;
-  }
-
-  .btn-primary:hover, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-    color: #007bff;
-    background-color: #ffffff;
-  }
-
-  .btn-warning:hover,.btn-warning:active, .btn-warning.active, .open>.dropdown-toggle.btn-warning {
-    color: #f0ad4e;
-    background-color: #ffffff;
-  }
-
-  .btn-success:hover,  .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success {
-    color: #28a745;
-    background-color: #ffffff;
-  }
-
-  .btn-secondary:hover, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
-    color: #6c757d;
-    background-color: #ffffff;
-  }
-
-  .btn-danger:hover, .btn-danger:active, .btn-danger.active, .open>.dropdown-toggle.btn-danger {
-    color: #dc3545;
-    background-color: #ffffff;
-  }
-  
-  .btn-dark:hover, .btn-dark:active, .btn-dark.active, .open>.dropdown-toggle.btn-dark {
-    color: #343a40;
-    background-color: #ffffff;
-  }
 
   .searchBox {
     margin-left: 10px;
