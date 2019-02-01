@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SupplierService } from 'src/app/supplier.service';
+import { SupplierService } from 'src/app/warehouse/supplier/supplier.service';
 import { MatDialogRef } from '@angular/material';
-import { WarehouseService } from 'src/app/warehouse.service';
+import { WarehouseService } from 'src/app/warehouse/warehouse/warehouse.service';
 
 @Component({
   selector: 'app-warehouse-create-dialog',

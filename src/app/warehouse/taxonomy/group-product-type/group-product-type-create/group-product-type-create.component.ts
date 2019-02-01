@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UnitService } from 'src/app/unit.service';
-import { WaveTypeService } from 'src/app/wave-type.service';
-import { GroupProductTypeService } from 'src/app/group-product-type.service';
+import { UnitService } from 'src/app/warehouse/taxonomy/unit/unit.service';
+import { WaveTypeService } from 'src/app/warehouse/taxonomy/wave-type/wave-type.service';
+import { GroupProductTypeService } from '../group-product-type.service';
 import { Router } from '@angular/router';
 
 @Component({

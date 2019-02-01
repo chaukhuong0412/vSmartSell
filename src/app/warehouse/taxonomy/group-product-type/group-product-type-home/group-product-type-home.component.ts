@@ -3,8 +3,9 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
-import { GroupProductTypeService } from 'src/app/group-product-type.service';
+import { GroupProductTypeService } from '../group-product-type.service';
 import { Router } from '@angular/router';
+import { Config } from 'src/app/config';
 
 @Component({
   selector: 'app-group-product-type-home',
@@ -51,19 +52,8 @@ export class GroupProductTypeHomeComponent implements OnInit {
       paging: false,
       info: false,
       searching: false,
-      language: {
-        processing: "Đang xử lý",
-        search: "Tìm kiếm",
-        lengthMenu: "Hiển thị _MENU_ tài khoản",
-        info: "Hiển thị tài khoản _START_ tới _END_ trong tổng số _TOTAL_ tài khoản",
-        infoEmpty: "Hiển thị tài khoản 0 tới 0 trong tổng số 0 tài khoản",
-        paginate: {
-          first: "Premier",
-          previous: "Lùi",
-          next: "Tới",
-          last: "Cuối"
-        }
-      }
+      language: Config.tableInformation
+
     };
 
     this.groupProductTypeService.getAllGroupProductTypes().subscribe(res => {

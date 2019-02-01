@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SupplierService } from 'src/app/supplier.service';
+import { SupplierService } from 'src/app/warehouse/supplier/supplier.service';
 import { MatDialogRef } from '@angular/material';
-import { ProducerService } from 'src/app/producer.service';
+import { ProducerService } from 'src/app/warehouse/producer/producer.service';
 
 @Component({
   selector: 'app-producer-create-dialog',

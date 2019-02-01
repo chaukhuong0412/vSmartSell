@@ -49,30 +49,30 @@ import { MatAutocompleteModule,
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserHomeComponent } from './user/user-home/user-home.component';
+import { UserHomeComponent } from '../app/user/user/user-home/user-home.component';
 import { FlxUiDatatableModule, FlxUiDataTable } from 'flx-ui-datatable';
 
-import { RoleHomeComponent } from './role/role-home/role-home.component';
+import { RoleHomeComponent } from '../app/user/role/role-home/role-home.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { UiModule } from './ui/ui.module';
-import { UserCreateDialogComponent } from './user/user-create-dialog/user-create-dialog.component';
+import { UserCreateDialogComponent } from '../app/user/user/user-create-dialog/user-create-dialog.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { UserEditDialogComponent } from './user/user-edit-dialog/user-edit-dialog.component';
-import { RoleCreateDialogComponent } from './role/role-create-dialog/role-create-dialog.component';
-import { RoleEditDialogComponent } from './role/role-edit-dialog/role-edit-dialog.component';
-import { CompanyHomeComponent } from './company/company-home/company-home.component';
-import { CompanyCreateDialogComponent } from './company/company-create-dialog/company-create-dialog.component';
-import { CompanyEditDialogComponent } from './company/company-edit-dialog/company-edit-dialog.component';
-import { StoreHomeComponent } from './store/store-home/store-home.component';
-import { StoreCreateDialogComponent } from './store/store-create-dialog/store-create-dialog.component';
-import { StoreEditDialogComponent } from './store/store-edit-dialog/store-edit-dialog.component';
+import { UserEditDialogComponent } from '../app/user/user/user-edit-dialog/user-edit-dialog.component';
+import { RoleCreateDialogComponent } from '../app/user/role/role-create-dialog/role-create-dialog.component';
+import { RoleEditDialogComponent } from '../app/user/role/role-edit-dialog/role-edit-dialog.component';
+import { CompanyHomeComponent } from '../app/user/company/company-home/company-home.component';
+import { CompanyCreateDialogComponent } from '../app/user/company/company-create-dialog/company-create-dialog.component';
+import { CompanyEditDialogComponent } from '../app/user/company/company-edit-dialog/company-edit-dialog.component';
+import { StoreHomeComponent } from '../app/user/store/store-home/store-home.component';
+import { StoreCreateDialogComponent } from '../app/user/store/store-create-dialog/store-create-dialog.component';
+import { StoreEditDialogComponent } from '../app/user/store/store-edit-dialog/store-edit-dialog.component';
 import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './helper/jwt.interceptor';
 import { AuthGuard } from './guard/auth.guard';
-import { ClientComponent } from './client/client/client.component';
-import { StoreConfigComponent } from './store/store-config/store-config.component';
-import { StoreConfigEditDialogComponent } from './store/store-config-edit-dialog/store-config-edit-dialog.component';
-import { StoreConfigCreateDialogComponent } from './store/store-config-create-dialog/store-config-create-dialog.component';
+import { ClientComponent } from '../app/user/client/client.component';
+import { StoreConfigComponent } from '../app/user/store/store-config/store-config.component';
+import { StoreConfigEditDialogComponent } from '../app/user/store/store-config-edit-dialog/store-config-edit-dialog.component';
+import { StoreConfigCreateDialogComponent } from '../app/user/store/store-config-create-dialog/store-config-create-dialog.component';
 import { ProducerHomeComponent } from './warehouse/producer/producer-home/producer-home.component';
 import { ProducerEditDialogComponent } from './warehouse/producer/producer-edit-dialog/producer-edit-dialog.component';
 import { Select2Module } from 'ng2-select2';
@@ -104,6 +104,7 @@ import { ProductNameEditComponent } from './warehouse/product-name/product-name-
 import { HttpErrorInterceptor } from './helper/http-error.interceptor';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { ProductHomeComponent } from './warehouse/product/product-home/product-home.component';
 
 
 @NgModule({
@@ -154,6 +155,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     ProductNameCreateComponent,
     ProductNameEditComponent,
     ErrorDialogComponent,
+    ProductHomeComponent,
     
     
     

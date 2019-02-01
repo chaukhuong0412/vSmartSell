@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, PipeTransform, Pipe } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { ProducerService, ReqModelGetListProducer, ESortField } from 'src/app/producer.service';
+import { ProducerService, ReqModelGetListProducer, ESortField } from 'src/app/warehouse/producer/producer.service';
 import { Router } from '@angular/router';
 import { NgbDate, NgbCalendar, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-import { SupplierService, ReqModelGetListSupplier } from 'src/app/supplier.service';
+import { SupplierService, ReqModelGetListSupplier } from 'src/app/warehouse/supplier/supplier.service';
+import { Config } from 'src/app/config';
 
 @Component({
   selector: 'app-supplier-home',
@@ -110,19 +111,8 @@ export class SupplierHomeComponent implements OnInit, AfterViewInit, OnDestroy {
       paging: false,
       info: false,
       searching: false,
-      language: {
-        processing: "Đang xử lý",
-        search: "Tìm kiếm",
-        lengthMenu: "Hiển thị _MENU_ tài khoản",
-        info: "Hiển thị tài khoản _START_ tới _END_ trong tổng số _TOTAL_ tài khoản",
-        infoEmpty: "Hiển thị tài khoản 0 tới 0 trong tổng số 0 tài khoản",
-        paginate: {
-          first: "Premier",
-          previous: "Lùi",
-          next: "Tới",
-          last: "Cuối"
-        }
-      }
+      language: Config.tableInformation
+
     };
 
     this._producerService.getListProducer().subscribe(res => {

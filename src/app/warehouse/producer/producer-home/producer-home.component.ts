@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Select2OptionData } from 'ng2-select2';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
-import { SupplierService, ReqModelGetListSupplier, ESortField } from 'src/app/supplier.service';
-import { ProducerService, ReqModelGetListProducer } from 'src/app/producer.service';
+import { SupplierService, ReqModelGetListSupplier, ESortField } from 'src/app/warehouse/supplier/supplier.service';
+import { ProducerService, ReqModelGetListProducer } from 'src/app/warehouse/producer/producer.service';
 import { Subject } from 'rxjs';
 import { ProducerCreateDialogComponent } from '../producer-create-dialog/producer-create-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 import { ProducerEditDialogComponent } from '../producer-edit-dialog/producer-edit-dialog.component';
+import { Config } from 'src/app/config';
 
 @Component({
   selector: 'app-producer-home',
@@ -83,19 +84,8 @@ export class ProducerHomeComponent implements OnInit {
       paging: false,
       info: false,
       searching: false,
-      language: {
-        processing: "Đang xử lý",
-        search: "Tìm kiếm",
-        lengthMenu: "Hiển thị _MENU_ tài khoản",
-        info: "Hiển thị tài khoản _START_ tới _END_ trong tổng số _TOTAL_ tài khoản",
-        infoEmpty: "Hiển thị tài khoản 0 tới 0 trong tổng số 0 tài khoản",
-        paginate: {
-          first: "Premier",
-          previous: "Lùi",
-          next: "Tới",
-          last: "Cuối"
-        }
-      }
+      language: Config.tableInformation
+
     };
     this.update();
   }
