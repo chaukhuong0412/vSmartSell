@@ -16,7 +16,7 @@ export class WarehouseService {
   constructor(private _http: HttpClient) { }
 
   getListWarehouse(): Observable<Warehouse[]> {
-    return this._http.get<Warehouse[]>(this.apiURL);
+    return this._http.get<Warehouse[]>(`${this.apiURL}/all`);
   }
 
   createWarehouse(warehouse): Observable<Warehouse> {

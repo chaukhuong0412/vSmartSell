@@ -1,7 +1,7 @@
 
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producer } from '../producer/producer.service';
 import { Config } from '../../config';
@@ -21,7 +21,19 @@ export class SupplierService {
   }
 
   getListSupplierOrderBy(reqModelGetListSupplier): Observable<Object[]> {
-    return this._http.post<Object[]>(`${this.apiURL}/sort`, reqModelGetListSupplier);
+    let params = new HttpParams();
+    params = params.append('IsAscending',reqModelGetListSupplier.isAscending);
+    params = params.append('SortField',reqModelGetListSupplier.sortField);
+    params = params.append('PageIndex',reqModelGetListSupplier.pageIndex);
+    params = params.append('PageSize',reqModelGetListSupplier.pageSize);
+    params = params.append('SearchString',reqModelGetListSupplier.searchString);
+    if (reqModelGetListSupplier.producerIds.length != 0) {
+      reqModelGetListSupplier.producerIds.forEach(id => {
+        params = params.append('ProducerIds',id);
+      });
+    }
+
+    return this._http.get<SupplierViewModel[]>(this.apiURL, { params: params });
   }
 
   createSupplier(supplier): Observable<SupplierBindingModel> {
@@ -33,7 +45,7 @@ export class SupplierService {
   }
 
   editSupplier(supplier) {
-    return this._http.post(`${this.apiURL}/edit`, supplier);
+    return this._http.put(this.apiURL, supplier);
   }
 
   getDebtAtGivenDate(requestDebtModel): Observable<number> {

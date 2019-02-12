@@ -96,7 +96,6 @@ export class ProductNameHomeComponent implements OnInit {
       warehouseId: 0
     }
 
-
     this.productNameService.getListProductNames(this.reqModelGetListProductName).subscribe(res => {
       this.productNames = res;
     })

@@ -13,7 +13,7 @@ export class WaveTypeService {
   constructor(private _http: HttpClient) { }
 
   getAllWaveTypes(): Observable<WaveType[]> {
-    return this._http.get<WaveType[]>(this.apiURL);
+    return this._http.get<WaveType[]>(`${this.apiURL}/all`);
   }
 
   getWaveType(waveTypeId): Observable<WaveType> {
