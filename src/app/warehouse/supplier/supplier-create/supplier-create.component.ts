@@ -2,8 +2,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProducerService, Producer } from 'src/app/producer.service';
-import { SupplierService } from 'src/app/supplier.service';
+import { ProducerService, Producer } from 'src/app/warehouse/producer/producer.service';
+import { SupplierService } from 'src/app/warehouse/supplier/supplier.service';
 
 @Component({
   selector: 'app-supplier-create',

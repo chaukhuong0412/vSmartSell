@@ -14,7 +14,6 @@ body
   background: #007bff !important;
 }
 
-
 .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
   background: #007bff !important;
 }
@@ -31,8 +30,6 @@ body
 .multiselect-dropdown .dropdown-btn .selected-item {
   background: #007bff !important;
 }
-
-
 
 table.dataTable thead th {
   border-bottom-width: 0px !important;
@@ -58,10 +55,7 @@ table.dataTable thead th {
 .leftFloatButton {
   float: left;
   margin: 5px;
-
 }
-
-
 
 * {
   font-size: 14px;
@@ -100,5 +94,9 @@ table.dataTable thead th {
 .btn-dark:hover, .btn-dark:active, .btn-dark.active, .open>.dropdown-toggle.btn-dark {
   color: #343a40 !important;
   background-color: #ffffff !important;
+}
+
+.dropdown-btn {
+  border: 1px solid #ced4da !important
 }
 

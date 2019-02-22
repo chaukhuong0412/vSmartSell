@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WaveTypeService } from 'src/app/wave-type.service';
+import { WaveTypeService } from 'src/app/warehouse/taxonomy/wave-type/wave-type.service';
 import { Router } from '@angular/router';
 
 @Component({

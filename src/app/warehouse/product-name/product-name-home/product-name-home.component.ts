@@ -3,10 +3,11 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
-import { ProductNameService, ReqModelGetListProductName, ESortField } from 'src/app/product-name.service';
+import { ProductNameService, ReqModelGetListProductName, ESortField } from 'src/app/warehouse/product-name/product-name.service';
 import { Router } from '@angular/router';
-import { ProducerService } from 'src/app/producer.service';
-import { WarehouseService } from 'src/app/warehouse.service';
+import { ProducerService } from 'src/app/warehouse/producer/producer.service';
+import { WarehouseService } from 'src/app/warehouse/warehouse/warehouse.service';
+import { Config } from 'src/app/config';
 
 @Component({
   selector: 'app-product-name-home',
@@ -72,19 +73,8 @@ export class ProductNameHomeComponent implements OnInit {
       paging: false,
       info: false,
       searching: false,
-      language: {
-        processing: "Đang xử lý",
-        search: "Tìm kiếm",
-        lengthMenu: "Hiển thị _MENU_ tài khoản",
-        info: "Hiển thị tài khoản _START_ tới _END_ trong tổng số _TOTAL_ tài khoản",
-        infoEmpty: "Hiển thị tài khoản 0 tới 0 trong tổng số 0 tài khoản",
-        paginate: {
-          first: "Premier",
-          previous: "Lùi",
-          next: "Tới",
-          last: "Cuối"
-        }
-      }
+      language: Config.tableInformation
+
     };
 
     this.dropdownSettings = {
@@ -105,7 +95,6 @@ export class ProductNameHomeComponent implements OnInit {
       producerIds: [],
       warehouseId: 0
     }
-
 
     this.productNameService.getListProductNames(this.reqModelGetListProductName).subscribe(res => {
       this.productNames = res;

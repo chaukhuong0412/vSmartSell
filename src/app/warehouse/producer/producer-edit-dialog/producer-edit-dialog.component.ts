@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { UserService } from 'src/app/user.service';
-import { SupplierService } from 'src/app/supplier.service';
+import { UserService } from '../../../user/user/user.service';
+import { SupplierService } from 'src/app/warehouse/supplier/supplier.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
-import { ProducerService } from 'src/app/producer.service';
+import { ProducerService } from 'src/app/warehouse/producer/producer.service';
 
 @Component({
   selector: 'app-producer-edit-dialog',

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UnitService } from 'src/app/unit.service';
-import { WaveTypeService } from 'src/app/wave-type.service';
-import { GroupProductTypeService } from 'src/app/group-product-type.service';
+import { UnitService } from 'src/app/warehouse/taxonomy/unit/unit.service';
+import { WaveTypeService } from 'src/app/warehouse/taxonomy/wave-type/wave-type.service';
+import { GroupProductTypeService } from '../../taxonomy/group-product-type/group-product-type.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProducerService } from 'src/app/producer.service';
-import { WarehouseService } from 'src/app/warehouse.service';
-import { ProductNameService } from 'src/app/product-name.service';
+import { ProducerService } from 'src/app/warehouse/producer/producer.service';
+import { WarehouseService } from 'src/app/warehouse/warehouse/warehouse.service';
+import { ProductNameService } from 'src/app/warehouse/product-name/product-name.service';
 
 @Component({
   selector: 'app-product-name-edit',

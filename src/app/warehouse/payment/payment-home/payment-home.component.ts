@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { SupplierService } from 'src/app/supplier.service';
+import { SupplierService } from 'src/app/warehouse/supplier/supplier.service';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentCreateDialogComponent } from '../payment-create-dialog/payment-create-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material';

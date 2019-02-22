@@ -3,8 +3,9 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-import { WaveTypeService } from 'src/app/wave-type.service';
+import { WaveTypeService } from 'src/app/warehouse/taxonomy/wave-type/wave-type.service';
 import { Router } from '@angular/router';
+import { Config } from 'src/app/config';
 
 @Component({
   selector: 'app-wave-type-home',
@@ -50,19 +51,8 @@ export class WaveTypeHomeComponent implements OnInit {
       paging: false,
       info: false,
       searching: false,
-      language: {
-        processing: "Đang xử lý",
-        search: "Tìm kiếm",
-        lengthMenu: "Hiển thị _MENU_ tài khoản",
-        info: "Hiển thị tài khoản _START_ tới _END_ trong tổng số _TOTAL_ tài khoản",
-        infoEmpty: "Hiển thị tài khoản 0 tới 0 trong tổng số 0 tài khoản",
-        paginate: {
-          first: "Premier",
-          previous: "Lùi",
-          next: "Tới",
-          last: "Cuối"
-        }
-      }
+      language: Config.tableInformation
+
     };
 
     this.waveTypeService.getAllWaveTypes().subscribe(res => {

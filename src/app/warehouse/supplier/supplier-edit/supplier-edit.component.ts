@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2OptionData } from 'ng2-select2';
-import { SupplierService } from 'src/app/supplier.service';
-import { ProducerService } from 'src/app/producer.service';
+import { SupplierService } from 'src/app/warehouse/supplier/supplier.service';
+import { ProducerService } from 'src/app/warehouse/producer/producer.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { PaymentCreateDialogComponent } from '../../payment/payment-create-dialog/payment-create-dialog.component';
 import { DataTableDirective } from 'angular-datatables';
