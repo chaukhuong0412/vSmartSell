@@ -6,8 +6,8 @@
   
       <div class="col-md-12">
         <div class="form-group">
-          <label for="Name">Tên loại hàng</label>
-          <input required class="form-control" [(ngModel)]="name" #uName="ngModel">
+          <label for="Title">Tên loại hàng</label>
+          <input required class="form-control" [(ngModel)]="title" #uName="ngModel">
         </div>
       </div>
   
@@ -42,7 +42,7 @@
           <div class="input-group mb-3">
               <mat-selection-list class="border" [(ngModel)]="selectedUnitIds" #listroles>
                   <mat-list-option *ngFor="let unit of units" [value]="unit.id">
-                    {{unit.unitName}}
+                    {{unit.title}}
                   </mat-list-option>
                 </mat-selection-list>
           </div>
@@ -57,7 +57,7 @@
             <div class="input-group mb-3">
                 <mat-selection-list class="border" [(ngModel)]="selectedWaveTypeIds" #listroles>
                     <mat-list-option *ngFor="let waveType of waveTypes" [value]="waveType.id">
-                      {{waveType.waveTypeName}}
+                      {{waveType.title}}
                     </mat-list-option>
                   </mat-selection-list>
             </div>

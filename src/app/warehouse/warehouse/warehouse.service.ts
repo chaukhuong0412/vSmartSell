@@ -39,7 +39,7 @@ export class WarehouseService {
 
 export class Warehouse {
   id: number;
-  name: string;
+  title: string;
 }
 
 export class ReqModelGetListWarehouse {
@@ -51,6 +51,6 @@ export class ReqModelGetListWarehouse {
 }
 
 export enum ESortField {
-  Name,
+  Title,
   CreateAt
 }

@@ -12,7 +12,7 @@ import { Store, StoreService } from '../../store/store.service';
 export class CompanyEditDialogComponent implements OnInit {
 
   company: Company;
-  companyName;
+  companyTitle;
   address;
   phoneNumber;
   numberOfAccountAllowed;
@@ -25,7 +25,7 @@ export class CompanyEditDialogComponent implements OnInit {
   ngOnInit() {
     console.log(this.data.id);
       this._companyService.getCompany(this.data.id).subscribe(result => {
-        this.companyName = result.name;
+        this.companyTitle = result.title;
         this.address = result.address;
         this.phoneNumber = result.phoneNumber;
         this.numberOfAccountAllowed = result.numberOfAccountAllowed;
@@ -35,7 +35,7 @@ export class CompanyEditDialogComponent implements OnInit {
   save() {
       var company = {
         id: this.data.id,
-        name: this.companyName,
+        title: this.companyTitle,
         address: this.address,
         phoneNumber: this.phoneNumber,
         numberOfAccountAllowed: this.numberOfAccountAllowed

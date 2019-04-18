@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UnitEditComponent implements OnInit {
 
   weight;
-  name;
+  title;
   slug = "";
   unitId;
   goodsCuttingType;
@@ -24,7 +24,7 @@ export class UnitEditComponent implements OnInit {
         this.unitId = +params["id"]; // cast to number
       })
     this.unitService.getUnit(this.unitId).subscribe(res => {
-      this.name = res.unitName;
+      this.title = res.title;
       this.weight = res.weight;
       this.slug = res.slug;
       this.goodsCuttingType = res.goodsCuttingType;
@@ -54,7 +54,7 @@ export class UnitEditComponent implements OnInit {
   save() {
     var unit = {
       id: this.unitId,
-      unitName: this.name,
+      title: this.title,
       weight: this.weight,
       slug: this.slug,
       goodsCuttingType: this.goodsCuttingType

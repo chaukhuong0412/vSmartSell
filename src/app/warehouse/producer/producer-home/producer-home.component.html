@@ -14,8 +14,8 @@
     <tr>
       <th scope="col" id="stt-column" (click)="sortById()">STT</th>
       <th scope="col"><a class="clickable" (click)="sortByFullName()">Tên nhà sản xuất</a>
-        <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
-        <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
+        <a *ngIf="sortField == 'Title' && asc==true">▾</a>
+        <a *ngIf="sortField == 'Title' && asc==false">▴</a>
       </th>
 
       <th scope="col">Nhà cung cấp</th>
@@ -26,7 +26,7 @@
   <tbody>
     <tr *ngFor="let producer of producerList; let i = index">
       <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
-      <td>{{producer.name}}</td>
+      <td>{{producer.title}}</td>
       <td>{{producer.suppliers | getObjectName}}</td>
 
       <td class="right">

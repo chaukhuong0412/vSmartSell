@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class WaveTypeCreateComponent implements OnInit {
 
   weight;
-  name;
+  title;
   slug = "";
   loss;
   lossAmount;
@@ -41,7 +41,7 @@ export class WaveTypeCreateComponent implements OnInit {
 
   createWaveType() {
     var waveType = {
-      waveTypeName: this.name,
+      title: this.title,
       weight: this.weight,
       slug: this.slug,
       loss: this.loss,

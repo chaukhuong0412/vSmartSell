@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let unit of units; let i = index">
-      <td>{{unit.unitName}}</td>
+      <td>{{unit.title}}</td>
       <td id="right-col">
         <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/Unit/Edit/', unit.id ]"><i
           class="fa fa-edit"></i></button>

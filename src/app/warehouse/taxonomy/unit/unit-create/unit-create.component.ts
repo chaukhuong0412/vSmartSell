@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UnitCreateComponent implements OnInit {
   weight;
-  name;
+  title;
   slug = "";
   goodsCuttingType;
 
@@ -39,7 +39,7 @@ export class UnitCreateComponent implements OnInit {
 
   createUnit() {
     var unit = {
-      unitName: this.name,
+      title: this.title,
       weight: this.weight,
       slug: this.slug,
       goodsCuttingType: this.goodsCuttingType

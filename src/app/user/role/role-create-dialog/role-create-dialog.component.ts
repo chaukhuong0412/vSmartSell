@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RoleCreateDialogComponent implements OnInit {
 
-  name;
+  title;
   permissions: Permission[];
   selectedPermissions;
   permissionGroups;
@@ -88,7 +88,7 @@ export class RoleCreateDialogComponent implements OnInit {
 
 
     var role = {
-      name:this.name,
+      title:this.title,
       permissionIds: selectedPermissions
     }
     this._roleService.createRole(role).subscribe((result) => {

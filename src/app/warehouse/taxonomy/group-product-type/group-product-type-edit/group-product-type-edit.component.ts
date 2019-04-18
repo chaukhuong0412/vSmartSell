@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class GroupProductTypeEditComponent implements OnInit {
 
   weight;
-  name;
+  title;
   slug = "";
   groupProductTypeId;
   units;
@@ -33,7 +33,7 @@ export class GroupProductTypeEditComponent implements OnInit {
       this.unitService.getAllUnits().subscribe(res => {
         this.units = res;
         this.groupProductTypeService.getGroupProductType(this.groupProductTypeId).subscribe(res => {
-          this.name = res.groupProductTypeName;
+          this.title = res.title;
           this.weight = res.weight;
           this.slug = res.slug;
           this.selectedWaveTypeIds = res.waveTypeIds;
@@ -69,7 +69,7 @@ export class GroupProductTypeEditComponent implements OnInit {
   save() {
     var groupProductType = {
       id: this.groupProductTypeId,
-      groupProductTypeName: this.name,
+      title: this.title,
       weight: this.weight,
       slug: this.slug,
       unitIds: this.selectedUnitIds,

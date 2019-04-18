@@ -72,7 +72,7 @@
     <tbody>
       <tr *ngFor="let role of roles; let i = index">
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
-        <td>{{role.name}}</td>
+        <td>{{role.title}}</td>
 
         <td class="right">
           <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditRoleDialog(role.id)"><i class="fa fa-edit"></i></button>

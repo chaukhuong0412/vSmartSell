@@ -87,7 +87,7 @@ export class User {
   userId: number;
   userName: string;
   password: string;
-  fullName: string;
+  title: string;
   userStatus: any;
   roleIds: number[];
   companyId: number;
@@ -119,7 +119,7 @@ export class ReqModelGetListUser {
 
 export enum ESortField {
   UserName,
-  FullName,
-  CuaHang,
+  Title,
+  Store,
   CreateAt
 }

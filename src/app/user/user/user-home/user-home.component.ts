@@ -242,15 +242,15 @@ export class UserHomeComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   sortByFullName() {
-    if (this.reqModelGetListUser.sortField == ESortField.FullName) {
+    if (this.reqModelGetListUser.sortField == ESortField.Title) {
       this.reqModelGetListUser.isAscending = !this.reqModelGetListUser.isAscending;
-      this.sortField = "FullName";
+      this.sortField = "Title";
       this.asc = this.reqModelGetListUser.isAscending;
     }
     else {
-      this.reqModelGetListUser.sortField = ESortField.FullName;
+      this.reqModelGetListUser.sortField = ESortField.Title;
       this.reqModelGetListUser.isAscending = true;
-      this.sortField = "FullName";
+      this.sortField = "Title";
       this.asc = this.reqModelGetListUser.isAscending;
     }
     this.update();

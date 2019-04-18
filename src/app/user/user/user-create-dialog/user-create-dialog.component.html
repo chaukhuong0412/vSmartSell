@@ -21,8 +21,8 @@
     </div>
 
     <div class="form-group col-md-6">
-      <label for="FullName">Họ tên</label>
-      <input required class="form-control" [(ngModel)]="fullName">
+      <label for="Title">Họ tên</label>
+      <input required class="form-control" [(ngModel)]="title">
     </div>
   </div>
 
@@ -59,7 +59,7 @@
       <div class="form-group">
         <label for="CongTyCha">Thuộc công ty</label>
         <select class="form-control" (change)="companySelected()" [(ngModel)]="companyId">
-          <option class="form-control" *ngFor="let company of companies" [ngValue]="company.id"> {{company.name}}
+          <option class="form-control" *ngFor="let company of companies" [ngValue]="company.id"> {{company.title}}
           </option>
         </select>
       </div>
@@ -70,7 +70,7 @@
     <div class="form-group col-md-6">
       <label for="CongTyCha">Thuộc cửa hàng </label>
       <select class="form-control" (change)="storeSelected()" [(ngModel)]="storeId">
-        <option class="form-control" *ngFor="let store of stores" [ngValue]="store.id"> {{store.name}} </option>
+        <option class="form-control" *ngFor="let store of stores" [ngValue]="store.id"> {{store.title}} </option>
       </select>
     </div>
   </div>

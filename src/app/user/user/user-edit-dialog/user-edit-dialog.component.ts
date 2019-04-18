@@ -16,7 +16,7 @@ export class UserEditDialogComponent implements OnInit {
 
 
   userName;
-  fullName;
+  title;
   roles: Role[];
   selectedRoles = [];
 
@@ -30,7 +30,7 @@ export class UserEditDialogComponent implements OnInit {
     
     this._userService.getUser(this.data.id).subscribe( result => {
       this.userName = result.userName;
-      this.fullName = result.fullName;
+      this.title = result.title;
       this.selectedRoles = result.roleIds;
     });
   }
@@ -39,7 +39,7 @@ export class UserEditDialogComponent implements OnInit {
     var user = {
       Id: this.data.id,
       UserName: this.userName,
-      fullName: this.fullName,
+      title: this.title,
       RoleIds: this.selectedRoles
     }
     console.log(user);

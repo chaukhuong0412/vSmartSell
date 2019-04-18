@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class GroupProductTypeCreateComponent implements OnInit {
 
   weight;
-  name;
+  title;
   slug = "";
   units;
   selectedUnitIds;
@@ -51,7 +51,7 @@ export class GroupProductTypeCreateComponent implements OnInit {
 
   createGroupProductType() {
     var groupProductType = {
-      groupProductTypeName: this.name,
+      title: this.title,
       weight: this.weight,
       slug: this.slug,
       unitIds: this.selectedUnitIds,

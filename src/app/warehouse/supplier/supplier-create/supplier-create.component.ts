@@ -14,7 +14,7 @@ export class SupplierCreateComponent implements OnInit {
 
   public options: Select2Options;
 
-  supplierName;
+  title;
   supplierCode;
   address;
   phoneNumber;
@@ -74,7 +74,7 @@ export class SupplierCreateComponent implements OnInit {
     });
 
     var supplier = {
-      name: this.supplierName,
+      title: this.title,
       code: this.supplierCode,
       address: this.address,
       phoneNumber: this.phoneNumber,

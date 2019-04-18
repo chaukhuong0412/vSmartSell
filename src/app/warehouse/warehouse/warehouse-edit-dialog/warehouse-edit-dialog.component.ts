@@ -12,8 +12,7 @@ import { WarehouseService } from 'src/app/warehouse/warehouse/warehouse.service'
 })
 export class WarehouseEditDialogComponent implements OnInit {
 
-  name;
-
+  title;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<WarehouseEditDialogComponent>, 
               private _warehouseService: WarehouseService, private router: Router) { }
@@ -21,14 +20,14 @@ export class WarehouseEditDialogComponent implements OnInit {
   ngOnInit() {
     
     this._warehouseService.getWarehouse(this.data.id).subscribe( result => {
-      this.name = result.name;
+      this.title = result.title;
     });
   }
 
   save() {
     var warehouse = {
       id: this.data.id,
-      name: this.name
+      title: this.title
     }
     this._warehouseService.editWarehouse(warehouse).subscribe((result) => {
       this.dialogRef.close("Edit");

@@ -37,7 +37,7 @@ export class WaveTypeService {
 
 export class WaveType {
   id: number;
-  waveTypeName: string;
+  title: string;
   weight: number;
   slug: string;
   loss: number;

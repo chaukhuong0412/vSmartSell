@@ -82,8 +82,8 @@
           <a *ngIf="sortField == 'UserName' && asc==false">▴</a>
         </th>
         <th scope="col"><a class="clickable" (click)="sortByFullName()">Tên nhà cung cấp</a>
-          <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
-          <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
+          <a *ngIf="sortField == 'Title' && asc==true">▾</a>
+          <a *ngIf="sortField == 'Title' && asc==false">▴</a>
         </th>
         <th scope="col">Số điện thoại</th>
         <th scope="col">Địa chỉ</th>
@@ -97,12 +97,12 @@
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
         <td>{{supplier.createdAt | date:"dd/MM/yyyy"}}</td>
         <td>
-          {{supplier.name}}
+          {{supplier.title}}
           <ng-template #popContent>{{supplier.note}}</ng-template>
           <i *ngIf="supplier.note" class="fa fa-question-circle" [ngbPopover]="popContent" placement="left"></i>
         </td>
-        <td>{{supplier.name}}</td>
-        <td>{{supplier.name}}</td>
+        <td>{{supplier.title}}</td>
+        <td>{{supplier.title}}</td>
         <td>{{supplier.producers | getObjectName }}</td>
         <td>{{ 0 | date:"dd/MM/yyyy" }}</td>
 

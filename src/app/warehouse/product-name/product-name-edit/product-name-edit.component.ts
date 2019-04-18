@@ -16,7 +16,7 @@ export class ProductNameEditComponent implements OnInit {
 
   
   productNameId;
-  name;
+  title;
   units;
   selectedUnitIds;
   waveTypes;
@@ -72,7 +72,7 @@ export class ProductNameEditComponent implements OnInit {
             this.groupProductTypeService.getAllGroupProductTypes().subscribe(res => {
               this.groupProductTypes = res;
               this.productNameService.getProductName(this.productNameId).subscribe(productName => {
-                this.name = productName.name;
+                this.title = productName.title;
                 this.selectedGroupProductType = productName.groupProductTypeId;
                 this.groupProductTypeService.getWaveTypesOfGroupProductType(this.selectedGroupProductType).subscribe(res => {
                   this.waveTypes = res;
@@ -126,7 +126,7 @@ export class ProductNameEditComponent implements OnInit {
 
     var productName = {
       id: this.productNameId,
-      name: this.name,
+      title: this.title,
       groupProductTypeId: this.selectedGroupProductType,
       producerId: this.selectedProducer,
       unitIds: this.selectedUnitIds,

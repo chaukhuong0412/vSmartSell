@@ -19,7 +19,7 @@ export class ProductNameCreateComponent implements OnInit {
 
   dialogErrorRef: MatDialogRef<ErrorDialogComponent>;
 
-  name;
+  title;
   units;
   selectedUnitIds;
   waveTypes;
@@ -113,7 +113,7 @@ export class ProductNameCreateComponent implements OnInit {
         warehouseIds.push(element.id);
       });
       productName = {
-        name: this.name,
+        title: this.title,
         groupProductTypeId: this.selectedGroupProductType,
         producerId: this.selectedProducer,
         unitIds: this.selectedUnitIds,
@@ -134,7 +134,7 @@ export class ProductNameCreateComponent implements OnInit {
           warehouseIds.push(element);
         });
         productName = {
-          name: this.name,
+          title: this.title,
           groupProductTypeId: this.selectedGroupProductType,
           producerId: this.selectedProducer,
           unitIds: this.selectedUnitIds,

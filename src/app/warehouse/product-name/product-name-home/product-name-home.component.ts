@@ -87,7 +87,7 @@ export class ProductNameHomeComponent implements OnInit {
     };
 
     this.reqModelGetListProductName = {
-      sortField: ESortField.Name,
+      sortField: ESortField.title,
       isAscending: true,
       pageIndex: 0,
       pageSize: 10,

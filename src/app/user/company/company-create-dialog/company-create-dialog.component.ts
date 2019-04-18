@@ -12,7 +12,7 @@ import { Store, StoreService } from '../../store/store.service';
 })
 export class CompanyCreateDialogComponent implements OnInit {
 
-  companyName;
+  companyTitle;
   address;
   phoneNumber;
   numberOfAccountAllowed: number;
@@ -31,7 +31,7 @@ export class CompanyCreateDialogComponent implements OnInit {
   createCompany() {
 
     var company = {
-      name: this.companyName,
+      title: this.companyTitle,
       address: this.address,
       phoneNumber: this.phoneNumber,
       numberOfAccountAllowed: this.numberOfAccountAllowed

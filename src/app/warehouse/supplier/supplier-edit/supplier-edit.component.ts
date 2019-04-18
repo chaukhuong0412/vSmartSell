@@ -30,7 +30,7 @@ export class SupplierEditComponent implements OnInit {
   sub: any;
   supplierId: number;
 
-  supplierName;
+  title;
   supplierCode;
   address;
   phoneNumber;
@@ -91,7 +91,7 @@ export class SupplierEditComponent implements OnInit {
       })
 
     this.supplierService.getSupplier(this.supplierId).subscribe(res => {
-      this.supplierName = res.name;
+      this.title = res.title;
       this.supplierCode = res.code;
       this.address = res.address;
       this.phoneNumber = res.phoneNumber;
@@ -142,7 +142,7 @@ export class SupplierEditComponent implements OnInit {
 
     var supplier = {
       id: this.supplierId,
-      name: this.supplierName,
+      title: this.title,
       code: this.supplierCode,
       address: this.address,
       phoneNumber: this.phoneNumber,

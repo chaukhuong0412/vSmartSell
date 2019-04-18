@@ -37,7 +37,7 @@ export class ProducerService {
 
 export class Producer {
   id: number;
-  name: string;
+  title: string;
   suppliers: SupplierViewModel[];
 }
 
@@ -50,6 +50,6 @@ export class ReqModelGetListProducer {
 }
 
 export enum ESortField {
-  Name,
+  Title,
   CreateAt
 }

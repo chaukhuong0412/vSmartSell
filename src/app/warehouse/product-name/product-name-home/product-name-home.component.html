@@ -36,7 +36,7 @@
               <div class="form-group">
                   <select class="form-control custom-select" [(ngModel)]="selectedWarehouse" (change)="onWarehouseChange($event.target.value)">
                     <option value="0">Tất cả</option>
-                    <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
+                    <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.title}}</option>
                   </select>
               </div>
             </div>
@@ -80,7 +80,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let productName of productNames; let i = index">
-      <td>{{productName.name}}</td>
+      <td>{{productName.title}}</td>
       <td id="right-col">
         <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/ProductName/Edit/', productName.id ]"><i
           class="fa fa-edit"></i></button>

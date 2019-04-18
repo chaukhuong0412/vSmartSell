@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let groupProductType of groupProductTypes; let i = index">
-        <td>{{groupProductType.groupProductTypeName}}</td>
+        <td>{{groupProductType.title}}</td>
         <td id="right-col">
           <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/GroupProductType/Edit/', groupProductType.id ]"><i
             class="fa fa-edit"></i></button>

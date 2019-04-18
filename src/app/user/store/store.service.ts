@@ -59,7 +59,7 @@ export class StoreService {
 
 export class Store {
   id : number;
-  name : string;
+  title : string;
   storeCode: string;
   phoneNumber: string;
   address: string;
@@ -68,7 +68,7 @@ export class Store {
 
 export class StoreViewModel {
   id : number;
-  name : string;
+  title : string;
   companyName : string;
 }
 

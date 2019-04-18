@@ -57,7 +57,7 @@ export class ProductNameService {
 
 export class ProductName {
   id: number;
-  name: string;
+  title: string;
   groupProductTypeId: number;
   producerId: number;
   unitIds: number[];
@@ -76,5 +76,5 @@ export class ReqModelGetListProductName {
 }
 
 export enum ESortField {
-  Name
+  title
 }

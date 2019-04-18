@@ -18,8 +18,8 @@
     </div>
 
     <div class="form-group col-md-auto">
-      <label for="FullName">Họ tên</label>
-      <input required class="form-control" [(ngModel)]="fullName">
+      <label for="Title">Họ tên</label>
+      <input required class="form-control" [(ngModel)]="title">
     </div>
   </div>
 
@@ -28,7 +28,7 @@
   <div class="form-group scrollbar">
     <mat-selection-list class="border" [(ngModel)]="selectedRoles" #listroles>
       <mat-list-option *ngFor="let role of roles" [value]="role.id">
-        {{role.name}}
+        {{role.title}}
       </mat-list-option>
     </mat-selection-list>
   </div>

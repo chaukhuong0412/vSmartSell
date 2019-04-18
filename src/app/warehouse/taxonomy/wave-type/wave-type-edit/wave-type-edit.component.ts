@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class WaveTypeEditComponent implements OnInit {
 
   weight;
-  name;
+  title;
   slug = "";
   waveTypeId;
   loss;
@@ -23,7 +23,7 @@ export class WaveTypeEditComponent implements OnInit {
         this.waveTypeId = +params["id"]; // cast to number
       })
     this.waveTypeService.getWaveType(this.waveTypeId).subscribe(res => {
-      this.name = res.waveTypeName;
+      this.title = res.title;
       this.weight = res.weight;
       this.slug = res.slug;
       this.loss = res.loss;
@@ -54,7 +54,7 @@ export class WaveTypeEditComponent implements OnInit {
   save() {
     var waveType = {
       id: this.waveTypeId,
-      waveTypeName: this.name,
+      title: this.title,
       weight: this.weight,
       slug: this.slug,
       loss: this.loss,

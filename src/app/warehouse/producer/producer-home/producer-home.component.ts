@@ -72,7 +72,7 @@ export class ProducerHomeComponent implements OnInit {
     manageSupplierButton.addEventListener("click", manageSupplier);
 
     this.ReqModelGetListProducer = {
-      sortField: ESortField.Name,
+      sortField: ESortField.Title,
       isAscending: true,
       pageIndex: 0,
       pageSize: 10,

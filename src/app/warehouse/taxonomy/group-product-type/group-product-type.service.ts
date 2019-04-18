@@ -48,7 +48,7 @@ export class GroupProductTypeService {
 
 export class GroupProductType {
   id: number;
-  groupProductTypeName: string;
+  title: string;
   weight: number;
   slug: string;
   unitIds: number[];

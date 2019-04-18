@@ -6,8 +6,8 @@
 
     <div class="col-md-12">
       <div class="form-group">
-        <label for="Name">Tên sản phẩm</label>
-        <input required class="form-control" [(ngModel)]="name" #uName="ngModel">
+        <label for="Title">Tên sản phẩm</label>
+        <input required class="form-control" [(ngModel)]="title" #uName="ngModel">
       </div>
     </div>
 
@@ -32,8 +32,8 @@
       <mat-option>
         <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let producer of producers" [value]="producer.name">
-        {{producer.name}}
+      <mat-option *ngFor="let producer of producers" [value]="producer.title">
+        {{producer.title}}
       </mat-option>
     </mat-select>
   </mat-form-field> -->
@@ -44,7 +44,7 @@
           <label for="Name">Nhà sản xuất</label>
           <div class="input-group mb-3">
             <select [(ngModel)]="selectedProducer" class="form-control custom-select">
-              <option *ngFor="let producer of producers" [value]="producer.id">{{producer.name}}</option>
+              <option *ngFor="let producer of producers" [value]="producer.id">{{producer.title}}</option>
             </select>
           </div>
         </div>
@@ -71,10 +71,10 @@
         <label class="head-lable" for="Name">Loại hàng</label>
         <hr />
         <div class="form-check" *ngFor="let groupProductType of groupProductTypes">
-          <input class="form-check-input" type="radio" [name]="groupProductType.groupProductTypeName" [id]="groupProductType.groupProductTypeName"
+          <input class="form-check-input" type="radio" [name]="groupProductType.title" [id]="groupProductType.title"
             [value]="groupProductType.id" [(ngModel)]="selectedGroupProductType" (change)='groupProductTypeChange();'>
-          <label class="form-check-label" [for]="groupProductType.groupProductTypeName">
-            {{groupProductType.groupProductTypeName}}
+          <label class="form-check-label" [for]="groupProductType.title">
+            {{groupProductType.title}}
           </label>
         </div>
       </div>
@@ -91,7 +91,7 @@
         <div class="input-group mb-3">
           <mat-selection-list class="border" [(ngModel)]="selectedUnitIds" #listroles>
             <mat-list-option *ngFor="let unit of units" [value]="unit.id">
-              {{unit.unitName}}
+              {{unit.title}}
             </mat-list-option>
           </mat-selection-list>
         </div>
@@ -107,7 +107,7 @@
         <div class="input-group mb-3">
           <mat-selection-list class="border" [(ngModel)]="selectedWaveTypeIds" #listroles>
             <mat-list-option *ngFor="let waveType of waveTypes" [value]="waveType.id">
-              {{waveType.waveTypeName}}
+              {{waveType.title}}
             </mat-list-option>
           </mat-selection-list>
 

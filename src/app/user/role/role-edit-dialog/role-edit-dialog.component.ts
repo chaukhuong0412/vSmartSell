@@ -15,7 +15,7 @@ export class RoleEditDialogComponent implements OnInit {
 
   private id : number;
   private sub: any;
-  name;
+  title;
   permissionIds: string[];
   permissions: Permission[];
   selectedPermissions;
@@ -29,7 +29,7 @@ export class RoleEditDialogComponent implements OnInit {
     });
     
     this._roleService.getRole(this.data.id).subscribe( result => {
-      this.name = result.name;
+      this.title = result.title;
       this.selectedPermissions = result.permissionIds
     });
   }
@@ -37,7 +37,7 @@ export class RoleEditDialogComponent implements OnInit {
   save() {
     var role = {
       id: this.data.id,
-      name:this.name,
+      title:this.title,
       permissionIds: this.selectedPermissions
     }
     this._roleService.editRole(role).subscribe((result) => {

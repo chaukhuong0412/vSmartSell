@@ -10,7 +10,7 @@ import { WarehouseService } from 'src/app/warehouse/warehouse/warehouse.service'
 })
 export class WarehouseCreateDialogComponent implements OnInit {
 
-  name: string;
+  title: string;
 
   constructor(public dialogRef: MatDialogRef<WarehouseCreateDialogComponent>, private _warehouseService: WarehouseService) { }
 
@@ -23,7 +23,7 @@ export class WarehouseCreateDialogComponent implements OnInit {
 
   createWarehouse() {
     var warehouse = {
-      name: this.name
+      title: this.title
     };
     this._warehouseService.createWarehouse(warehouse).subscribe(res => {
       this.dialogRef.close("Create");

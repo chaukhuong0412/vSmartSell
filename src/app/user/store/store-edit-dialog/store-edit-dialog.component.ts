@@ -10,7 +10,7 @@ import { StoreService } from '../store.service';
 })
 export class StoreEditDialogComponent implements OnInit {
 
-  name;
+  title;
   storeCode;
   phoneNumber;
   address;
@@ -26,7 +26,7 @@ export class StoreEditDialogComponent implements OnInit {
     this._congTyService.getListCompanys().subscribe(result => {
       this.companies = result;
       this._storeService.getStore(this.data.id).subscribe(result => {
-        this.name = result.name;
+        this.title = result.title;
         this.storeCode = result.storeCode;
         this.phoneNumber = result.phoneNumber;
         this.address = result.address;
@@ -38,7 +38,7 @@ export class StoreEditDialogComponent implements OnInit {
   save() {
     var store = {
       id: this.data.id,
-      name:this.name,
+      title:this.title,
       storeCode: this.storeCode,
       phoneNumber: this.phoneNumber,
       address: this.address,

@@ -12,7 +12,7 @@ import { ProducerService } from 'src/app/warehouse/producer/producer.service';
 })
 export class ProducerEditDialogComponent implements OnInit {
 
-  name;
+  title;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<ProducerEditDialogComponent>, 
@@ -21,14 +21,14 @@ export class ProducerEditDialogComponent implements OnInit {
   ngOnInit() {
     
     this._producerService.getProducer(this.data.id).subscribe( result => {
-      this.name = result.name;
+      this.title = result.title;
     });
   }
 
   save() {
     var producer = {
       id: this.data.id,
-      name: this.name
+      title: this.title
     }
     this._producerService.editProducer(producer).subscribe((result) => {
       this.dialogRef.close("Edit");

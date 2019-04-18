@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let waveType of waveTypes; let i = index">
-        <td>{{waveType.waveTypeName}}</td>
+        <td>{{waveType.title}}</td>
         <td id="right-col">
           <button title="Chi tiết" type="button" class="btn btn-primary" [routerLink]="['/WaveType/Edit/', waveType.id ]"><i
             class="fa fa-edit"></i></button>

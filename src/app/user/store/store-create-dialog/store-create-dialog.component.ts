@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class StoreCreateDialogComponent implements OnInit {
 
-  name;
+  title;
   storeCode;
   phoneNumber;
   address;
@@ -19,17 +19,17 @@ export class StoreCreateDialogComponent implements OnInit {
   companies: Company[];
 
   constructor(public dialogRef: MatDialogRef<StoreCreateDialogComponent>,
-    private _congTyService: CompanyService, private _storeService: StoreService) { }
+    private _CompanyService: CompanyService, private _storeService: StoreService) { }
 
   ngOnInit() {
-    this._congTyService.getListCompanys().subscribe(result => {
+    this._CompanyService.getListCompanys().subscribe(result => {
       this.companies = result;
     });
   }
 
   createStore() {
     var store = {
-      name:this.name,
+      title:this.title,
       storeCode: this.storeCode,
       phoneNumber: this.phoneNumber,
       address: this.address,

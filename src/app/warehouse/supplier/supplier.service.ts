@@ -55,7 +55,7 @@ export class SupplierService {
 
 export class SupplierBindingModel {
   id: number;
-  name: string;
+  title: string;
   code: string;
   phoneNumber: string;
   address: string;
@@ -68,7 +68,7 @@ export class SupplierBindingModel {
 
 export class SupplierViewModel {
   id: number;
-  name: string;
+  title: string;
   code: string;
   phoneNumber: string;
   address: string;
@@ -91,7 +91,7 @@ export class ReqModelGetListSupplier {
 }
 
 export enum ESortField {
-  Name,
+  Title,
   CreateAt
 }
 

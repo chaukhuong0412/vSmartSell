@@ -26,7 +26,7 @@ export class ClientService {
 }
 
 export class Client {
-  name: string;
+  title: string;
   address: string;
   phoneNumber: string;
 }

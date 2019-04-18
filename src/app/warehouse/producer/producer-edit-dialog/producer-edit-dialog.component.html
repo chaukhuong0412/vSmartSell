@@ -6,8 +6,8 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <label for="Name">Tên nhà sản xuất</label>
-        <input required class="form-control" [(ngModel)]="name" #uName="ngModel">
+        <label for="Title">Tên nhà sản xuất</label>
+        <input required class="form-control" [(ngModel)]="title" #uName="ngModel">
       </div>
 
       <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger">

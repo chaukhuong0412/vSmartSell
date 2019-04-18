@@ -6,9 +6,9 @@
   <thead>
     <tr>
       <th scope="col" id="stt-column" (click)="sortById()">STT</th>
-      <th scope="col"><a class="clickable" (click)="sortByFullName()">Tên kho hàng</a>
-        <a *ngIf="sortField == 'FullName' && asc==true">▾</a>
-        <a *ngIf="sortField == 'FullName' && asc==false">▴</a>
+      <th scope="col"><a class="clickable" (click)="sortByTitle()">Tên kho hàng</a>
+        <a *ngIf="sortField == 'Title' && asc==true">▾</a>
+        <a *ngIf="sortField == 'Title' && asc==false">▴</a>
       </th>
 
       <th scope="col" id="right-header">Thao tác</th>
@@ -17,7 +17,7 @@
   <tbody>
     <tr *ngFor="let warehouse of warehouseList; let i = index">
       <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
-      <td>{{warehouse.name}}</td>
+      <td>{{warehouse.title}}</td>
       <td class="right">
         <button title="Chi tiết" type="button" class="btn btn-primary" (click)="openEditWarehouseDialog(warehouse.id)"><i class="fa fa-edit"></i></button>
         <button title="Xóa" type="button" class="btn btn-danger" (click)="openDeleteConfirmationDialog(warehouse.id)"><i

@@ -58,7 +58,7 @@ export class CompanyService {
 
 export class Company {
   id : number;
-  name : string;
+  title : string;
   address: string;
   phoneNumber: string;
   numberOfAccountAllowed: number;
@@ -67,7 +67,7 @@ export class Company {
 
 export class CompanyViewModel {
   id : number;
-  name : string;
+  title : string;
   address: string;
   phoneNumber: string;
   numberOfAccountAllowed: number;

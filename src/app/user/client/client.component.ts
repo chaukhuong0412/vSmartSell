@@ -11,7 +11,7 @@ import { ClientService } from './client.service';
 export class ClientComponent implements OnInit {
 
 
-  name;
+  title;
   address;
   phoneNumber;
 
@@ -21,7 +21,7 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
     this._clientService.getClient().subscribe(result => {
-      this.name = result.name;
+      this.title = result.title;
       this.address = result.address;
       this.phoneNumber = result.phoneNumber;
     })
@@ -29,7 +29,7 @@ export class ClientComponent implements OnInit {
 
   save() {
       var client = {
-        name: this.name,
+        title: this.title,
         address: this.address,
         phoneNumber: this.phoneNumber
       }

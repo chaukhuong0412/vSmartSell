@@ -37,7 +37,7 @@ export class UnitService {
 
 export class Unit {
   id: number;
-  unitName: string;
+  title: string;
   weight: number;
   slug: string;
   goodsCuttingType: number;

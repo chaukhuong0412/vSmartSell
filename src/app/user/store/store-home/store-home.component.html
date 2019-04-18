@@ -38,8 +38,8 @@
     <tbody>
       <tr *ngFor="let store of stores; let i = index">
         <td scope="row" id="stt-column"> {{(pageIndex-1)*pageSize + i + 1}}</td>
-        <td>{{store.name}}</td>
-        <td>{{store.companyName}}</td>
+        <td>{{stores.title}}</td>
+        <td>{{stores.companyName}}</td>
 
 
         <td class="right">

@@ -10,7 +10,7 @@ import { ProducerService } from 'src/app/warehouse/producer/producer.service';
 })
 export class ProducerCreateDialogComponent implements OnInit {
 
-  name: string;
+  title: string;
 
   constructor(public dialogRef: MatDialogRef<ProducerCreateDialogComponent>, private _producerService: ProducerService) { }
 
@@ -23,7 +23,7 @@ export class ProducerCreateDialogComponent implements OnInit {
 
   createProducer() {
     var producer = {
-      name: this.name
+      title: this.title
     };
     this._producerService.createProducer(producer).subscribe(res => {
       this.dialogRef.close("Create");

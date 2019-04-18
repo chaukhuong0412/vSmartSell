@@ -59,7 +59,7 @@ export class WarehouseHomeComponent implements OnInit {
     createWarehouseButton.addEventListener("click", createWarehouseHandler);
 
     this.ReqModelGetListWarehouse = {
-      sortField: ESortField.Name,
+      sortField: ESortField.Title,
       isAscending: true,
       pageIndex: 0,
       pageSize: 10,
